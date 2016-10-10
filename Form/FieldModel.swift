@@ -124,9 +124,9 @@ extension Field: EmptyType {
 }
 
 //struct Ciccio {
-//	let x = FieldModel(
+//	let x: Field = .onOff(.init(
 //		key: "key_local",
-//		config: FieldConfig(
+//		config: .init(
 //			title: "field_title",
 //			options: FieldOptionsSwitch { $0.analyze(
 //				ifTrue: "si",
@@ -137,11 +137,11 @@ extension Field: EmptyType {
 //		          FieldCondition.valueIs(equal: true).runCondition(
 //					ifTrue: .hideField(at: "pluto"),
 //					ifFalse: .showField(at: "pluto"))],
-//		serialization: FieldSerialization(
+//		serialization: .init(
 //			visibility: .always,
-//			strategy: .simple(FieldWSRelation(key: "key_ws") { $0.analyze(
+//			strategy: .simple(.init(key: "key_ws") { $0.analyze(
 //				ifTrue: "Y",
-//				ifFalse: "N") })))
+//				ifFalse: "N") }))))
 //}
 //
 //extension FieldRuleType where FieldValueType == Bool {
