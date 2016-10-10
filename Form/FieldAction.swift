@@ -68,7 +68,7 @@ extension FieldActionType {
 	}
 
 	public static func removeValueAndHideField(at key: FieldKey) -> FieldAction<FieldValueType> {
-		return [removeValueForField(at: key),hideField(at: key)].composeAll()
+		return [removeValueForField(at: key),hideField(at: key)].composeAll
 	}
 
 	public static func notify(at key: FieldKey) -> FieldAction<FieldValueType> {

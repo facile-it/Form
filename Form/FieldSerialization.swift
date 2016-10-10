@@ -48,7 +48,7 @@ public struct FieldSerialization<FieldValueType> {
 		case let .simple(relation):
 			return relation.getPlist(for: value)
 		case let .multiple(relations):
-			return relations.map(Use(WSRelation.getPlist).with(value)).composeAll()
+			return relations.map(Use(WSRelation.getPlist).with(value)).composeAll
 		}
 	}
 }

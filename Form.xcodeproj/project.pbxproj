@@ -14,9 +14,7 @@
 		3815496F1DA6609700210634 /* FieldAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3815496E1DA6609700210634 /* FieldAction.swift */; };
 		381549711DA660B600210634 /* FieldActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381549701DA660B600210634 /* FieldActivity.swift */; };
 		381549731DA67EBE00210634 /* FieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381549721DA67EBE00210634 /* FieldViewModel.swift */; };
-		381549751DA68AAF00210634 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381549741DA68AAF00210634 /* Observer.swift */; };
 		381549771DA69B5300210634 /* FieldOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381549761DA69B5300210634 /* FieldOptions.swift */; };
-		3841A3B41DA797E500519DF4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3841A3B31DA797E500519DF4 /* Extensions.swift */; };
 		3841A3B61DA7991800519DF4 /* UtilityModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3841A3B51DA7991800519DF4 /* UtilityModels.swift */; };
 		3841A3B81DA7A79200519DF4 /* FieldIndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3841A3B71DA7A79200519DF4 /* FieldIndexPath.swift */; };
 		38AFB09A1D9EA6D700A8C890 /* Form.h in Headers */ = {isa = PBXBuildFile; fileRef = 38AFB0981D9EA6D700A8C890 /* Form.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -48,9 +46,7 @@
 		3815496E1DA6609700210634 /* FieldAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldAction.swift; sourceTree = "<group>"; };
 		381549701DA660B600210634 /* FieldActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldActivity.swift; sourceTree = "<group>"; };
 		381549721DA67EBE00210634 /* FieldViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldViewModel.swift; sourceTree = "<group>"; };
-		381549741DA68AAF00210634 /* Observer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
 		381549761DA69B5300210634 /* FieldOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldOptions.swift; sourceTree = "<group>"; };
-		3841A3B31DA797E500519DF4 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		3841A3B51DA7991800519DF4 /* UtilityModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityModels.swift; sourceTree = "<group>"; };
 		3841A3B71DA7A79200519DF4 /* FieldIndexPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldIndexPath.swift; sourceTree = "<group>"; };
 		38AFB0951D9EA6D700A8C890 /* Form.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Form.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,15 +70,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3841A3B21DA797D300519DF4 /* Functional */ = {
-			isa = PBXGroup;
-			children = (
-				381549741DA68AAF00210634 /* Observer.swift */,
-				3841A3B31DA797E500519DF4 /* Extensions.swift */,
-			);
-			name = Functional;
-			sourceTree = "<group>";
-		};
 		38AFB08B1D9EA6D700A8C890 = {
 			isa = PBXGroup;
 			children = (
@@ -121,7 +108,6 @@
 		38AFB0A11D9EA71400A8C890 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				3841A3B21DA797D300519DF4 /* Functional */,
 				38AFB0A91D9EA9D200A8C890 /* FieldModel.swift */,
 				38AFB0AD1D9EAF9600A8C890 /* FieldConfig.swift */,
 				38AFB0AF1D9EB64400A8C890 /* FieldSerialization.swift */,
@@ -237,9 +223,7 @@
 				381549771DA69B5300210634 /* FieldOptions.swift in Sources */,
 				38AFB0AA1D9EA9D200A8C890 /* FieldModel.swift in Sources */,
 				3815496B1DA657CC00210634 /* FieldRule.swift in Sources */,
-				3841A3B41DA797E500519DF4 /* Extensions.swift in Sources */,
 				3815496D1DA6608E00210634 /* FieldCondition.swift in Sources */,
-				381549751DA68AAF00210634 /* Observer.swift in Sources */,
 				3841A3B81DA7A79200519DF4 /* FieldIndexPath.swift in Sources */,
 				3815496F1DA6609700210634 /* FieldAction.swift in Sources */,
 				3841A3B61DA7991800519DF4 /* UtilityModels.swift in Sources */,
