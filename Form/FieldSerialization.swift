@@ -24,6 +24,7 @@ public enum FieldSerializationVisibility {
 }
 
 public enum FieldSerializationStrategy<FieldValueType> {
+	case direct(FieldKey)
 	case simple(FieldWSRelation<FieldValueType>)
 	case multiple([FieldWSRelation<FieldValueType>])
 //	case path([String],FieldWSRelation<FieldValueType>)
@@ -39,12 +40,18 @@ public struct FieldSerialization<FieldValueType> {
 		self.strategy = strategy
 	}
 
-	public func getPlist(value: FieldValueType, visible: Bool) -> PropertyList? {
+	public func getWSPlist(for key: FieldKey, in storage: FormStorage) -> PropertyList? {
 		guard visibility != .never else { return nil }
+
+		let visible = storage.getHidden(at: key).inverse
 
 		guard visible == true || visibility != .ifVisible else { return nil }
 
+		guard let value = storage.getValue(at: key) as? FieldValueType else { return nil }
+
 		switch strategy {
+		case let .direct(key):
+			return [key: value]
 		case let .simple(relation):
 			return relation.getPlist(for: value)
 		case let .multiple(relations):

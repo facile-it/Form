@@ -1,7 +1,6 @@
 import Functional
 
-public protocol FormStorageType: EmitterType {
-	associatedtype EmittedType = FieldKey
+public protocol FormStorageType {
 	var allKeys: [FieldKey] { get }
 	func set(value: Any?, at key: FieldKey)
 	func getValue(at key: FieldKey) -> Any?
@@ -13,21 +12,16 @@ public protocol FormStorageType: EmitterType {
 	func clear()
 }
 
-public final class FormStorage: FormStorageType {
-	fileprivate var fieldChangedObservers: [AnyWeakObserver<FieldKey>] = []
+public final class FormStorage: FormStorageType, WeakObserversCollectionEmitterType {
+	public typealias EmittedType = FieldKey
+
+	public var weakObservers: [AnyWeakObserver<FieldKey>] = []
+	
 	fileprivate var fieldValues: [FieldKey:Any] = [:]
 	fileprivate var fieldOptions: [FieldKey:Any] = [:]
 	fileprivate var hiddenFieldKeys: Set<FieldKey> = []
 
 	public init() {}
-
-	public func addObserver<Observer: ObserverType>(_ observer: Observer) where Observer.ObservedType == FieldKey {
-		fieldChangedObservers.append(AnyWeakObserver(observer))
-	}
-
-	public func removeObserver(withIdentifier identifier: String) {
-		fieldChangedObservers = fieldChangedObservers.filter { $0.identifier != identifier }
-	}
 
 	public var allKeys: [FieldKey] {
 		return Array(fieldValues.keys)
@@ -68,7 +62,7 @@ public final class FormStorage: FormStorageType {
 	}
 
 	public func notify(at key: FieldKey) {
-		fieldChangedObservers.forEach { $0.observe(key) }
+		weakObservers.forEach { $0.observe(key) }
 	}
 
 	public func clear() {

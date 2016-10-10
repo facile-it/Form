@@ -2,6 +2,15 @@ public protocol FieldOptionsType {
 	associatedtype FieldValueType
 }
 
+public struct FieldOptionsFixed: FieldOptionsType {
+	public typealias FieldValueType = String
+
+	public let text: String
+	public init(text: String) {
+		self.text = text
+	}
+}
+
 public struct FieldOptionsSwitch: FieldOptionsType {
 	public typealias FieldValueType = Bool
 

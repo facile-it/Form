@@ -1,4 +1,6 @@
-public struct FieldViewModel<FieldValue, FieldOptions: FieldOptionsType> where FieldOptions.FieldValueType == FieldValue {
+public struct FieldViewModel<FieldOptions: FieldOptionsType> {
+	typealias FieldValue = FieldOptions.FieldValueType
+	
 	public let title: String?
 	public let value: FieldValue?
 	public let options: FieldOptions?
@@ -15,4 +17,14 @@ public struct FieldViewModel<FieldValue, FieldOptions: FieldOptionsType> where F
 			isHidden: isHidden,
 			isLoading: isLoading)
 	}
+}
+
+public enum FieldViewModelType {
+	case fixed(FieldViewModel<FieldOptionsFixed>)
+	case onOff(FieldViewModel<FieldOptionsSwitch>)
+	case textEntry(FieldViewModel<FieldOptionsText>)
+	case datePicker(FieldViewModel<FieldOptionsDate>)
+	case intPicker(FieldViewModel<FieldOptionsPicker<Int>>)
+	case stringPicker(FieldViewModel<FieldOptionsPicker<String>>)
+	case anyPicker(FieldViewModel<FieldOptionsPicker<AnyHashable>>)
 }
