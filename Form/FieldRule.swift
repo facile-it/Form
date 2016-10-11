@@ -1,18 +1,15 @@
-public protocol FieldRuleType: FieldActivityType {
-	func isValid(value: FieldValueType?, storage: FormStorage) -> FieldConformance
-}
+public struct FieldRule<Value> {
+	public typealias FieldValueType = Value
 
-public struct FieldRule<FieldValue>: FieldRuleType {
-	public typealias FieldValueType = FieldValue
+	private let validation: (Value?,FormStorage) -> FieldConformance
 
-	private let validation: (FieldValue?,FormStorage) -> FieldConformance
-
-	public init(validation: @escaping (FieldValue?,FormStorage) -> FieldConformance) {
+	public init(validation: @escaping (Value?,FormStorage) -> FieldConformance) {
 		self.validation = validation
 	}
 
-	public func isValid(value: FieldValue?, storage: FormStorage) -> FieldConformance {
-		return validation(value,storage)
+	public func isValid(value: Any?, storage: FormStorage) -> FieldConformance {
+		guard let validValue = value as? Value else { return FieldConformance.invalid(message: "invalid value: \(value)") }
+		return validation(validValue,storage)
 	}
 }
 

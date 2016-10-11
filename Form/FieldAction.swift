@@ -1,20 +1,17 @@
 import Functional
 
-public protocol FieldActionType: FieldActivityType {
-	init(transform: @escaping (FieldValueType?,FormStorage) -> ())
-	func apply(value: FieldValueType?, storage: FormStorage)
-}
+public struct FieldAction<Value> {
+	private let transform: (Value?,FormStorage) -> ()
 
-public struct FieldAction<FieldValue>: FieldActionType {
-	public typealias FieldValueType = FieldValue
-	
-	private let transform: (FieldValue?,FormStorage) -> ()
-
-	public init(transform: @escaping (FieldValue?,FormStorage) -> ()) {
+	public init(transform: @escaping (Value?,FormStorage) -> ()) {
 		self.transform = transform
 	}
 
-	public func apply(value: FieldValue?, storage: FormStorage) {
+	public func apply(value: Any?, storage: FormStorage) {
+		guard let value = value as? Value else {
+			transform(nil, storage)
+			return
+		}
 		transform(value,storage)
 	}
 }
@@ -38,40 +35,40 @@ extension FieldAction {
 	}
 }
 
-extension FieldActionType {
-	public static func updateField(at key: FieldKey) -> FieldAction<FieldValueType> {
+extension FieldAction {
+	public static func updateField(at key: FieldKey) -> FieldAction {
 		return FieldAction { (value, storage) in
 			storage.set(value: value, at: key)
 		}
 	}
 
-	public static func set(value: Any?, at key: FieldKey) -> FieldAction<FieldValueType> {
+	public static func set(value: Any?, at key: FieldKey) -> FieldAction {
 		return FieldAction { (_, storage) in
 			storage.set(value: value, at: key)
 		}
 	}
 
-	public static func removeValueForField(at key: FieldKey) -> FieldAction<FieldValueType> {
+	public static func removeValueForField(at key: FieldKey) -> FieldAction {
 		return set(value: nil, at: key)
 	}
 
-	public static func hideField(at key: FieldKey) -> FieldAction<FieldValueType> {
+	public static func hideField(at key: FieldKey) -> FieldAction {
 		return FieldAction { (_, storage) in
 			storage.set(hidden: true, at: key)
 		}
 	}
 
-	public static func showField(at key: FieldKey) -> FieldAction<FieldValueType> {
+	public static func showField(at key: FieldKey) -> FieldAction {
 		return FieldAction { (_, storage) in
 			storage.set(hidden: false, at: key)
 		}
 	}
 
-	public static func removeValueAndHideField(at key: FieldKey) -> FieldAction<FieldValueType> {
+	public static func removeValueAndHideField(at key: FieldKey) -> FieldAction {
 		return [removeValueForField(at: key),hideField(at: key)].composeAll
 	}
 
-	public static func notify(at key: FieldKey) -> FieldAction<FieldValueType> {
+	public static func notify(at key: FieldKey) -> FieldAction {
 		return FieldAction { (_, storage) in
 			storage.notify(at: key)
 		}

@@ -15,7 +15,7 @@ public struct WSRelation<RootValue,WSKey: Hashable,WSObject> {
 	}
 }
 
-public typealias FieldWSRelation<FieldValue> = WSRelation<FieldValue,String,Any>
+public typealias FieldWSRelation<Value> = WSRelation<Value,String,Any>
 
 public enum FieldSerializationVisibility {
 	case never
@@ -23,19 +23,19 @@ public enum FieldSerializationVisibility {
 	case always
 }
 
-public enum FieldSerializationStrategy<FieldValueType> {
+public enum FieldSerializationStrategy<Value> {
 	case direct(FieldKey)
-	case simple(FieldWSRelation<FieldValueType>)
-	case multiple([FieldWSRelation<FieldValueType>])
-//	case path([String],FieldWSRelation<FieldValueType>)
+	case simple(FieldWSRelation<Value>)
+	case multiple([FieldWSRelation<Value>])
+//	case path([String],FieldWSRelation<Value>)
 }
 
-public struct FieldSerialization<FieldValueType> {
+public struct FieldSerialization<Value> {
 
 	private let visibility: FieldSerializationVisibility
-	private let strategy: FieldSerializationStrategy<FieldValueType>
+	private let strategy: FieldSerializationStrategy<Value>
 
-	public init(visibility: FieldSerializationVisibility, strategy: FieldSerializationStrategy<FieldValueType>) {
+	public init(visibility: FieldSerializationVisibility, strategy: FieldSerializationStrategy<Value>) {
 		self.visibility = visibility
 		self.strategy = strategy
 	}
@@ -47,7 +47,7 @@ public struct FieldSerialization<FieldValueType> {
 
 		guard visible == true || visibility != .ifVisible else { return nil }
 
-		guard let value = storage.getValue(at: key) as? FieldValueType else { return nil }
+		guard let value = storage.getValue(at: key) as? Value else { return nil }
 
 		switch strategy {
 		case let .direct(key):

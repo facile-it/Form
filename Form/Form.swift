@@ -1,7 +1,7 @@
 import Functional
 
-public typealias FieldViewModelPair = (viewModel: FieldViewModelType, indexPath: FieldIndexPath)
-public typealias FieldValueCompletePair = (fieldValue: Any?, indexPath: FieldIndexPathComplete)
+public typealias FieldViewModelPair = (viewModel: FieldViewModel, indexPath: FieldIndexPath)
+public typealias FieldValueCompletePair = (fieldValue: FieldValue?, indexPath: FieldIndexPathComplete)
 
 public final class Form: EmitterMapperType {
 	public typealias ObservedType = FieldKey

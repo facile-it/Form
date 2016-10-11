@@ -1,19 +1,14 @@
 import Functional
 
-public protocol FieldConditionType: FieldActivityType {
-	func check(value: FieldValueType?, storage: FormStorage) -> Bool
-}
+public struct FieldCondition<Value> {
+	fileprivate let predicate: (Value?,FormStorage) -> Bool
 
-public struct FieldCondition<FieldValue>: FieldConditionType {
-	public typealias FieldValueType = FieldValue
-	
-	fileprivate let predicate: (FieldValue?,FormStorage) -> Bool
-
-	public init(predicate: @escaping (FieldValue?,FormStorage) -> Bool) {
+	public init(predicate: @escaping (Value?,FormStorage) -> Bool) {
 		self.predicate = predicate
 	}
 
-	public func check(value: FieldValue?, storage: FormStorage) -> Bool {
+	public func check(value: Any?, storage: FormStorage) -> Bool {
+		guard let value = value as? Value else { return false }
 		return predicate(value,storage)
 	}
 }
@@ -36,18 +31,18 @@ extension FieldCondition {
 	}
 }
 
-extension FieldCondition where FieldValue: Equatable {
-	public static func valueIs(equal toValue: FieldValue?) -> FieldCondition {
+extension FieldCondition where Value: Equatable {
+	public static func valueIs(equal toValue: Value?) -> FieldCondition {
 		return FieldCondition { (value, _) in value == toValue }
 	}
 
-	public static func otherValue(at key: FieldKey, isEqual toValue: FieldValue?) -> FieldCondition {
+	public static func otherValue(at key: FieldKey, isEqual toValue: Value?) -> FieldCondition {
 		return FieldCondition { (_, storage) in
 			let optionalStorageValue = storage.getValue(at: key)
 			guard toValue != nil else {
 				return optionalStorageValue == nil
 			}
-			guard let value = optionalStorageValue as? FieldValue else {
+			guard let value = optionalStorageValue as? Value else {
 				return false
 			}
 			return value == toValue
@@ -57,8 +52,8 @@ extension FieldCondition where FieldValue: Equatable {
 
 /// FieldAction related methods
 extension FieldCondition {
-	public func runCondition(ifTrue actionTrue: FieldAction<FieldValue>, ifFalse actionFalse: FieldAction<FieldValue>) -> FieldAction<FieldValue> {
-		return FieldAction<FieldValue> {
+	public func runCondition(ifTrue actionTrue: FieldAction<Value>, ifFalse actionFalse: FieldAction<Value>) -> FieldAction<Value> {
+		return FieldAction<Value> {
 			if self.predicate($0.0,$0.1) {
 				actionTrue.apply(value: $0.0, storage: $0.1)
 			} else {
@@ -67,11 +62,11 @@ extension FieldCondition {
 		}
 	}
 
-	public func ifTrue(_ action: FieldAction<FieldValue>) -> FieldAction<FieldValue> {
-		return runCondition(ifTrue: action, ifFalse: FieldAction<FieldValue>.empty)
+	public func ifTrue(_ action: FieldAction<Value>) -> FieldAction<Value> {
+		return runCondition(ifTrue: action, ifFalse: FieldAction<Value>.empty)
 	}
 
-	public func ifFalse(_ action: FieldAction<FieldValue>) -> FieldAction<FieldValue> {
-		return runCondition(ifTrue: FieldAction<FieldValue>.empty, ifFalse: action)
+	public func ifFalse(_ action: FieldAction<Value>) -> FieldAction<Value> {
+		return runCondition(ifTrue: FieldAction<Value>.empty, ifFalse: action)
 	}
 }

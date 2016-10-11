@@ -1,28 +1,58 @@
-public protocol FieldOptionsType {
-	associatedtype FieldValueType
+import Functional
+
+public typealias OptionsStyle = FieldStyle<
+	FieldOptionsFixed,
+	FieldOptionsSwitch,
+	FieldOptionsText,
+	FieldOptionsDate,
+	FieldOptionsIntPicker,
+	FieldOptionsStringPicker,
+	FieldOptionsAnyPicker
+>
+
+public protocol FieldOptions: EmptyType {
+	associatedtype ValueType
+
+	var style: OptionsStyle { get }
 }
 
-public struct FieldOptionsFixed: FieldOptionsType {
-	public typealias FieldValueType = String
+public struct FieldOptionsFixed: FieldOptions {
+	public typealias ValueType = String
 
 	public let text: String
 	public init(text: String) {
 		self.text = text
 	}
+
+	public static var empty: FieldOptionsFixed {
+		return FieldOptionsFixed(text: "")
+	}
+
+	public var style: OptionsStyle {
+		return .fixed(self)
+	}
 }
 
-public struct FieldOptionsSwitch: FieldOptionsType {
-	public typealias FieldValueType = Bool
+public struct FieldOptionsSwitch: FieldOptions {
+	public typealias ValueType = Bool
 
 	public let getDescription: (Bool) -> String?
 
 	public init(getDescription: @escaping (Bool) -> String?) {
 		self.getDescription = getDescription
 	}
+
+	public static var empty: FieldOptionsSwitch {
+		return FieldOptionsSwitch { _ in nil }
+	}
+
+	public var style: OptionsStyle {
+		return .onOff(self)
+	}
 }
 
-public struct FieldOptionsText: FieldOptionsType {
-	public typealias FieldValueType = String
+public struct FieldOptionsText: FieldOptions {
+	public typealias ValueType = String
 
 	public let placeholder: String?
 	public let keyboardType: KeyboardType
@@ -31,10 +61,18 @@ public struct FieldOptionsText: FieldOptionsType {
 		self.placeholder = placeholder
 		self.keyboardType = keyboardType
 	}
+
+	public static var empty: FieldOptionsText {
+		return FieldOptionsText(placeholder: nil, keyboardType: .text)
+	}
+
+	public var style: OptionsStyle {
+		return .textEntry(self)
+	}
 }
 
-public struct FieldOptionsDate: FieldOptionsType {
-	public typealias FieldValueType = Date
+public struct FieldOptionsDate: FieldOptions {
+	public typealias ValueType = Date
 
 	public let possibleValues: DateRange
 	public let formatter: (Date) -> String
@@ -43,14 +81,66 @@ public struct FieldOptionsDate: FieldOptionsType {
 		self.possibleValues = possibleValue
 		self.formatter = formatter
 	}
+
+	public static var empty: FieldOptionsDate {
+		return FieldOptionsDate(possibleValue: DateRange(nil, nil), formatter: { _ in "" })
+	}
+
+	public var style: OptionsStyle {
+		return .datePicker(self)
+	}
 }
 
-public struct FieldOptionsPicker<FieldValue>: FieldOptionsType {
-	public typealias FieldValueType = FieldValue
+public struct FieldOptionsIntPicker: FieldOptions {
+	public typealias ValueType = Int
+
+	public let possibleValues: [(Int,CustomStringConvertible)]
+
+	public init(possibleValues: [(Int,CustomStringConvertible)]) {
+		self.possibleValues = possibleValues
+	}
+
+	public static var empty: FieldOptionsIntPicker {
+		return FieldOptionsIntPicker(possibleValues: [])
+	}
+
+	public var style: OptionsStyle {
+		return .intPicker(self)
+	}
+}
+
+public struct FieldOptionsStringPicker: FieldOptions {
+	public typealias ValueType = String
+
+	public let possibleValues: [(String,CustomStringConvertible)]
+
+	public init(possibleValues: [(String,CustomStringConvertible)]) {
+		self.possibleValues = possibleValues
+	}
+
+	public static var empty: FieldOptionsStringPicker {
+		return FieldOptionsStringPicker(possibleValues: [])
+	}
+
+	public var style: OptionsStyle {
+		return .stringPicker(self)
+	}
+}
+
+public struct FieldOptionsAnyPicker: FieldOptions {
+	public typealias ValueType = FieldValue
 
 	public let possibleValues: [(FieldValue,CustomStringConvertible)]
 
 	public init(possibleValues: [(FieldValue,CustomStringConvertible)]) {
 		self.possibleValues = possibleValues
+	}
+
+	public static var empty: FieldOptionsAnyPicker {
+		return FieldOptionsAnyPicker(possibleValues: [])
+	}
+
+	public var style: OptionsStyle {
+		return .anyPicker(self)
 	}
 }

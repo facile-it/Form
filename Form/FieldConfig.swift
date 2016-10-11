@@ -1,46 +1,36 @@
 import Functional
 
-public protocol FieldConfigType {//: FieldViewModelGeneratorType {
-	associatedtype OptionsType: FieldOptionsType
-
-	var title: String { get }
-	var deferredOptions: Deferred<OptionsType> { get }
-}
-
-public struct FieldConfig<FieldOptions: FieldOptionsType>: FieldConfigType {
-	public typealias OptionsType = FieldOptions
-
+public struct FieldConfig<Options: FieldOptions> {
 	public let title: String
-	public let deferredOptions: Deferred<FieldOptions>
+	public let deferredOptions: Deferred<Options>
 
-	init(title: String, deferredOptions: Deferred<FieldOptions>) {
+	init(title: String, deferredOptions: Deferred<Options>) {
 		self.title = title
 		self.deferredOptions = deferredOptions
 	}
 
-	init(title: String, options: FieldOptions) {
-		self.init(title: title, deferredOptions: Deferred<FieldOptions>(options))
+	init(title: String, options: Options) {
+		self.init(title: title, deferredOptions: Deferred<Options>(options))
 	}
 
-	public func getViewModel(for key: FieldKey, in storage: FormStorage) -> FieldViewModel<FieldOptions> {
-		guard let availableOptions = [storage.getOptions(at: key) as? FieldOptions,
+	public func getViewModel(for key: FieldKey, in storage: FormStorage) -> FieldViewModel {
+		guard let availableOptions = [storage.getOptions(at: key) as? Options,
 		                              deferredOptions.peek]
 			.firstOptionalSomeOrNone else {
 
 				deferredOptions.upon { storage.set(options: $0, at: key) }
 
-				return FieldViewModel<FieldOptions>.empty(
+				return FieldViewModel.empty(
 					isHidden: storage.getHidden(at: key),
 					isLoading: true)
 		}
 
-		return FieldViewModel<FieldOptions>(
+		return FieldViewModel(
 			title: title,
-			value: storage.getValue(at: key) as? FieldOptions.FieldValueType,
-			options: availableOptions,
+			value: storage.getValue(at: key) as? FieldValue,
+			style: availableOptions.style,
 			errorMessage: nil,
 			isHidden: storage.getHidden(at: key),
 			isLoading: false)
-
 	}
 }
