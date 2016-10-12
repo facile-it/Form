@@ -1,7 +1,7 @@
 public struct FieldViewModel {
 	public let title: String?
 	public let value: FieldValue?
-	public let style: OptionsStyle?
+	public let style: FieldOptionsStyle?
 	public let errorMessage: String?
 	public let isHidden: Bool
 	public let isLoading: Bool

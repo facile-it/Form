@@ -24,8 +24,21 @@ public final class Form: EmitterMapperType {
 		storage.addObserver(self)
 	}
 
+	public func editStorage(with transform: (FormStorage) -> ()) {
+		transform(storage)
+	}
+
 	public var allPairs: [FieldViewModelPair] {
 		return storage.allKeys.map(getFieldViewModelIndexPathPair)
+	}
+
+	public func update(pair: FieldValueCompletePair) {
+		guard
+			let step = model.subelements.get(at: Int(pair.indexPath.stepIndex)),
+			let section = step.subelements.get(at: Int(pair.indexPath.sectionIndex)),
+			let field = section.subelements.get(at: Int(pair.indexPath.fieldIndex))
+			else { return }
+		field.updateValueAndApplyActions(with: pair.fieldValue, in: storage)
 	}
 
 	public var wsPlist: PropertyList? {
@@ -36,19 +49,6 @@ public final class Form: EmitterMapperType {
 			.accumulate { $0.compose($1) }
 	}
 
-	public func editStorage(with transform: (FormStorage) -> ()) {
-		transform(storage)
-	}
-
-	public func update(pair: FieldValueCompletePair) {
-		guard
-			let step = model.subelements.get(at: Int(pair.indexPath.stepIndex)),
-			let section = step.subelements.get(at: Int(pair.indexPath.sectionIndex)),
-			let field = section.subelements.get(at: Int(pair.indexPath.fieldIndex))
-			else { return }
-			field.updateValueAndApplyActions(with: pair.fieldValue, in: storage)
-	}
-
 	fileprivate func getFieldViewModelIndexPathPair(at key: FieldKey) -> FieldViewModelPair {
 		return Writer<FormModel,FieldIndexPath>(model)
 			.flatMap(Use(FormModel.getSubelement).with(key))
@@ -56,5 +56,11 @@ public final class Form: EmitterMapperType {
 			.flatMap(Use(FormSectionModel.getSubelement).with(key))
 			.map(Use(Field.getViewModel).with(storage))
 			.runWriter
+	}
+}
+
+extension Form: EmptyType {
+	public static var empty: Form {
+		return Form(model: FormModel.empty, storage: FormStorage())
 	}
 }

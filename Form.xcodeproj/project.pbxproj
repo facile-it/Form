@@ -23,6 +23,7 @@
 		38A0D6411DAB8F0B00C5FF06 /* FormModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0D6401DAB8F0B00C5FF06 /* FormModels.swift */; };
 		38A0D6441DAB90DF00C5FF06 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0D6431DAB90DF00C5FF06 /* Utility.swift */; };
 		38A0D6461DABA7E700C5FF06 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0D6451DABA7E700C5FF06 /* Form.swift */; };
+		38AEC9911DAE7CFA003587E6 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AEC9901DAE7CFA003587E6 /* Field.swift */; };
 		38AFB09A1D9EA6D700A8C890 /* Form.h in Headers */ = {isa = PBXBuildFile; fileRef = 38AFB0981D9EA6D700A8C890 /* Form.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38AFB0A61D9EA87000A8C890 /* Functional.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38AFB0A51D9EA87000A8C890 /* Functional.framework */; };
 		38AFB0A81D9EA88300A8C890 /* Functional.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38AFB0A51D9EA87000A8C890 /* Functional.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -61,6 +62,7 @@
 		38A0D6401DAB8F0B00C5FF06 /* FormModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormModels.swift; sourceTree = "<group>"; };
 		38A0D6431DAB90DF00C5FF06 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		38A0D6451DABA7E700C5FF06 /* Form.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
+		38AEC9901DAE7CFA003587E6 /* Field.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
 		38AFB0951D9EA6D700A8C890 /* Form.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Form.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		38AFB0981D9EA6D700A8C890 /* Form.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Form.h; sourceTree = "<group>"; };
 		38AFB0991D9EA6D700A8C890 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -128,16 +130,19 @@
 		38AFB0A11D9EA71400A8C890 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				38AEC9901DAE7CFA003587E6 /* Field.swift */,
 				3815496E1DA6609700210634 /* FieldAction.swift */,
 				3815496C1DA6608E00210634 /* FieldCondition.swift */,
 				38AFB0AD1D9EAF9600A8C890 /* FieldConfig.swift */,
+				381549681DA6559000210634 /* FieldConformance.swift */,
 				3841A3B71DA7A79200519DF4 /* FieldIndexPath.swift */,
 				38A0D63E1DAB8EDC00C5FF06 /* FieldKey.swift */,
 				38AFB0A91D9EA9D200A8C890 /* FieldModel.swift */,
 				381549761DA69B5300210634 /* FieldOptions.swift */,
 				3815496A1DA657CC00210634 /* FieldRule.swift */,
 				38AFB0AF1D9EB64400A8C890 /* FieldSerialization.swift */,
-				381549681DA6559000210634 /* FieldConformance.swift */,
+				38661A6F1DAD443900C4F270 /* FieldStyle.swift */,
+				38661A6D1DAD35C900C4F270 /* FieldValue.swift */,
 				381549721DA67EBE00210634 /* FieldViewModel.swift */,
 				38A0D6451DABA7E700C5FF06 /* Form.swift */,
 				38A0D63C1DAB8A2C00C5FF06 /* FormContainer.swift */,
@@ -145,8 +150,6 @@
 				381549661DA6403200210634 /* FormStorage.swift */,
 				3841A3B51DA7991800519DF4 /* UtilityModels.swift */,
 				38A0D6421DAB90D000C5FF06 /* Tools */,
-				38661A6D1DAD35C900C4F270 /* FieldValue.swift */,
-				38661A6F1DAD443900C4F270 /* FieldStyle.swift */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 				381549671DA6403200210634 /* FormStorage.swift in Sources */,
 				381549771DA69B5300210634 /* FieldOptions.swift in Sources */,
 				38AFB0AA1D9EA9D200A8C890 /* FieldModel.swift in Sources */,
+				38AEC9911DAE7CFA003587E6 /* Field.swift in Sources */,
 				38A0D63F1DAB8EDC00C5FF06 /* FieldKey.swift in Sources */,
 				3815496B1DA657CC00210634 /* FieldRule.swift in Sources */,
 				3815496D1DA6608E00210634 /* FieldCondition.swift in Sources */,

@@ -1,6 +1,6 @@
 import Functional
 
-public typealias OptionsStyle = FieldStyle<
+public typealias FieldOptionsStyle = FieldStyle<
 	FieldOptionsFixed,
 	FieldOptionsSwitch,
 	FieldOptionsText,
@@ -13,7 +13,7 @@ public typealias OptionsStyle = FieldStyle<
 public protocol FieldOptions: EmptyType {
 	associatedtype ValueType
 
-	var style: OptionsStyle { get }
+	var style: FieldOptionsStyle { get }
 }
 
 public struct FieldOptionsFixed: FieldOptions {
@@ -28,7 +28,7 @@ public struct FieldOptionsFixed: FieldOptions {
 		return FieldOptionsFixed(text: "")
 	}
 
-	public var style: OptionsStyle {
+	public var style: FieldOptionsStyle {
 		return .fixed(self)
 	}
 }
@@ -46,7 +46,7 @@ public struct FieldOptionsSwitch: FieldOptions {
 		return FieldOptionsSwitch { _ in nil }
 	}
 
-	public var style: OptionsStyle {
+	public var style: FieldOptionsStyle {
 		return .onOff(self)
 	}
 }
@@ -66,7 +66,7 @@ public struct FieldOptionsText: FieldOptions {
 		return FieldOptionsText(placeholder: nil, keyboardType: .text)
 	}
 
-	public var style: OptionsStyle {
+	public var style: FieldOptionsStyle {
 		return .textEntry(self)
 	}
 }
@@ -86,7 +86,7 @@ public struct FieldOptionsDate: FieldOptions {
 		return FieldOptionsDate(possibleValue: DateRange(nil, nil), formatter: { _ in "" })
 	}
 
-	public var style: OptionsStyle {
+	public var style: FieldOptionsStyle {
 		return .datePicker(self)
 	}
 }
@@ -104,7 +104,7 @@ public struct FieldOptionsIntPicker: FieldOptions {
 		return FieldOptionsIntPicker(possibleValues: [])
 	}
 
-	public var style: OptionsStyle {
+	public var style: FieldOptionsStyle {
 		return .intPicker(self)
 	}
 }
@@ -122,7 +122,7 @@ public struct FieldOptionsStringPicker: FieldOptions {
 		return FieldOptionsStringPicker(possibleValues: [])
 	}
 
-	public var style: OptionsStyle {
+	public var style: FieldOptionsStyle {
 		return .stringPicker(self)
 	}
 }
@@ -140,7 +140,7 @@ public struct FieldOptionsAnyPicker: FieldOptions {
 		return FieldOptionsAnyPicker(possibleValues: [])
 	}
 
-	public var style: OptionsStyle {
+	public var style: FieldOptionsStyle {
 		return .anyPicker(self)
 	}
 }
