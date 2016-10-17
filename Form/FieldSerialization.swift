@@ -29,12 +29,12 @@ public enum FieldSerializationStrategy<Value>: EmptyType {
 	case multiple([FieldWSRelation<Value>])
 //	case path([String],FieldWSRelation<Value>)
 
-	public static var empty: FieldSerializationStrategy {
+	public static var empty: FieldSerializationStrategy<Value> {
 		return .direct(FieldKey.empty)
 	}
 }
 
-public struct FieldSerialization<Value> {
+public struct FieldSerialization<Value>: EmptyType {
 
 	private let visibility: FieldSerializationVisibility
 	private let strategy: FieldSerializationStrategy<Value>
@@ -61,5 +61,11 @@ public struct FieldSerialization<Value> {
 		case let .multiple(relations):
 			return relations.map(Use(WSRelation.getPlist).with(value)).composeAll
 		}
+	}
+
+	public static var empty: FieldSerialization<Value> {
+		return FieldSerialization(
+			visibility: .never,
+			strategy: .empty)
 	}
 }
