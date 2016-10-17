@@ -23,11 +23,15 @@ public enum FieldSerializationVisibility {
 	case always
 }
 
-public enum FieldSerializationStrategy<Value> {
+public enum FieldSerializationStrategy<Value>: EmptyType {
 	case direct(FieldKey)
 	case simple(FieldWSRelation<Value>)
 	case multiple([FieldWSRelation<Value>])
 //	case path([String],FieldWSRelation<Value>)
+
+	public static var empty: FieldSerializationStrategy {
+		return .direct(FieldKey.empty)
+	}
 }
 
 public struct FieldSerialization<Value> {
