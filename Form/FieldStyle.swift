@@ -1,4 +1,4 @@
-public enum FieldStyle<Fixed,OnOff,TextEntry,DatePicker,IntPicker,StringPicker,AnyPicker> {
+public enum FieldStyle<Fixed,OnOff,TextEntry,DatePicker,IntPicker,StringPicker,AnyPicker,Custom> {
 	case fixed(Fixed)
 	case onOff(OnOff)
 	case textEntry(TextEntry)
@@ -6,4 +6,5 @@ public enum FieldStyle<Fixed,OnOff,TextEntry,DatePicker,IntPicker,StringPicker,A
 	case intPicker(IntPicker)
 	case stringPicker(StringPicker)
 	case anyPicker(AnyPicker)
+	case custom(Custom)
 }

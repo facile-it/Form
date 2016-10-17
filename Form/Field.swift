@@ -7,7 +7,8 @@ public typealias FieldModelStyle = FieldStyle<
 	FieldModel<FieldOptionsDate>,
 	FieldModel<FieldOptionsIntPicker>,
 	FieldModel<FieldOptionsStringPicker>,
-	FieldModel<FieldOptionsAnyPicker>
+	FieldModel<FieldOptionsAnyPicker>,
+	FieldModel<FieldOptionsCustom>
 >
 
 public struct Field: FieldKeyOwnerType, EmptyType {
@@ -32,6 +33,8 @@ public struct Field: FieldKeyOwnerType, EmptyType {
 			return model.key
 		case .anyPicker(let model):
 			return model.key
+		case .custom(let model):
+			return model.key
 		}
 	}
 
@@ -50,6 +53,8 @@ public struct Field: FieldKeyOwnerType, EmptyType {
 		case .stringPicker(let model):
 			return model.getWSPlist(in: storage)
 		case .anyPicker(let model):
+			return model.getWSPlist(in: storage)
+		case .custom(let model):
 			return model.getWSPlist(in: storage)
 		}
 	}
@@ -70,6 +75,8 @@ public struct Field: FieldKeyOwnerType, EmptyType {
 			return model.getViewModel(in: storage)
 		case .anyPicker(let model):
 			return model.getViewModel(in: storage)
+		case .custom(let model):
+			return model.getViewModel(in: storage)
 		}
 	}
 
@@ -88,6 +95,8 @@ public struct Field: FieldKeyOwnerType, EmptyType {
 		case .stringPicker(let model):
 			model.updateValueAndApplyActions(with: value, in: storage)
 		case .anyPicker(let model):
+			model.updateValueAndApplyActions(with: value, in: storage)
+		case .custom(let model):
 			model.updateValueAndApplyActions(with: value, in: storage)
 		}
 	}

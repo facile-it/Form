@@ -7,7 +7,8 @@ public typealias FieldOptionsStyle = FieldStyle<
 	FieldOptionsDate,
 	FieldOptionsIntPicker,
 	FieldOptionsStringPicker,
-	FieldOptionsAnyPicker
+	FieldOptionsAnyPicker,
+	FieldOptionsCustom
 >
 
 public protocol FieldOptions: EmptyType {
@@ -142,5 +143,25 @@ public struct FieldOptionsAnyPicker: FieldOptions {
 
 	public var style: FieldOptionsStyle {
 		return .anyPicker(self)
+	}
+}
+
+public struct FieldOptionsCustom: FieldOptions {
+	public typealias ValueType = FieldValue
+
+	public let identifier: String
+	public let valueDescription: (FieldValue?) -> String
+
+	public init(identifier: String, valueDescription: @escaping (FieldValue?) -> String = { $0?.optionalString ?? "" }) {
+		self.identifier = identifier
+		self.valueDescription = valueDescription
+	}
+
+	public static var empty: FieldOptionsCustom {
+		return FieldOptionsCustom(identifier: "")
+	}
+
+	public var style: FieldOptionsStyle {
+		return .custom(self)
 	}
 }
