@@ -4,12 +4,12 @@ public struct FieldConfig<Options: FieldOptions> {
 	public let title: String
 	public let deferredOptions: Deferred<Options>
 
-	init(title: String, deferredOptions: Deferred<Options>) {
+	public init(title: String, deferredOptions: Deferred<Options>) {
 		self.title = title
 		self.deferredOptions = deferredOptions
 	}
 
-	init(title: String, options: Options) {
+	public init(title: String, options: Options) {
 		self.init(title: title, deferredOptions: Deferred<Options>(options))
 	}
 
