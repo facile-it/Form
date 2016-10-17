@@ -1,6 +1,6 @@
 import Functional
 
-public struct FieldConfig<Options: FieldOptions> {
+public struct FieldConfig<Options: FieldOptions>: EmptyType {
 	public let title: String
 	public let deferredOptions: Deferred<Options>
 
@@ -32,5 +32,11 @@ public struct FieldConfig<Options: FieldOptions> {
 			errorMessage: nil,
 			isHidden: storage.getHidden(at: key),
 			isLoading: false)
+	}
+
+	public static var empty: FieldConfig<Options> {
+		return FieldConfig(
+			title: String.empty,
+			options: Options.empty)
 	}
 }
