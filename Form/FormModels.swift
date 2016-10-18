@@ -74,13 +74,13 @@ public struct FormConfiguration: EmptyType {
 }
 
 public struct FormModel: FormContainerType {
-	public typealias ConfigurationType = FormStepConfiguration
+	public typealias ConfigurationType = FormConfiguration
 	public typealias Subtype = FormStepModel
 
-	public let configuration: FormStepConfiguration
+	public let configuration: FormConfiguration
 	public let subelements: [FormStepModel]
 
-	public init(configuration: FormStepConfiguration, subelements: [FormStepModel]) {
+	public init(configuration: FormConfiguration, subelements: [FormStepModel]) {
 		self.configuration = configuration
 		self.subelements = subelements
 	}
