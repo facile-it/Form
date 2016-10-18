@@ -25,7 +25,7 @@ public enum FieldSerializationCondition {
 
 public enum FieldSerializationStrategy<Value>: EmptyType {
 	case direct(FieldKey)
-	case simple(FieldWSRelation<Value>)
+	case single(FieldWSRelation<Value>)
 	case multiple([FieldWSRelation<Value>])
 //	case path([String],FieldWSRelation<Value>)
 
@@ -56,14 +56,14 @@ public struct FieldSerialization<Value>: EmptyType {
 		switch strategy {
 		case let .direct(key):
 			return [key: value]
-		case let .simple(relation):
+		case let .single(relation):
 			return relation.getPlist(for: value)
 		case let .multiple(relations):
 			return relations.map(Use(WSRelation.getPlist).with(value)).composeAll
 		}
 	}
 
-	public static func simple(for key: FieldKey) -> FieldSerialization<Value> {
+	public static func simple(key: FieldKey) -> FieldSerialization<Value> {
 		return FieldSerialization(
 			condition: .ifVisible,
 			strategy: .direct(key))
