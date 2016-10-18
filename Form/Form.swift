@@ -7,8 +7,8 @@ public final class Form: EmitterMapperType {
 	public typealias ObservedType = FieldKey
 	public typealias EmittedType = FieldViewModelPair
 
-	private let model: FormModel
 	private let storage: FormStorage
+	private let model: FormModel
 	public var identifier: String {
 		return model.configuration.title.getOrEmpty
 	}
@@ -18,9 +18,9 @@ public final class Form: EmitterMapperType {
 		return getFieldViewModelIndexPathPair
 	}
 
-	public init(model: FormModel, storage: FormStorage) {
-		self.model = model
+	public init(storage: FormStorage, model: FormModel) {
 		self.storage = storage
+		self.model = model
 		storage.addObserver(self)
 	}
 
@@ -61,6 +61,6 @@ public final class Form: EmitterMapperType {
 
 extension Form: EmptyType {
 	public static var empty: Form {
-		return Form(model: FormModel.empty, storage: FormStorage())
+		return Form(storage: FormStorage(), model: FormModel.empty)
 	}
 }
