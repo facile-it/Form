@@ -3,15 +3,15 @@ import Functional
 
 public struct WSRelation<RootValue,WSKey: Hashable,WSObject> {
 	private let key: WSKey
-	private let getObject: (RootValue) -> WSObject
+	private let getObject: (RootValue) -> WSObject?
 
-	public init(key: WSKey, getObject: @escaping (RootValue) -> WSObject) {
+	public init(key: WSKey, getObject: @escaping (RootValue) -> WSObject?) {
 		self.key = key
 		self.getObject = getObject
 	}
 
-	public func getPlist(for value: RootValue) -> [WSKey:WSObject] {
-		return [key : getObject(value)]
+	public func getPlist(for value: RootValue) -> [WSKey:WSObject]? {
+		return getObject(value).map { [key : $0] }
 	}
 }
 
@@ -59,7 +59,7 @@ public struct FieldSerialization<Value>: EmptyType {
 		case let .single(relation):
 			return relation.getPlist(for: value)
 		case let .multiple(relations):
-			return relations.map(Use(WSRelation.getPlist).with(value)).composeAll
+			return relations.mapSome(Use(WSRelation.getPlist).with(value)).composeAll
 		}
 	}
 
