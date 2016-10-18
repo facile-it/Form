@@ -43,8 +43,6 @@ public struct FieldModel<Options: FieldOptions>: FieldKeyOwnerType, EmptyType {
 				options: Options.empty),
 			rules: [],
 			actions: [],
-			serialization: FieldSerialization(
-				visibility: .never,
-				strategy: .direct("")))
+			serialization: FieldSerialization.empty)
 	}
 }

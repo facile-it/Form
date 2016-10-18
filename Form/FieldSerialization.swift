@@ -17,7 +17,7 @@ public struct WSRelation<RootValue,WSKey: Hashable,WSObject> {
 
 public typealias FieldWSRelation<Value> = WSRelation<Value,String,Any>
 
-public enum FieldSerializationVisibility {
+public enum FieldSerializationCondition {
 	case never
 	case ifVisible
 	case always
@@ -36,20 +36,20 @@ public enum FieldSerializationStrategy<Value>: EmptyType {
 
 public struct FieldSerialization<Value>: EmptyType {
 
-	private let visibility: FieldSerializationVisibility
+	private let condition: FieldSerializationCondition
 	private let strategy: FieldSerializationStrategy<Value>
 
-	public init(visibility: FieldSerializationVisibility, strategy: FieldSerializationStrategy<Value>) {
-		self.visibility = visibility
+	public init(condition: FieldSerializationCondition, strategy: FieldSerializationStrategy<Value>) {
+		self.condition = condition
 		self.strategy = strategy
 	}
 
 	public func getWSPlist(for key: FieldKey, in storage: FormStorage) -> PropertyList? {
-		guard visibility != .never else { return nil }
+		guard condition != .never else { return nil }
 
 		let visible = storage.getHidden(at: key).inverse
 
-		guard visible == true || visibility != .ifVisible else { return nil }
+		guard visible == true || condition != .ifVisible else { return nil }
 
 		guard let value = storage.getValue(at: key) as? Value else { return nil }
 
@@ -63,9 +63,15 @@ public struct FieldSerialization<Value>: EmptyType {
 		}
 	}
 
+	public static func simple(for key: FieldKey) -> FieldSerialization<Value> {
+		return FieldSerialization(
+			condition: .ifVisible,
+			strategy: .direct(key))
+	}
+
 	public static var empty: FieldSerialization<Value> {
 		return FieldSerialization(
-			visibility: .never,
+			condition: .never,
 			strategy: .empty)
 	}
 }
