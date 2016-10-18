@@ -32,8 +32,12 @@ extension FieldCondition {
 }
 
 extension FieldCondition where Value: Equatable {
-	public static func valueIs(equal toValue: Value?) -> FieldCondition {
-		return FieldCondition { (value, _) in value == toValue }
+	public static func valueIs(equalTo otherValue: Value?) -> FieldCondition {
+		return FieldCondition { (value, _) in value == otherValue }
+	}
+
+	public static func valueIs(differentFrom otherValue: Value?) -> FieldCondition {
+		return FieldCondition { (value, _) in value != otherValue }
 	}
 
 	public static func otherValue(at key: FieldKey, isEqual toValue: Value?) -> FieldCondition {
