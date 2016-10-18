@@ -26,8 +26,16 @@ extension FieldCondition: Monoid {
 }
 
 extension FieldCondition {
-	func and(_ other: FieldCondition) -> FieldCondition {
-		return compose(other)
+	public func and(_ other: FieldCondition) -> FieldCondition {
+		return FieldCondition {
+			self.check(value: $0.0, storage: $0.1) && other.check(value: $0.0, storage: $0.1)
+		}
+	}
+
+	public func or(_ other: FieldCondition) -> FieldCondition {
+		return FieldCondition {
+			self.check(value: $0.0, storage: $0.1) || other.check(value: $0.0, storage: $0.1)
+		}
 	}
 }
 
