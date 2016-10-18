@@ -78,13 +78,13 @@ public struct FieldOptionsDate: FieldOptions {
 	public let possibleValues: DateRange
 	public let formatter: (Date) -> String
 
-	public init(possibleValue: DateRange, formatter: @escaping (Date) -> String) {
-		self.possibleValues = possibleValue
+	public init(possibleValues: DateRange, formatter: @escaping (Date) -> String) {
+		self.possibleValues = possibleValues
 		self.formatter = formatter
 	}
 
 	public static var empty: FieldOptionsDate {
-		return FieldOptionsDate(possibleValue: DateRange(nil, nil), formatter: { _ in "" })
+		return FieldOptionsDate(possibleValues: DateRange(nil, nil), formatter: { _ in "" })
 	}
 
 	public var style: FieldOptionsStyle {
