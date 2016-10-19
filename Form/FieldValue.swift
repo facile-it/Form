@@ -60,7 +60,7 @@ extension String: FieldValue {
 	}
 	
 	public var optionalString: String? {
-		return nil
+		return self
 	}
 }
 
