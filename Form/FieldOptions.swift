@@ -17,6 +17,10 @@ public protocol FieldOptions: EmptyType {
 	var style: FieldOptionsStyle { get }
 }
 
+public protocol FieldOptionsPicker: FieldOptions {
+	var possibleValues: [(ValueType,CustomStringConvertible)] { get }
+}
+
 public struct FieldOptionsFixed: FieldOptions {
 	public typealias ValueType = String
 
@@ -92,7 +96,7 @@ public struct FieldOptionsDate: FieldOptions {
 	}
 }
 
-public struct FieldOptionsIntPicker: FieldOptions {
+public struct FieldOptionsIntPicker: FieldOptionsPicker {
 	public typealias ValueType = Int
 
 	public let possibleValues: [(Int,CustomStringConvertible)]
@@ -110,7 +114,7 @@ public struct FieldOptionsIntPicker: FieldOptions {
 	}
 }
 
-public struct FieldOptionsStringPicker: FieldOptions {
+public struct FieldOptionsStringPicker: FieldOptionsPicker {
 	public typealias ValueType = String
 
 	public let possibleValues: [(String,CustomStringConvertible)]
@@ -128,7 +132,7 @@ public struct FieldOptionsStringPicker: FieldOptions {
 	}
 }
 
-public struct FieldOptionsAnyPicker: FieldOptions {
+public struct FieldOptionsAnyPicker: FieldOptionsPicker {
 	public typealias ValueType = FieldValue
 
 	public let possibleValues: [(FieldValue,CustomStringConvertible)]
