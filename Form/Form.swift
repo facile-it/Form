@@ -24,6 +24,22 @@ public final class Form: EmitterMapperType {
 		storage.addObserver(self)
 	}
 
+	public var formConfiguration: FormConfiguration {
+		return model.configuration
+	}
+
+	public func stepConfiguration(at index: UInt) -> FormStepConfiguration? {
+		guard model.subelements.indices.contains(Int(index)) else { return nil }
+		return model.subelements[index].configuration
+	}
+
+	public func sectionConfiguration(at sectionIndex: UInt, forStep stepIndex: UInt) -> FormSectionConfiguration? {
+		guard model.subelements.indices.contains(Int(stepIndex)) else { return nil }
+		let step = model.subelements[stepIndex]
+		guard step.subelements.indices.contains(Int(sectionIndex)) else { return nil }
+		return step.subelements[sectionIndex].configuration
+	}
+
 	public func editStorage(with transform: (FormStorage) -> ()) {
 		transform(storage)
 	}
