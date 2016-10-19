@@ -19,3 +19,69 @@ public protocol HasHashable {
 }
 
 public protocol FieldValue: HasOptionalString, HasOptionalInt, HasOptionalBool, HasOptionalWSObject, HasHashable {}
+
+extension Int: FieldValue {
+	public var optionalBool: Bool? {
+		return nil
+	}
+	
+	public var hashable: AnyHashable {
+		return AnyHashable(self)
+	}
+	
+	public var optionalString: String? {
+		return nil
+	}
+	
+	public var optionalWSObject: Any? {
+		return self
+	}
+
+	public var optionalInt: Int? {
+		return self
+	}
+}
+
+extension String: FieldValue {
+	public var optionalInt: Int? {
+		return nil
+	}
+	
+	public var hashable: AnyHashable {
+		return AnyHashable(self)
+	}
+	
+	public var optionalBool: Bool? {
+		return nil
+	}
+	
+	public var optionalWSObject: Any? {
+		return self
+	}
+	
+	public var optionalString: String? {
+		return nil
+	}
+}
+
+extension Bool: FieldValue {
+	public var hashable: AnyHashable {
+		return AnyHashable(self)
+	}
+	
+	public var optionalBool: Bool? {
+		return self
+	}
+	
+	public var optionalWSObject: Any? {
+		return self
+	}
+	
+	public var optionalString: String? {
+		return nil
+	}
+	
+	public var optionalInt: Int? {
+		return nil
+	}
+}
