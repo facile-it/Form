@@ -133,11 +133,11 @@ public struct FieldOptionsStringPicker: FieldOptionsPicker {
 }
 
 public struct FieldOptionsAnyPicker: FieldOptionsPicker {
-	public typealias ValueType = FieldValue
+	public typealias ValueType = AnyFieldValue
 
-	public let possibleValues: [(FieldValue,CustomStringConvertible)]
+	public let possibleValues: [(AnyFieldValue,CustomStringConvertible)]
 
-	public init(possibleValues: [(FieldValue,CustomStringConvertible)]) {
+	public init(possibleValues: [(AnyFieldValue,CustomStringConvertible)]) {
 		self.possibleValues = possibleValues
 	}
 
@@ -151,12 +151,12 @@ public struct FieldOptionsAnyPicker: FieldOptionsPicker {
 }
 
 public struct FieldOptionsCustom: FieldOptions {
-	public typealias ValueType = FieldValue
+	public typealias ValueType = AnyFieldValue
 
 	public let identifier: String
-	public let valueDescription: (FieldValue?) -> String
+	public let valueDescription: (AnyFieldValue?) -> String
 
-	public init(identifier: String, valueDescription: @escaping (FieldValue?) -> String = { $0?.optionalString ?? "" }) {
+	public init(identifier: String, valueDescription: @escaping (AnyFieldValue?) -> String = { $0?.optionalString ?? "" }) {
 		self.identifier = identifier
 		self.valueDescription = valueDescription
 	}

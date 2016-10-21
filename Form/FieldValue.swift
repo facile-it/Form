@@ -85,3 +85,30 @@ extension Bool: FieldValue {
 		return nil
 	}
 }
+
+public struct AnyFieldValue: FieldValue {
+	public let get: FieldValue
+	public init(_ value: FieldValue) {
+		self.get = value
+	}
+
+	public var hashable: AnyHashable {
+		return get.hashable
+	}
+
+	public var optionalBool: Bool? {
+		return get.optionalBool
+	}
+
+	public var optionalWSObject: Any? {
+		return get.optionalWSObject
+	}
+
+	public var optionalString: String? {
+		return get.optionalString
+	}
+
+	public var optionalInt: Int? {
+		return get.optionalInt
+	}
+}
