@@ -45,7 +45,11 @@ public final class Form: EmitterMapperType {
 	}
 
 	public var allPairs: [FieldViewModelPair] {
-		return storage.allKeys.map(getFieldViewModelIndexPathPair)
+		return model.subelements
+			.flatMap { $0.subelements }
+			.flatMap { $0.subelements }
+			.map { $0.key }
+			.map(getFieldViewModelIndexPathPair)
 	}
 
 	public func update(pair: FieldValueCompletePair) {
