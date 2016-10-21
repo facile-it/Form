@@ -7,11 +7,7 @@ public struct FieldAction<Value> {
 		self.transform = transform
 	}
 
-	public func apply(value: Any?, storage: FormStorage) {
-		guard let value = value as? Value else {
-			transform(nil, storage)
-			return
-		}
+	public func apply(value: Value?, storage: FormStorage) {
 		transform(value,storage)
 	}
 }

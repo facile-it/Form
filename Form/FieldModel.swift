@@ -18,21 +18,16 @@ public struct FieldModel<Options: FieldOptions>: FieldKeyOwnerType, EmptyType {
 	}
 
 	public func getWSPlist(in storage: FormStorage) -> PropertyList? {
-		return serialization.getWSPlist(for: key, in: storage)
+		return serialization.getWSPlist(for: key, in: storage, considering: Options.checkValue)
 	}
 
 	public func getViewModel(in storage: FormStorage) -> FieldViewModel {
-		return config.getViewModel(for: key, in: storage)
+		return config.getViewModel(for: key, in: storage, rules: rules, considering: Options.checkValue)
 	}
 
 	public func updateValueAndApplyActions(with value: Any?, in storage: FormStorage) {
-		if let value = value as? ValueType {
-			storage.set(value: value, at: key)
-			actions.composeAll.apply(value: value, storage: storage)
-		} else {
-			storage.set(value: nil, at: key)
-			actions.composeAll.apply(value: nil, storage: storage)
-		}
+		storage.set(value: value, at: key)
+		actions.composeAll.apply(value: value.flatMap(Options.checkValue), storage: storage)
 	}
 
 	public static var empty: FieldModel<Options> {
