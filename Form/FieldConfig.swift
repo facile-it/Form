@@ -29,7 +29,9 @@ public struct FieldConfig<Options: FieldOptions>: EmptyType {
 
 		let value = storage.getValue(at: key) as? FieldValue
 		let errorMessage = rules.composeAll
-			.isValid(value: value.flatMap(checkValue), storage: storage).invalidMessages
+			.isValid(value: value.flatMap(checkValue), storage: storage)
+			.invalidMessages
+			.map { "\(title): \($0)" }
 			.accumulate { "\($0)\n\($1)" }
 
 		return FieldViewModel(
