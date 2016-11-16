@@ -12,7 +12,7 @@ public typealias FieldOptionsStyle = FieldStyle<
 >
 
 public protocol FieldOptions: EmptyType {
-	associatedtype ValueType
+	associatedtype ValueType: FieldValue
 
 	var style: FieldOptionsStyle { get }
 	static func checkValue(for storageValue: Any) -> ValueType?

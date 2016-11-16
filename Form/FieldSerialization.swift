@@ -15,7 +15,7 @@ public struct WSRelation<RootValue,WSKey: Hashable,WSObject> {
 	}
 }
 
-public typealias FieldWSRelation<Value> = WSRelation<Value,String,Any>
+public typealias FieldWSRelation<Value> = WSRelation<Value,FieldKey,Any>
 
 public enum FieldSerializationCondition {
 	case never
@@ -34,7 +34,7 @@ public enum FieldSerializationStrategy<Value>: EmptyType {
 	}
 }
 
-public struct FieldSerialization<Value>: EmptyType {
+public struct FieldSerialization<Value: FieldValue>: EmptyType {
 
 	private let condition: FieldSerializationCondition
 	private let strategy: FieldSerializationStrategy<Value>
@@ -55,7 +55,7 @@ public struct FieldSerialization<Value>: EmptyType {
 
 		switch strategy {
 		case let .direct(key):
-			return [key: value]
+			return FieldWSRelation<Value>(key: key) { $0.optionalWSObject }.getPlist(for: value)
 		case let .single(relation):
 			return relation.getPlist(for: value)
 		case let .multiple(relations):

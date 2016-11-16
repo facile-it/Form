@@ -86,6 +86,32 @@ extension Bool: FieldValue {
 	}
 }
 
+extension Date: FieldValue {
+	public var hashable: AnyHashable {
+		return AnyHashable(self)
+	}
+
+	public var optionalBool: Bool? {
+		return nil
+	}
+
+	public var optionalWSObject: Any? {
+		let formatter = DateFormatter()
+		formatter.dateFormat = "yyyyMMddHHmmss"
+		return formatter.string(from: self)
+	}
+
+	public var optionalString: String? {
+		let formatter = DateFormatter()
+		formatter.dateFormat = "yyyyMMddHHmmss"
+		return formatter.string(from: self)
+	}
+
+	public var optionalInt: Int? {
+		return nil
+	}
+}
+
 public struct AnyFieldValue: FieldValue {
 	public let get: FieldValue
 	public init(_ value: FieldValue) {
