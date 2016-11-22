@@ -26,24 +26,10 @@
 		38AEC9911DAE7CFA003587E6 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AEC9901DAE7CFA003587E6 /* Field.swift */; };
 		38AFB09A1D9EA6D700A8C890 /* Form.h in Headers */ = {isa = PBXBuildFile; fileRef = 38AFB0981D9EA6D700A8C890 /* Form.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38AFB0A61D9EA87000A8C890 /* Functional.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38AFB0A51D9EA87000A8C890 /* Functional.framework */; };
-		38AFB0A81D9EA88300A8C890 /* Functional.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38AFB0A51D9EA87000A8C890 /* Functional.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		38AFB0AA1D9EA9D200A8C890 /* FieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFB0A91D9EA9D200A8C890 /* FieldModel.swift */; };
 		38AFB0AE1D9EAF9600A8C890 /* FieldConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFB0AD1D9EAF9600A8C890 /* FieldConfig.swift */; };
 		38AFB0B01D9EB64400A8C890 /* FieldSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFB0AF1D9EB64400A8C890 /* FieldSerialization.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		38AFB0A71D9EA87B00A8C890 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				38AFB0A81D9EA88300A8C890 /* Functional.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		381549661DA6403200210634 /* FormStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormStorage.swift; sourceTree = "<group>"; };
@@ -183,8 +169,6 @@
 				38AFB0901D9EA6D700A8C890 /* Sources */,
 				38AFB0911D9EA6D700A8C890 /* Frameworks */,
 				38AFB0921D9EA6D700A8C890 /* Headers */,
-				38AFB0931D9EA6D700A8C890 /* Resources */,
-				38AFB0A71D9EA87B00A8C890 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -228,16 +212,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		38AFB0931D9EA6D700A8C890 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		38AFB0901D9EA6D700A8C890 /* Sources */ = {
