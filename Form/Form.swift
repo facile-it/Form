@@ -75,7 +75,7 @@ public final class Form: EmitterMapperType {
 			.flatMap(Use(FormStepModel.getSubelement).with(key))
 			.flatMap(Use(FormSectionModel.getSubelement).with(key))
 			.map(Use(Field.getViewModel).with(storage))
-			.runWriter
+			.run
 	}
 }
 
