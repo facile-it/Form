@@ -32,7 +32,7 @@ public struct FieldConfig<Options: FieldOptions>: EmptyType {
 			.isValid(value: value.flatMap(checkValue), storage: storage)
 			.invalidMessages
 			.map { "\(title): \($0)" }
-			.accumulate { "\($0)\n\($1)" }
+			.joined(separator: "\n")
 
 		return FieldViewModel(
 			title: title,
