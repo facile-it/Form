@@ -17,6 +17,10 @@
 		382A22E31DEC356B00305D64 /* FormSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 382A22E21DEC356B00305D64 /* FormSpec.swift */; };
 		382A22E51DEC356B00305D64 /* Form.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38AFB0951D9EA6D700A8C890 /* Form.framework */; };
 		382A22F11DEC36F400305D64 /* Functional.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38AFB0A51D9EA87000A8C890 /* Functional.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		383F83BE1DEC68270024D32B /* JSONObject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383F83BD1DEC68270024D32B /* JSONObject.framework */; };
+		383F83C01DEC68310024D32B /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383F83BF1DEC68310024D32B /* SwiftCheck.framework */; };
+		383F83C11DEC68A20024D32B /* JSONObject.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 383F83BD1DEC68270024D32B /* JSONObject.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		383F83C21DEC68BB0024D32B /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 383F83BF1DEC68310024D32B /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3841A3B61DA7991800519DF4 /* UtilityModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3841A3B51DA7991800519DF4 /* UtilityModels.swift */; };
 		3841A3B81DA7A79200519DF4 /* FieldIndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3841A3B71DA7A79200519DF4 /* FieldIndexPath.swift */; };
 		38661A6E1DAD35C900C4F270 /* FieldValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38661A6D1DAD35C900C4F270 /* FieldValue.swift */; };
@@ -51,6 +55,8 @@
 			dstSubfolderSpec = 10;
 			files = (
 				382A22F11DEC36F400305D64 /* Functional.framework in CopyFiles */,
+				383F83C11DEC68A20024D32B /* JSONObject.framework in CopyFiles */,
+				383F83C21DEC68BB0024D32B /* SwiftCheck.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +73,8 @@
 		382A22E01DEC356B00305D64 /* FormSpec.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FormSpec.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		382A22E21DEC356B00305D64 /* FormSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSpec.swift; sourceTree = "<group>"; };
 		382A22E41DEC356B00305D64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		383F83BD1DEC68270024D32B /* JSONObject.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSONObject.framework; path = Carthage/Build/iOS/JSONObject.framework; sourceTree = "<group>"; };
+		383F83BF1DEC68310024D32B /* SwiftCheck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftCheck.framework; path = Carthage/Build/iOS/SwiftCheck.framework; sourceTree = "<group>"; };
 		3841A3B51DA7991800519DF4 /* UtilityModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityModels.swift; sourceTree = "<group>"; };
 		3841A3B71DA7A79200519DF4 /* FieldIndexPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldIndexPath.swift; sourceTree = "<group>"; };
 		38661A6D1DAD35C900C4F270 /* FieldValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldValue.swift; sourceTree = "<group>"; };
@@ -91,6 +99,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				382A22E51DEC356B00305D64 /* Form.framework in Frameworks */,
+				383F83C01DEC68310024D32B /* SwiftCheck.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +108,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				38AFB0A61D9EA87000A8C890 /* Functional.framework in Frameworks */,
+				383F83BE1DEC68270024D32B /* JSONObject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,6 +190,8 @@
 		38AFB0A41D9EA83800A8C890 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				383F83BF1DEC68310024D32B /* SwiftCheck.framework */,
+				383F83BD1DEC68270024D32B /* JSONObject.framework */,
 				38AFB0A51D9EA87000A8C890 /* Functional.framework */,
 			);
 			name = Frameworks;
@@ -515,6 +527,7 @@
 				382A22E91DEC356B00305D64 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		38AFB08F1D9EA6D700A8C890 /* Build configuration list for PBXProject "Form" */ = {
 			isa = XCConfigurationList;
