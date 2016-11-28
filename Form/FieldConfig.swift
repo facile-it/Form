@@ -15,7 +15,7 @@ public struct FieldConfig<Options: FieldOptions>: EmptyType {
 		self.init(title: title, deferredOptions: Deferred<Options>(options))
 	}
 
-	public func getViewModel(for key: FieldKey, in storage: FormStorage, rules: [FieldRule<FieldValueType>], considering checkValue: (Any) -> FieldValueType?) -> FieldViewModel {
+	public func getViewModel(for key: FieldKey, in storage: FormStorage, rules: [FieldRule<FieldValueType>], considering checkValue: (FieldValue) -> FieldValueType?) -> FieldViewModel {
 		guard let availableOptions = [storage.getOptions(at: key) as? Options,
 		                              deferredOptions.peek]
 			.firstOptionalSomeOrNone else {
@@ -27,7 +27,7 @@ public struct FieldConfig<Options: FieldOptions>: EmptyType {
 					isLoading: true)
 		}
 
-		let value = storage.getValue(at: key) as? FieldValue
+		let value = storage.getValue(at: key)
 		let errorMessage = rules.composeAll
 			.isValid(value: value.flatMap(checkValue), storage: storage)
 			.invalidMessages

@@ -44,7 +44,7 @@ public struct FieldSerialization<Value: FieldValue>: EmptyType {
 		self.strategy = strategy
 	}
 
-	public func getWSPlist(for key: FieldKey, in storage: FormStorage, considering checkValue: (Any) -> Value?) -> PropertyList? {
+	public func getWSPlist(for key: FieldKey, in storage: FormStorage, considering checkValue: (FieldValue) -> Value?) -> PropertyList? {
 		guard condition != .never else { return nil }
 
 		let visible = storage.getHidden(at: key).inverse

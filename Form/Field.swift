@@ -80,7 +80,7 @@ public struct Field: FieldKeyOwnerType, EmptyType {
 		}
 	}
 
-	public func updateValueAndApplyActions(with value: Any?, in storage: FormStorage) {
+	public func updateValueAndApplyActions(with value: FieldValue?, in storage: FormStorage) {
 		switch modelStyle {
 		case .fixed(let model):
 			model.updateValueAndApplyActions(with: value, in: storage)

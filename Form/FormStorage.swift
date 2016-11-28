@@ -2,8 +2,8 @@ import Functional
 
 public protocol FormStorageType {
 	var allKeys: [FieldKey] { get }
-	func set(value: Any?, at key: FieldKey)
-	func getValue(at key: FieldKey) -> Any?
+	func set(value: FieldValue?, at key: FieldKey)
+	func getValue(at key: FieldKey) -> FieldValue?
 	func set(options: Any?, at key: FieldKey)
 	func getOptions(at key: FieldKey) -> Any?
 	func set(hidden: Bool, at key: FieldKey)
@@ -17,7 +17,7 @@ public final class FormStorage: FormStorageType, WeakObserversCollectionEmitterT
 
 	public var weakObservers: [AnyWeakObserver<FieldKey>] = []
 	
-	fileprivate var fieldValues: [FieldKey:Any] = [:]
+	fileprivate var fieldValues: [FieldKey:FieldValue] = [:]
 	fileprivate var fieldOptions: [FieldKey:Any] = [:]
 	fileprivate var hiddenFieldKeys: Set<FieldKey> = []
 
@@ -27,12 +27,12 @@ public final class FormStorage: FormStorageType, WeakObserversCollectionEmitterT
 		return Array(fieldValues.keys)
 	}
 
-	public func set(value: Any?, at key: FieldKey) {
+	public func set(value: FieldValue?, at key: FieldKey) {
 		fieldValues[key] = value
 		notify(at: key)
 	}
 
-	public func getValue(at key: FieldKey) -> Any? {
+	public func getValue(at key: FieldKey) -> FieldValue? {
 		return fieldValues[key]
 	}
 

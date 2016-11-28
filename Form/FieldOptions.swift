@@ -15,12 +15,21 @@ public protocol FieldOptions: EmptyType {
 	associatedtype ValueType: FieldValue
 
 	var style: FieldOptionsStyle { get }
-	static func checkValue(for storageValue: Any) -> ValueType?
+	static func sanitizeValue(for storageValue: FieldValue) -> ValueType?
 }
 
 extension FieldOptions {
-	public static func checkValue(for storageValue: Any) -> ValueType? {
+	public static func sanitizeValue(for storageValue: FieldValue) -> ValueType? {
 		return storageValue as? ValueType
+	}
+}
+extension FieldOptions where ValueType == AnyFieldValue {
+	public static func sanitizeValue(for storageValue: FieldValue) -> AnyFieldValue? {
+		if let value = storageValue as? AnyFieldValue {
+			return value
+		} else {
+			return AnyFieldValue(storageValue)
+		}
 	}
 }
 
@@ -155,11 +164,6 @@ public struct FieldOptionsAnyPicker: FieldOptionsPicker {
 	public var style: FieldOptionsStyle {
 		return .anyPicker(self)
 	}
-
-	public static func checkValue(for storageValue: Any) -> AnyFieldValue? {
-		guard let fieldValue = storageValue as? FieldValue else { return nil }
-		return AnyFieldValue(fieldValue)
-	}
 }
 
 public struct FieldOptionsCustom: FieldOptions {
@@ -179,10 +183,5 @@ public struct FieldOptionsCustom: FieldOptions {
 
 	public var style: FieldOptionsStyle {
 		return .custom(self)
-	}
-
-	public static func checkValue(for storageValue: Any) -> AnyFieldValue? {
-		guard let fieldValue = storageValue as? FieldValue else { return nil }
-		return AnyFieldValue(fieldValue)
 	}
 }

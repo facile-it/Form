@@ -1,13 +1,13 @@
 import Functional
 
-public struct FieldCondition<Value> {
+public struct FieldCondition<Value: FieldValue> {
 	fileprivate let predicate: (Value?,FormStorage) -> Bool
 
 	public init(predicate: @escaping (Value?,FormStorage) -> Bool) {
 		self.predicate = predicate
 	}
 
-	public func check(value: Any?, storage: FormStorage) -> Bool {
+	public func check(value: FieldValue?, storage: FormStorage) -> Bool {
 		guard let value = value as? Value else { return false }
 		return predicate(value,storage)
 	}

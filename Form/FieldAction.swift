@@ -1,6 +1,6 @@
 import Functional
 
-public struct FieldAction<Value> {
+public struct FieldAction<Value: FieldValue> {
 	private let transform: (Value?,FormStorage) -> ()
 
 	public init(transform: @escaping (Value?,FormStorage) -> ()) {
@@ -38,7 +38,7 @@ extension FieldAction {
 		}
 	}
 
-	public static func set(value: Any?, at key: FieldKey) -> FieldAction {
+	public static func set(value: FieldValue?, at key: FieldKey) -> FieldAction {
 		return FieldAction { (_, storage) in
 			storage.set(value: value, at: key)
 		}
