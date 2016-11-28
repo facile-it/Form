@@ -1,4 +1,5 @@
 import Functional
+import JSONObject
 
 public typealias FieldModelStyle = FieldStyle<
 	FieldModel<FieldOptionsFixed>,
@@ -38,24 +39,24 @@ public struct Field: FieldKeyOwnerType, EmptyType {
 		}
 	}
 
-	public func getWSPlist(in storage: FormStorage) -> PropertyList? {
+	public func getJSONObject(in storage: FormStorage) -> JSONObject? {
 		switch modelStyle {
 		case .fixed(let model):
-			return model.getWSPlist(in: storage)
+			return model.getJSONObject(in: storage)
 		case .onOff(let model):
-			return model.getWSPlist(in: storage)
+			return model.getJSONObject(in: storage)
 		case .textEntry(let model):
-			return model.getWSPlist(in: storage)
+			return model.getJSONObject(in: storage)
 		case .datePicker(let model):
-			return model.getWSPlist(in: storage)
+			return model.getJSONObject(in: storage)
 		case .intPicker(let model):
-			return model.getWSPlist(in: storage)
+			return model.getJSONObject(in: storage)
 		case .stringPicker(let model):
-			return model.getWSPlist(in: storage)
+			return model.getJSONObject(in: storage)
 		case .anyPicker(let model):
-			return model.getWSPlist(in: storage)
+			return model.getJSONObject(in: storage)
 		case .custom(let model):
-			return model.getWSPlist(in: storage)
+			return model.getJSONObject(in: storage)
 		}
 	}
 

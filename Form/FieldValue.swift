@@ -1,3 +1,5 @@
+import JSONObject
+
 public protocol HasOptionalString {
 	var optionalString: String? { get }
 }
@@ -10,15 +12,15 @@ public protocol HasOptionalBool {
 	var optionalBool: Bool? { get }
 }
 
-public protocol HasOptionalWSObject {
-	var optionalWSObject: Any? { get }
+public protocol HasOptionalJSONObject {
+	var optionalJSONObject: JSONObject? { get }
 }
 
 public protocol HasHashable {
 	var hashable: AnyHashable { get }
 }
 
-public protocol FieldValue: HasOptionalString, HasOptionalInt, HasOptionalBool, HasOptionalWSObject, HasHashable {}
+public protocol FieldValue: HasOptionalString, HasOptionalInt, HasOptionalBool, HasOptionalJSONObject, HasHashable {}
 
 extension Int: FieldValue {
 	public var optionalBool: Bool? {
@@ -33,8 +35,8 @@ extension Int: FieldValue {
 		return nil
 	}
 	
-	public var optionalWSObject: Any? {
-		return self
+	public var optionalJSONObject: JSONObject? {
+		return .number(self)
 	}
 
 	public var optionalInt: Int? {
@@ -55,8 +57,8 @@ extension String: FieldValue {
 		return nil
 	}
 	
-	public var optionalWSObject: Any? {
-		return self
+	public var optionalJSONObject: JSONObject? {
+		return .string(self)
 	}
 	
 	public var optionalString: String? {
@@ -73,8 +75,8 @@ extension Bool: FieldValue {
 		return self
 	}
 	
-	public var optionalWSObject: Any? {
-		return self
+	public var optionalJSONObject: JSONObject? {
+		return .bool(self)
 	}
 	
 	public var optionalString: String? {
@@ -95,10 +97,8 @@ extension Date: FieldValue {
 		return nil
 	}
 
-	public var optionalWSObject: Any? {
-		let formatter = DateFormatter()
-		formatter.dateFormat = "yyyyMMddHHmmss"
-		return formatter.string(from: self)
+	public var optionalJSONObject: JSONObject? {
+		return optionalString.map(JSONObject.string)
 	}
 
 	public var optionalString: String? {
@@ -126,8 +126,8 @@ public struct AnyFieldValue: FieldValue {
 		return get.optionalBool
 	}
 
-	public var optionalWSObject: Any? {
-		return get.optionalWSObject
+	public var optionalJSONObject: JSONObject? {
+		return get.optionalJSONObject
 	}
 
 	public var optionalString: String? {

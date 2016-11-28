@@ -1,21 +1,24 @@
 import Foundation
 import Functional
+import JSONObject
 
-public struct WSRelation<RootValue,WSKey: Hashable,WSObject> {
-	private let key: WSKey
-	private let getObject: (RootValue) -> WSObject?
+public struct WSRelation<RootValue> {
+	private let key: String
+	private let getObject: (RootValue) -> JSONObject?
 
-	public init(key: WSKey, getObject: @escaping (RootValue) -> WSObject?) {
+	public init(key: String, getObject: @escaping (RootValue) -> JSONObject?) {
 		self.key = key
 		self.getObject = getObject
 	}
 
-	public func getPlist(for value: RootValue) -> [WSKey:WSObject]? {
-		return getObject(value).map { [key : $0] }
+	public func getObject(for value: RootValue) -> JSONObject? {
+		return getObject(value)
+			.map { [key:$0] }
+			.map(JSONObject.dictionary)
 	}
 }
 
-public typealias FieldWSRelation<Value> = WSRelation<Value,FieldKey,Any>
+public typealias FieldWSRelation<Value: FieldValue> = WSRelation<Value>
 
 public enum FieldSerializationCondition {
 	case never
@@ -44,7 +47,7 @@ public struct FieldSerialization<Value: FieldValue>: EmptyType {
 		self.strategy = strategy
 	}
 
-	public func getWSPlist(for key: FieldKey, in storage: FormStorage, considering checkValue: (FieldValue) -> Value?) -> PropertyList? {
+	public func getJSONObject(for key: FieldKey, in storage: FormStorage, considering checkValue: (FieldValue) -> Value?) -> JSONObject? {
 		guard condition != .never else { return nil }
 
 		let visible = storage.getHidden(at: key).inverse
@@ -55,11 +58,11 @@ public struct FieldSerialization<Value: FieldValue>: EmptyType {
 
 		switch strategy {
 		case let .direct(key):
-			return FieldWSRelation<Value>(key: key) { $0.optionalWSObject }.getPlist(for: value)
+			return FieldWSRelation<Value>(key: key) { $0.optionalJSONObject }.getObject(for: value)
 		case let .single(relation):
-			return relation.getPlist(for: value)
+			return relation.getObject(for: value)
 		case let .multiple(relations):
-			return relations.mapSome(Use(WSRelation.getPlist).with(value)).composeAll
+			return relations.mapSome(Use(WSRelation.getObject).with(value)).composeAll
 		}
 	}
 

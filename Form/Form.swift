@@ -1,4 +1,5 @@
 import Functional
+import JSONObject
 
 public typealias FieldViewModelPair = (viewModel: FieldViewModel, indexPath: FieldIndexPath)
 public typealias FieldValueCompletePair = (fieldValue: FieldValue?, indexPath: FieldIndexPathComplete)
@@ -61,11 +62,11 @@ public final class Form: EmitterMapperType {
 		field.updateValueAndApplyActions(with: pair.fieldValue, in: storage)
 	}
 
-	public var wsPlist: PropertyList? {
+	public var jsonObject: JSONObject? {
 		return model.subelements
 			.flatMap { $0.subelements }
 			.flatMap { $0.subelements }
-			.mapSome { $0.getWSPlist(in: storage) }
+			.mapSome { $0.getJSONObject(in: storage) }
 			.accumulate { $0.compose($1) }
 	}
 

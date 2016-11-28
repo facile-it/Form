@@ -1,4 +1,5 @@
 import Functional
+import JSONObject
 
 public struct FieldModel<Options: FieldOptions>: FieldKeyOwnerType, EmptyType {
 	public typealias ValueType = Options.ValueType
@@ -17,8 +18,8 @@ public struct FieldModel<Options: FieldOptions>: FieldKeyOwnerType, EmptyType {
 		self.serialization = serialization
 	}
 
-	public func getWSPlist(in storage: FormStorage) -> PropertyList? {
-		return serialization.getWSPlist(for: key, in: storage, considering: Options.sanitizeValue)
+	public func getJSONObject(in storage: FormStorage) -> JSONObject? {
+		return serialization.getJSONObject(for: key, in: storage, considering: Options.sanitizeValue)
 	}
 
 	public func getViewModel(in storage: FormStorage) -> FieldViewModel {
