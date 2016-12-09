@@ -1,3 +1,3 @@
-github "broomburgo/Functional" "a01c4b6c2725ff4b8c20dfe3c58893a5d01a3cd2"
+github "broomburgo/Functional" "ee9d5d93e1f3518e4758a9a3f346f5ff05feb336"
 github "typelift/SwiftCheck" "0.7.2"
-github "broomburgo/JSONObject" "c0b80c0d0e8f30824c3d557f4100e1c425d66291"
+github "broomburgo/JSONObject" "a661100bb08f5ecccf6a3ca3c80c8ae5d60d83a6"
