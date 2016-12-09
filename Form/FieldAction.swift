@@ -17,7 +17,7 @@ extension FieldAction: Monoid {
 		return FieldAction { _ in }
 	}
 
-	public func compose(_ other: FieldAction) -> FieldAction {
+	public func join(_ other: FieldAction) -> FieldAction {
 		return FieldAction {
 			self.apply(value: $0.0, storage: $0.1)
 			other.apply(value: $0.0, storage: $0.1)
@@ -27,7 +27,7 @@ extension FieldAction: Monoid {
 
 extension FieldAction {
 	public func and(_ other: FieldAction) -> FieldAction {
-		return compose(other)
+		return join(other)
 	}
 }
 
@@ -61,7 +61,7 @@ extension FieldAction {
 	}
 
 	public static func removeValueAndHideField(at key: FieldKey) -> FieldAction {
-		return [removeValueForField(at: key),hideField(at: key)].composeAll
+		return [removeValueForField(at: key),hideField(at: key)].joined()
 	}
 
 	public static func notify(at key: FieldKey) -> FieldAction {

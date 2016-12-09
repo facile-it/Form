@@ -28,7 +28,7 @@ public struct FieldModel<Options: FieldOptions>: FieldKeyOwnerType, EmptyType {
 
 	public func updateValueAndApplyActions(with value: FieldValue?, in storage: FormStorage) {
 		storage.set(value: value, at: key)
-		actions.composeAll.apply(value: value.flatMap(Options.sanitizeValue), storage: storage)
+		actions.joined().apply(value: value.flatMap(Options.sanitizeValue), storage: storage)
 	}
 
 	public static var empty: FieldModel<Options> {

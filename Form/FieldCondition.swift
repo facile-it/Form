@@ -18,7 +18,7 @@ extension FieldCondition: Monoid {
 		return FieldCondition { _ in true }
 	}
 
-	public func compose(_ other: FieldCondition) -> FieldCondition {
+	public func join(_ other: FieldCondition) -> FieldCondition {
 		return FieldCondition {
 			self.check(value: $0.0, storage: $0.1) && other.check(value: $0.0, storage: $0.1)
 		}

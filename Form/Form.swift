@@ -67,15 +67,15 @@ public final class Form: EmitterMapperType {
 			.flatMap { $0.subelements }
 			.flatMap { $0.subelements }
 			.mapSome { $0.getJSONObject(in: storage) }
-			.accumulate { $0.compose($1) }
+			.accumulate { $0.join($1) }
 	}
 
 	fileprivate func getFieldViewModelIndexPathPair(at key: FieldKey) -> FieldViewModelPair {
 		return Writer<FormModel,FieldIndexPath>(model)
-			.flatMap(Use(FormModel.getSubelement).with(key))
-			.flatMap(Use(FormStepModel.getSubelement).with(key))
-			.flatMap(Use(FormSectionModel.getSubelement).with(key))
-			.map(Use(Field.getViewModel).with(storage))
+			.flatMap(FormModel.getSubelement >< key)
+			.flatMap(FormStepModel.getSubelement >< key)
+			.flatMap(FormSectionModel.getSubelement >< key)
+			.map(Field.getViewModel >< storage)
 			.run
 	}
 }

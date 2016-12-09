@@ -62,7 +62,7 @@ public struct FieldSerialization<Value: FieldValue>: EmptyType {
 		case let .single(relation):
 			return relation.getObject(for: value)
 		case let .multiple(relations):
-			return relations.mapSome(Use(WSRelation.getObject).with(value)).composeAll
+			return relations.mapSome(WSRelation.getObject >< value).joined()
 		}
 	}
 

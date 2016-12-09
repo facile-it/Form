@@ -28,9 +28,9 @@ extension FieldRule: Monoid {
 		return FieldRule { _ in .empty }
 	}
 
-	public func compose(_ other: FieldRule<Value>) -> FieldRule<Value> {
+	public func join(_ other: FieldRule<Value>) -> FieldRule<Value> {
 		return FieldRule {
-			self.isValid(value: $0, storage: $1).compose(other.isValid(value: $0, storage: $1))
+			self.isValid(value: $0, storage: $1).join(other.isValid(value: $0, storage: $1))
 		}
 	}
 }
