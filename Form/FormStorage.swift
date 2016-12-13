@@ -33,8 +33,14 @@ public final class FormStorage: WeakObserversCollectionEmitterType {
 	}
 
 	public func set(options: Any?, at key: FieldKey) {
-		fieldOptions[key] = options
-		send(key)
+        let prevOption = fieldOptions[key]
+        switch (options, prevOption) {
+        case (.none,.none):
+            return
+        default:
+            fieldOptions[key] = options
+            send(key)
+        }
 	}
 
 	public func getOptions(at key: FieldKey) -> Any? {
