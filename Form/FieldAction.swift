@@ -66,7 +66,7 @@ extension FieldAction {
 
 	public static func notify(at key: FieldKey) -> FieldAction {
 		return FieldAction { (_, storage) in
-			storage.notify(at: key)
+			storage.send(key)
 		}
 	}
 }

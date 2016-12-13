@@ -64,7 +64,7 @@ extension FieldCondition where Value: Equatable {
 
 /// FieldAction related methods
 extension FieldCondition {
-	public func runCondition(ifTrue actionTrue: FieldAction<Value>, ifFalse actionFalse: FieldAction<Value>) -> FieldAction<Value> {
+	public func run(ifTrue actionTrue: FieldAction<Value>, ifFalse actionFalse: FieldAction<Value>) -> FieldAction<Value> {
 		return FieldAction<Value> {
 			if self.predicate($0.0,$0.1) {
 				actionTrue.apply(value: $0.0, storage: $0.1)
@@ -75,10 +75,10 @@ extension FieldCondition {
 	}
 
 	public func ifTrue(_ action: FieldAction<Value>) -> FieldAction<Value> {
-		return runCondition(ifTrue: action, ifFalse: FieldAction<Value>.empty)
+		return run(ifTrue: action, ifFalse: FieldAction<Value>.empty)
 	}
 
 	public func ifFalse(_ action: FieldAction<Value>) -> FieldAction<Value> {
-		return runCondition(ifTrue: FieldAction<Value>.empty, ifFalse: action)
+		return run(ifTrue: FieldAction<Value>.empty, ifFalse: action)
 	}
 }

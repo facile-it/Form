@@ -15,7 +15,7 @@ public final class Form: EmitterMapperType {
 	}
 
 	public var weakObservers: [AnyWeakObserver<FieldViewModelPair>] = []
-	public var mappingFunction: (String) -> FieldViewModelPair {
+	public var mappingFunction: (FieldKey) -> FieldViewModelPair {
 		return getFieldViewModelIndexPathPair
 	}
 
@@ -67,7 +67,7 @@ public final class Form: EmitterMapperType {
 			.flatMap { $0.subelements }
 			.flatMap { $0.subelements }
 			.mapSome { $0.getJSONObject(in: storage) }
-			.accumulate { $0.join($1) }
+			.joined()
 	}
 
 	fileprivate func getFieldViewModelIndexPathPair(at key: FieldKey) -> FieldViewModelPair {

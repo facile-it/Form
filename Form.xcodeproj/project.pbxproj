@@ -35,6 +35,8 @@
 		38AFB0AA1D9EA9D200A8C890 /* FieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFB0A91D9EA9D200A8C890 /* FieldModel.swift */; };
 		38AFB0AE1D9EAF9600A8C890 /* FieldConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFB0AD1D9EAF9600A8C890 /* FieldConfig.swift */; };
 		38AFB0B01D9EB64400A8C890 /* FieldSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFB0AF1D9EB64400A8C890 /* FieldSerialization.swift */; };
+		38C163331E0016DB0035D06A /* FormStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C163321E0016DB0035D06A /* FormStorageSpec.swift */; };
+		38C163351E0018D60035D06A /* SpecTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C163341E0018D60035D06A /* SpecTools.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +93,8 @@
 		38AFB0A91D9EA9D200A8C890 /* FieldModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldModel.swift; sourceTree = "<group>"; };
 		38AFB0AD1D9EAF9600A8C890 /* FieldConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldConfig.swift; sourceTree = "<group>"; };
 		38AFB0AF1D9EB64400A8C890 /* FieldSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldSerialization.swift; sourceTree = "<group>"; };
+		38C163321E0016DB0035D06A /* FormStorageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormStorageSpec.swift; sourceTree = "<group>"; };
+		38C163341E0018D60035D06A /* SpecTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecTools.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +124,8 @@
 			children = (
 				382A22E21DEC356B00305D64 /* FormSpec.swift */,
 				382A22E41DEC356B00305D64 /* Info.plist */,
+				38C163321E0016DB0035D06A /* FormStorageSpec.swift */,
+				38C163341E0018D60035D06A /* SpecTools.swift */,
 			);
 			path = FormSpec;
 			sourceTree = "<group>";
@@ -292,6 +298,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38C163331E0016DB0035D06A /* FormStorageSpec.swift in Sources */,
+				38C163351E0018D60035D06A /* SpecTools.swift in Sources */,
 				382A22E31DEC356B00305D64 /* FormSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,18 +1,6 @@
 import Functional
 
-public protocol FormStorageType {
-	var allKeys: [FieldKey] { get }
-	func set(value: FieldValue?, at key: FieldKey)
-	func getValue(at key: FieldKey) -> FieldValue?
-	func set(options: Any?, at key: FieldKey)
-	func getOptions(at key: FieldKey) -> Any?
-	func set(hidden: Bool, at key: FieldKey)
-	func getHidden(at key: FieldKey) -> Bool
-	func notify(at key: FieldKey)
-	func clear()
-}
-
-public final class FormStorage: FormStorageType, WeakObserversCollectionEmitterType {
+public final class FormStorage: WeakObserversCollectionEmitterType {
 	public typealias EmittedType = FieldKey
 
 	public var weakObservers: [AnyWeakObserver<FieldKey>] = []
@@ -23,13 +11,21 @@ public final class FormStorage: FormStorageType, WeakObserversCollectionEmitterT
 
 	public init() {}
 
-	public var allKeys: [FieldKey] {
-		return Array(fieldValues.keys)
+	public var allKeys: Set<FieldKey> {
+		return Set(fieldValues.keys)
 	}
 
 	public func set(value: FieldValue?, at key: FieldKey) {
-		fieldValues[key] = value
-		notify(at: key)
+		let prevValue = fieldValues[key]
+		switch (value, prevValue) {
+		case (.none,.none):
+			return
+		case (.some(let value), .some(let prevValue)) where value.isEqual(to: prevValue):
+			return
+		default:
+			fieldValues[key] = value
+			send(key)
+		}
 	}
 
 	public func getValue(at key: FieldKey) -> FieldValue? {
@@ -38,7 +34,7 @@ public final class FormStorage: FormStorageType, WeakObserversCollectionEmitterT
 
 	public func set(options: Any?, at key: FieldKey) {
 		fieldOptions[key] = options
-		notify(at: key)
+		send(key)
 	}
 
 	public func getOptions(at key: FieldKey) -> Any? {
@@ -53,7 +49,7 @@ public final class FormStorage: FormStorageType, WeakObserversCollectionEmitterT
 			hiddenFieldKeys.remove(key)
 		}
 		if shouldNotify {
-			notify(at: key)
+			send(key)
 		}
 	}
 
@@ -61,14 +57,10 @@ public final class FormStorage: FormStorageType, WeakObserversCollectionEmitterT
 		return hiddenFieldKeys.contains(key)
 	}
 
-	public func notify(at key: FieldKey) {
-		weakObservers.forEach { $0.observe(key) }
-	}
-
 	public func clear() {
 		let keys = Set(fieldValues.keys).union(hiddenFieldKeys)
 		fieldValues.removeAll()
 		hiddenFieldKeys.removeAll()
-		keys.forEach(notify)
+		keys.forEach(send)
 	}
 }

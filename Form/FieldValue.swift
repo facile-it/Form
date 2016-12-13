@@ -22,6 +22,16 @@ public protocol HasHashable {
 
 public protocol FieldValue: HasOptionalString, HasOptionalInt, HasOptionalBool, HasOptionalJSONObject, HasHashable {}
 
+extension FieldValue {
+	public func isEqual(to other: FieldValue) -> Bool {
+		return optionalString == other.optionalString
+			&& optionalInt == other.optionalInt
+			&& optionalBool == other.optionalBool
+			&& optionalJSONObject == other.optionalJSONObject
+			&& hashable == other.hashable
+	}
+}
+
 extension Int: FieldValue {
 	public var optionalBool: Bool? {
 		return nil
