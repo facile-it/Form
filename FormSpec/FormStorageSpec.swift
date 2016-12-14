@@ -40,9 +40,7 @@ class FormStorageSpec: XCTestCase {
 			let optValue = av.getOptional as FieldValue?
 			storage.set(value: optValue, at: ak)
 			let optGotValue = storage.getValue(at: ak)
-			if optValue == nil && optGotValue == nil { return true }
-			guard let value = optValue, let gotValue = optGotValue else { return false }
-			return gotValue.isEqual(to: value)
+			return optFieldValuesAreEqual(optGotValue, optValue)
 		}
 	}
 

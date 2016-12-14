@@ -69,4 +69,12 @@ public final class FormStorage: WeakObserversCollectionEmitterType {
 		hiddenFieldKeys.removeAll()
 		keys.forEach(send)
 	}
+
+	public func hasSameFieldValuesAndHiddenFieldKeys(of other: FormStorage) -> Bool {
+		return fieldValues.isEqual(
+			to: other.fieldValues,
+			considering: { $0.isEqual(to: $1) })
+			&&
+			hiddenFieldKeys.isEqual(to: other.hiddenFieldKeys)
+	}
 }
