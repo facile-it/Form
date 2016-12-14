@@ -18,12 +18,36 @@ struct ArbitraryPair<A: Arbitrary, B: Arbitrary>: Arbitrary {
 	}
 }
 
-extension Set {
-	func isEqual(to other: Set) -> Bool {
-		guard count == other.count else { return false }
-		for element in self {
-			guard other.contains(element) else { return false }
+extension FieldAction {
+	public func isEqual(to other: FieldAction) -> (Value?) -> Bool {
+		return { optValue in
+
+			let storage1 = FormStorage()
+			let storage2 = FormStorage()
+
+			self.apply(value: optValue, storage: storage1)
+			other.apply(value: optValue, storage: storage2)
+
+			return storage1.hasSameFieldValuesAndHiddenFieldKeys(of: storage2)
 		}
-		return true
 	}
+}
+
+extension FieldAction: Arbitrary {
+	public static var arbitrary: Gen<FieldAction<Value>> {
+		return Gen<(FieldKey,Bool)>
+			.zip(FieldKey.arbitrary, Bool.arbitrary)
+			.map { (key,hidden) in
+				FieldAction { (optValue,storage) in
+					storage.set(value: optValue, at: key)
+					storage.set(hidden: hidden, at: key)
+				}
+		}
+	}
+}
+
+func optFieldValuesAreEqual(_ optFirst: FieldValue?, _ optSecond: FieldValue?) -> Bool {
+	if optFirst == nil && optSecond == nil { return true }
+	guard let first = optFirst, let second = optSecond else { return false }
+	return first.isEqual(to: second)
 }

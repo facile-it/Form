@@ -25,6 +25,7 @@
 		3841A3B81DA7A79200519DF4 /* FieldIndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3841A3B71DA7A79200519DF4 /* FieldIndexPath.swift */; };
 		38661A6E1DAD35C900C4F270 /* FieldValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38661A6D1DAD35C900C4F270 /* FieldValue.swift */; };
 		38661A701DAD443900C4F270 /* FieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38661A6F1DAD443900C4F270 /* FieldStyle.swift */; };
+		38888C2A1E01323B002184C5 /* FieldActionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38888C291E01323B002184C5 /* FieldActionSpec.swift */; };
 		38A0D63D1DAB8A2C00C5FF06 /* FormContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0D63C1DAB8A2C00C5FF06 /* FormContainer.swift */; };
 		38A0D63F1DAB8EDC00C5FF06 /* FieldKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0D63E1DAB8EDC00C5FF06 /* FieldKey.swift */; };
 		38A0D6411DAB8F0B00C5FF06 /* FormModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0D6401DAB8F0B00C5FF06 /* FormModels.swift */; };
@@ -81,6 +82,7 @@
 		3841A3B71DA7A79200519DF4 /* FieldIndexPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldIndexPath.swift; sourceTree = "<group>"; };
 		38661A6D1DAD35C900C4F270 /* FieldValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldValue.swift; sourceTree = "<group>"; };
 		38661A6F1DAD443900C4F270 /* FieldStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldStyle.swift; sourceTree = "<group>"; };
+		38888C291E01323B002184C5 /* FieldActionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldActionSpec.swift; sourceTree = "<group>"; };
 		38A0D63C1DAB8A2C00C5FF06 /* FormContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormContainer.swift; sourceTree = "<group>"; };
 		38A0D63E1DAB8EDC00C5FF06 /* FieldKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldKey.swift; sourceTree = "<group>"; };
 		38A0D6401DAB8F0B00C5FF06 /* FormModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormModels.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				382A22E41DEC356B00305D64 /* Info.plist */,
 				38C163321E0016DB0035D06A /* FormStorageSpec.swift */,
 				38C163341E0018D60035D06A /* SpecTools.swift */,
+				38888C291E01323B002184C5 /* FieldActionSpec.swift */,
 			);
 			path = FormSpec;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				38C163331E0016DB0035D06A /* FormStorageSpec.swift in Sources */,
+				38888C2A1E01323B002184C5 /* FieldActionSpec.swift in Sources */,
 				38C163351E0018D60035D06A /* SpecTools.swift in Sources */,
 				382A22E31DEC356B00305D64 /* FormSpec.swift in Sources */,
 			);
