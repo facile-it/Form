@@ -6,6 +6,7 @@ import Functional
 typealias Tested = FieldAction<Int>
 
 class FieldActionSpec: XCTestCase {
+    var actionObserver: CustomObserver<FieldKey>? = nil
     
 	func testMonoidLaws() {
 		property("1•a = a") <- forAll { (av: OptionalOf<Int>, object: Tested) in
@@ -39,5 +40,43 @@ class FieldActionSpec: XCTestCase {
 
 			return optFieldValuesAreEqual(storage.getValue(at: key), optValue)
 		}
+        
+        property("'removeValueForField(at key:) works as intended") <- forAll { (key: FieldKey, av: OptionalOf<Int>, avIgnored:OptionalOf<Int>) in
+            
+            let optValue = av.getOptional
+            let storage = FormStorage()
+            storage.set(value: optValue as FieldValue?, at: key)
+            Tested.removeValueForField(at: key).apply(value: avIgnored.getOptional, storage: storage)
+            return optFieldValuesAreEqual(storage.getValue(at: key), nil)
+        }
+        
+        property("'hideField(at key:)' work as intended") <- forAll { (key: FieldKey, av: OptionalOf<Int>, avIgnored: OptionalOf<Int>) in
+            
+            let optValue = av.getOptional
+            let storage = FormStorage()
+            storage.set(value: optValue as FieldValue?, at: key)
+            Tested.hideField(at: key).apply(value: avIgnored.getOptional, storage: storage)
+            return storage.getHidden(at: key)
+        }
+        
+        property("'showField(at key:)' work as intended") <- forAll { (key: FieldKey, av: OptionalOf<Int>, avIgnored: OptionalOf<Int>) in
+            
+            let optValue = av.getOptional
+            let storage = FormStorage()
+            storage.set(value: optValue as FieldValue?, at: key)
+            Tested.hideField(at: key).apply(value: avIgnored.getOptional, storage: storage)
+            Tested.showField(at: key).apply(value: avIgnored.getOptional, storage: storage)
+            return !storage.getHidden(at: key)
+        }
+        
+        property("'removeValueAndHideField(at key:)' work as intended") <- forAll { (key: FieldKey, av: OptionalOf<Int>, avIgnored: OptionalOf<Int>) in
+            
+            let optValue = av.getOptional
+            let storage = FormStorage()
+            storage.set(value: optValue as FieldValue?, at: key)
+            Tested.removeValueAndHideField(at: key).apply(value: avIgnored.getOptional, storage: storage)
+            
+            return storage.getHidden(at: key) && storage.getValue(at: key) == nil
+        }
 	}
 }

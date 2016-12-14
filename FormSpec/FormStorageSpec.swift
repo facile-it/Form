@@ -147,7 +147,7 @@ class FormStorageSpec: XCTestCase {
     func testSetGetHidden() {
         let storage = FormStorage()
         
-        property("'setHidde' and 'getHidden' should be consistent") <- forAll { (ab: Bool, av: OptionalOf<Int>, ak: FieldKey) in
+        property("'setHiddne' and 'getHidden' should be consistent") <- forAll { (ab: Bool, av: OptionalOf<Int>, ak: FieldKey) in
             storage.set(value: av.getOptional as FieldValue?, at: ak)
             storage.set(hidden: ab, at: ak)
             let gotHidden = storage.getHidden(at: ak)

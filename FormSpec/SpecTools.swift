@@ -51,3 +51,11 @@ func optFieldValuesAreEqual(_ optFirst: FieldValue?, _ optSecond: FieldValue?) -
 	guard let first = optFirst, let second = optSecond else { return false }
 	return first.isEqual(to: second)
 }
+
+extension Date: Arbitrary {
+    public static var arbitrary: Gen<Date> {
+        return Gen<Date>.pure(Date.init())
+    }
+}
+
+
