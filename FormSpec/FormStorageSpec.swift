@@ -9,12 +9,12 @@ class FormStorageSpec: XCTestCase {
     var optionsObserver: CustomObserver<FieldKey>? = nil
 
 	func testAllKeys() {
-		property("'allKeys' is consistent with stored field values") <- forAll { (ap1: ArbitraryPair<OptionalOf<Int>,FieldKey>, ap2: ArbitraryPair<OptionalOf<Int>,FieldKey>, ap3: ArbitraryPair<OptionalOf<Int>,FieldKey>, ap4: ArbitraryPair<OptionalOf<Int>,FieldKey>) in
+		property("'allKeys' is consistent with stored field values") <- forAll { (ap1: ArbitraryPair<OptionalOf<ArbitraryFieldValue>,FieldKey>, ap2: ArbitraryPair<OptionalOf<ArbitraryFieldValue>,FieldKey>, ap3: ArbitraryPair<OptionalOf<ArbitraryFieldValue>,FieldKey>, ap4: ArbitraryPair<OptionalOf<ArbitraryFieldValue>,FieldKey>) in
 
 			let storage = FormStorage()
 
 			let array = [ap1, ap2, ap3, ap4]
-				.map { ($0.left.getOptional, $0.right) }
+				.map { ($0.left.getOptional?.get, $0.right) }
 
 			array.forEach {
 				storage.set(value: $0.0, at: $0.1)
@@ -36,8 +36,8 @@ class FormStorageSpec: XCTestCase {
 	func testSetGetValue() {
 		let storage = FormStorage()
 
-		property("'setValue' and 'getValue' should be consistent") <- forAll { (av: OptionalOf<Int>, ak: FieldKey) in
-			let optValue = av.getOptional as FieldValue?
+		property("'setValue' and 'getValue' should be consistent") <- forAll { (av: OptionalOf<ArbitraryFieldValue>, ak: FieldKey) in
+			let optValue = av.getOptional?.get as FieldValue?
 			storage.set(value: optValue, at: ak)
 			let optGotValue = storage.getValue(at: ak)
 			return optFieldValuesAreEqual(optGotValue, optValue)
@@ -97,14 +97,14 @@ class FormStorageSpec: XCTestCase {
     func testSetGetOptions() {
         let storage = FormStorage();
         
-        property("'setOptions' and 'getOptions' should be consistent") <- forAll { (ao: OptionalOf<Int>, av: OptionalOf<Int>, ak: FieldKey) in
-            storage.set(value: av.getOptional as FieldValue?, at: ak)
-            storage.set(options: ao.getOptional, at: ak)
+        property("'setOptions' and 'getOptions' should be consistent") <- forAll { (ao: OptionalOf<ArbitraryFieldValue>, av: OptionalOf<ArbitraryFieldValue>, ak: FieldKey) in
+            storage.set(value: av.getOptional?.get as FieldValue?, at: ak)
+            storage.set(options: ao.getOptional?.get, at: ak)
             let optGotOption = storage.getOptions(at: ak)
             if ao.getOptional == nil && optGotOption == nil { return true }
-            guard let option = ao.getOptional, let gotOption = optGotOption else { return false }
-            guard gotOption is Int else { return false }
-            return (gotOption as! Int).isEqual(to: option)
+            guard let option = ao.getOptional?.get, let gotOption = optGotOption else { return false }
+            guard gotOption is FieldValue else { return false }
+            return (gotOption as! FieldValue).isEqual(to: option)
         }
     }
     
@@ -147,8 +147,8 @@ class FormStorageSpec: XCTestCase {
     func testSetGetHidden() {
         let storage = FormStorage()
         
-        property("'setHiddne' and 'getHidden' should be consistent") <- forAll { (ab: Bool, av: OptionalOf<Int>, ak: FieldKey) in
-            storage.set(value: av.getOptional as FieldValue?, at: ak)
+        property("'setHidden' and 'getHidden' should be consistent") <- forAll { (ab: Bool, av: OptionalOf<ArbitraryFieldValue>, ak: FieldKey) in
+            storage.set(value: av.getOptional?.get as FieldValue?, at: ak)
             storage.set(hidden: ab, at: ak)
             let gotHidden = storage.getHidden(at: ak)
             

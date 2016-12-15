@@ -58,4 +58,20 @@ extension Date: Arbitrary {
     }
 }
 
-
+struct ArbitraryFieldValue: Arbitrary, CustomStringConvertible {
+    
+    let get: FieldValue
+    var description: String
+    
+    init(value: FieldValue) {
+        self.get = value
+        self.description = ""
+    }
+    
+    static var arbitrary: Gen<ArbitraryFieldValue> {
+        return Gen.one(of: [Int.arbitrary.map(ArbitraryFieldValue.init),
+                            String.arbitrary.map(ArbitraryFieldValue.init),
+                            Bool.arbitrary.map(ArbitraryFieldValue.init),
+                            Date.arbitrary.map(ArbitraryFieldValue.init)])
+    }
+}
