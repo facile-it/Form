@@ -1,28 +1,31 @@
 import Functional
+import Signals
 import JSONObject
 
 public typealias FieldViewModelPair = (viewModel: FieldViewModel, indexPath: FieldIndexPath)
 public typealias FieldValueCompletePair = (fieldValue: FieldValue?, indexPath: FieldIndexPathComplete)
 
-public final class Form: EmitterMapperType {
-	public typealias ObservedType = FieldKey
-	public typealias EmittedType = FieldViewModelPair
+public final class Form {
 
 	private let storage: FormStorage
 	private let model: FormModel
-	public var identifier: String {
-		return model.configuration.title.getOrEmpty
-	}
+	private var storageBinding: Binding<FieldViewModelPair>? = nil
 
-	public var weakObservers: [AnyWeakObserver<FieldViewModelPair>] = []
-	public var mappingFunction: (FieldKey) -> FieldViewModelPair {
-		return getFieldViewModelIndexPathPair
-	}
+	private let variableFieldViewModelPair = Emitter<FieldViewModelPair>()
+	public private(set) lazy var observableFieldViewModelPair: AnyObservable<FieldViewModelPair> = {
+		return self.variableFieldViewModelPair.any
+	}()
 
 	public init(storage: FormStorage, model: FormModel) {
 		self.storage = storage
 		self.model = model
-		storage.addObserver(self)
+		self.storageBinding = self.variableFieldViewModelPair.bind(
+			to: storage.observableFieldKey
+				.map(Form.getFieldViewModelIndexPathPair(model: model, storage: storage)))
+	}
+
+	deinit {
+		storageBinding?.disconnect()
 	}
 
 	public var formConfiguration: FormConfiguration {
@@ -31,14 +34,14 @@ public final class Form: EmitterMapperType {
 
 	public func stepConfiguration(at index: UInt) -> FormStepConfiguration? {
 		guard model.subelements.indices.contains(Int(index)) else { return nil }
-		return model.subelements[index].configuration
+		return model.subelements[Int(index)].configuration
 	}
 
 	public func sectionConfiguration(at sectionIndex: UInt, forStep stepIndex: UInt) -> FormSectionConfiguration? {
 		guard model.subelements.indices.contains(Int(stepIndex)) else { return nil }
-		let step = model.subelements[stepIndex]
+		let step = model.subelements[Int(stepIndex)]
 		guard step.subelements.indices.contains(Int(sectionIndex)) else { return nil }
-		return step.subelements[sectionIndex].configuration
+		return step.subelements[Int(sectionIndex)].configuration
 	}
 
 	public func editStorage(with transform: (FormStorage) -> ()) {
@@ -50,14 +53,23 @@ public final class Form: EmitterMapperType {
 			.flatMap { $0.subelements }
 			.flatMap { $0.subelements }
 			.map { $0.key }
-			.map(getFieldViewModelIndexPathPair)
+			.map(Form.getFieldViewModelIndexPathPair(model: model, storage: storage))
 	}
 
 	public func update(pair: FieldValueCompletePair) {
+		let stepIndex = Int(pair.indexPath.stepIndex)
+		let sectionIndex = Int(pair.indexPath.sectionIndex)
+		let fieldIndex = Int(pair.indexPath.fieldIndex)
 		guard
-			let step = model.subelements.get(at: Int(pair.indexPath.stepIndex)),
-			let section = step.subelements.get(at: Int(pair.indexPath.sectionIndex)),
-			let field = section.subelements.get(at: Int(pair.indexPath.fieldIndex))
+			let step = model.subelements.indices.contains(stepIndex)
+				? model.subelements[stepIndex]
+				: nil,
+			let section = step.subelements.indices.contains(sectionIndex)
+				? step.subelements[sectionIndex]
+				: nil,
+			let field = section.subelements.indices.contains(fieldIndex)
+				? section.subelements[fieldIndex]
+				: nil
 			else { return }
 		field.updateValueAndApplyActions(with: pair.fieldValue, in: storage)
 	}
@@ -67,20 +79,22 @@ public final class Form: EmitterMapperType {
 			.flatMap { $0.subelements }
 			.flatMap { $0.subelements }
 			.mapSome { $0.getJSONObject(in: storage) }
-			.joined()
+			.joinAll()
 	}
 
-	fileprivate func getFieldViewModelIndexPathPair(at key: FieldKey) -> FieldViewModelPair {
-		return Writer<FormModel,FieldIndexPath>(model)
-			.flatMap(FormModel.getSubelement >< key)
-			.flatMap(FormStepModel.getSubelement >< key)
-			.flatMap(FormSectionModel.getSubelement >< key)
-			.map(Field.getViewModel >< storage)
-			.run
+	fileprivate static func getFieldViewModelIndexPathPair(model: FormModel, storage: FormStorage) -> (FieldKey) -> FieldViewModelPair {
+		return { key in
+			Writer<FormModel,FieldIndexPath>(model)
+				.flatMap(FormModel.getSubelement >< key)
+				.flatMap(FormStepModel.getSubelement >< key)
+				.flatMap(FormSectionModel.getSubelement >< key)
+				.map(Field.getViewModel >< storage)
+				.run
+		}
 	}
 }
 
-extension Form: EmptyType {
+extension Form: EmptyConstructible {
 	public static var empty: Form {
 		return Form(storage: FormStorage(), model: FormModel.empty)
 	}

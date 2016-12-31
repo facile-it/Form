@@ -32,7 +32,7 @@ public func == (lhs: FieldIndexPath, rhs: FieldIndexPath) -> Bool {
 }
 
 extension FieldIndexPath: Monoid {
-	public static var empty: FieldIndexPath {
+	public static var zero: FieldIndexPath {
 		return FieldIndexPath(stepIndex: nil, sectionIndex: nil, fieldIndex: nil)
 	}
 

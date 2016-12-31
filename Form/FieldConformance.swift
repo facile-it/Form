@@ -21,7 +21,7 @@ public func == (lhs: FieldConformance, rhs: FieldConformance) -> Bool {
 }
 
 extension FieldConformance: Monoid {
-	public static var empty: FieldConformance {
+	public static var zero: FieldConformance {
 		return FieldConformance(isValid: true, invalidMessages: [])
 	}
 

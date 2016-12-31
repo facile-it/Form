@@ -16,13 +16,3 @@ public struct DateRange: Equatable {
 public func == (lhs: DateRange, rhs: DateRange) -> Bool {
 	return lhs.min == rhs.min && lhs.max == rhs.max
 }
-
-extension Set {
-	public func isEqual(to other: Set) -> Bool {
-		guard count == other.count else { return false }
-		for element in self {
-			guard other.contains(element) else { return false }
-		}
-		return true
-	}
-}

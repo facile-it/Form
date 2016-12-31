@@ -12,7 +12,7 @@ public typealias FieldModelStyle = FieldStyle<
 	FieldModel<FieldOptionsCustom>
 >
 
-public struct Field: FieldKeyOwnerType, EmptyType {
+public struct Field: FieldKeyOwnerType, EmptyConstructible {
 	fileprivate let modelStyle: FieldModelStyle
 	public init(_ modelStyle: FieldModelStyle) {
 		self.modelStyle = modelStyle

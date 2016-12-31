@@ -13,7 +13,7 @@ public struct FieldAction<Value: FieldValue> {
 }
 
 extension FieldAction: Monoid {
-	public static var empty: FieldAction {
+	public static var zero: FieldAction {
 		return FieldAction { _ in }
 	}
 
@@ -61,12 +61,12 @@ extension FieldAction {
 	}
 
 	public static func removeValueAndHideField(at key: FieldKey) -> FieldAction {
-		return [removeValueForField(at: key),hideField(at: key)].joined()
+		return [removeValueForField(at: key),hideField(at: key)].joinAll()
 	}
 
 	public static func notify(at key: FieldKey) -> FieldAction {
 		return FieldAction { (_, storage) in
-			storage.send(key)
+			storage.notify(at: key)
 		}
 	}
 }

@@ -1,2 +1,3 @@
 github "broomburgo/Functional" "master"
+github "broomburgo/Signals" "master"
 github "broomburgo/JSONObject" "master"

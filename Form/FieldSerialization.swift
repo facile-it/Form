@@ -14,7 +14,7 @@ public struct WSRelation<RootValue> {
 	public func getObject(for value: RootValue) -> JSONObject? {
 		return getObject(value)
 			.map { [key:$0] }
-			.map(JSONObject.dictionary)
+			.map(JSONObject.dict)
 	}
 }
 
@@ -26,18 +26,18 @@ public enum FieldSerializationCondition {
 	case always
 }
 
-public enum FieldSerializationStrategy<Value>: EmptyType {
+public enum FieldSerializationStrategy<Value>: EmptyConstructible {
 	case direct(FieldKey)
 	case single(FieldWSRelation<Value>)
 	case multiple([FieldWSRelation<Value>])
 //	case path([String],FieldWSRelation<Value>)
 
 	public static var empty: FieldSerializationStrategy<Value> {
-		return .direct(FieldKey.empty)
+		return .direct(FieldKey.zero)
 	}
 }
 
-public struct FieldSerialization<Value: FieldValue>: EmptyType {
+public struct FieldSerialization<Value: FieldValue>: EmptyConstructible {
 
 	private let condition: FieldSerializationCondition
 	private let strategy: FieldSerializationStrategy<Value>
@@ -62,7 +62,7 @@ public struct FieldSerialization<Value: FieldValue>: EmptyType {
 		case let .single(relation):
 			return relation.getObject(for: value)
 		case let .multiple(relations):
-			return relations.mapSome(WSRelation.getObject >< value).joined()
+			return relations.mapSome(WSRelation.getObject >< value).joinAll()
 		}
 	}
 

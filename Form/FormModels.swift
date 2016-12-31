@@ -2,7 +2,7 @@ import Functional
 
 // MARK: - Section
 
-public struct FormSectionConfiguration: EmptyType {
+public struct FormSectionConfiguration: EmptyConstructible {
 	public let title: String?
 	public init(title: String?) {
 		self.title = title
@@ -32,7 +32,7 @@ public struct FormSectionModel: FormContainerType {
 
 // MARK: - Step
 
-public struct FormStepConfiguration: EmptyType {
+public struct FormStepConfiguration: EmptyConstructible {
 	public let title: String?
 	public init(title: String?) {
 		self.title = title
@@ -62,7 +62,7 @@ public struct FormStepModel: FormContainerType {
 
 // MARK: - Form
 
-public struct FormConfiguration: EmptyType {
+public struct FormConfiguration: EmptyConstructible {
 	public let title: String?
 	public init(title: String?) {
 		self.title = title

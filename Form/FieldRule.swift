@@ -24,8 +24,8 @@ extension FieldRule {
 }
 
 extension FieldRule: Monoid {
-	public static var empty: FieldRule<Value> {
-		return FieldRule { _ in .empty }
+	public static var zero: FieldRule<Value> {
+		return FieldRule { _ in .zero }
 	}
 
 	public func join(_ other: FieldRule<Value>) -> FieldRule<Value> {

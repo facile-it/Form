@@ -14,7 +14,7 @@ public struct FieldCondition<Value: FieldValue> {
 }
 
 extension FieldCondition: Monoid {
-	public static var empty: FieldCondition {
+	public static var zero: FieldCondition {
 		return FieldCondition { _ in true }
 	}
 
@@ -75,10 +75,10 @@ extension FieldCondition {
 	}
 
 	public func ifTrue(_ action: FieldAction<Value>) -> FieldAction<Value> {
-		return run(ifTrue: action, ifFalse: FieldAction<Value>.empty)
+		return run(ifTrue: action, ifFalse: FieldAction<Value>.zero)
 	}
 
 	public func ifFalse(_ action: FieldAction<Value>) -> FieldAction<Value> {
-		return run(ifTrue: FieldAction<Value>.empty, ifFalse: action)
+		return run(ifTrue: FieldAction<Value>.zero, ifFalse: action)
 	}
 }

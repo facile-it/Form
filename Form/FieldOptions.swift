@@ -11,7 +11,7 @@ public typealias FieldOptionsStyle = FieldStyle<
 	FieldOptionsCustom
 >
 
-public protocol FieldOptions: EmptyType {
+public protocol FieldOptions: EmptyConstructible {
 	associatedtype ValueType: FieldValue
 
 	var style: FieldOptionsStyle { get }

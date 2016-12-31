@@ -2,11 +2,9 @@ import XCTest
 import Form
 import SwiftCheck
 import Functional
+import Signals
 
 class FormStorageSpec: XCTestCase {
-
-	var customObserver: CustomObserver<FieldKey>? = nil
-    var optionsObserver: CustomObserver<FieldKey>? = nil
 
 	func testAllKeys() {
 		property("'allKeys' is consistent with stored field values") <- forAll { (ap1: ArbitraryPair<OptionalOf<Int>,FieldKey>, ap2: ArbitraryPair<OptionalOf<Int>,FieldKey>, ap3: ArbitraryPair<OptionalOf<Int>,FieldKey>, ap4: ArbitraryPair<OptionalOf<Int>,FieldKey>) in
@@ -70,15 +68,14 @@ class FormStorageSpec: XCTestCase {
 		let counterWillReach6 = expectation(description: "counterWillReach6")
 
 		var counter = 0
-		let customObserver = CustomObserver<FieldKey>(identifier: "") { sentKey in
+		storage.observableFieldKey.onNext { sentKey in
 			XCTAssertEqual(sentKey, key)
 			counter += 1
 			if counter >= 6 {
 				counterWillReach6.fulfill()
 			}
+			return .again
 		}
-		self.customObserver = customObserver
-		storage.addObserver(customObserver)
 
 		storage.set(value: nil, at: key)
 		storage.set(value: value1, at: key)
@@ -121,15 +118,14 @@ class FormStorageSpec: XCTestCase {
         let counterWillReach9 = expectation(description: "counterWillReach9")
         
         var counter = 0
-        let optionsObserver = CustomObserver<FieldKey>(identifier: "") { sentKey in
-            counter += 1
-            if counter >= 9 {
-                counterWillReach9.fulfill()
-            }
-        }
-        self.optionsObserver = optionsObserver
-        storage.addObserver(optionsObserver)
-        
+		storage.observableFieldKey.onNext { sentKey in
+			counter += 1
+			if counter >= 9 {
+				counterWillReach9.fulfill()
+			}
+			return .again
+		}
+
         storage.set(options: nil, at: key)
         storage.set(options: option2, at: key)
         storage.set(options: option1, at: key)
@@ -167,15 +163,14 @@ class FormStorageSpec: XCTestCase {
         let counterWillReach6 = expectation(description: "counterWillReach10")
         
         var counter = 0
-        let hiddenObserver = CustomObserver<FieldKey>(identifier: "") { sentKey in
-            counter += 1
-            if counter >= 6 {
-                counterWillReach6.fulfill()
-            }
-        }
-        
-        storage.addObserver(hiddenObserver)
-        
+		storage.observableFieldKey.onNext { sentKey in
+			counter += 1
+			if counter >= 6 {
+				counterWillReach6.fulfill()
+			}
+			return .again
+		}
+
         storage.set(hidden: true, at: key)
         storage.set(hidden: false, at: key)
         storage.set(hidden: true, at: key)

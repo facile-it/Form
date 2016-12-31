@@ -1,6 +1,6 @@
 import Functional
 
-public struct FieldConfig<Options: FieldOptions>: EmptyType {
+public struct FieldConfig<Options: FieldOptions>: EmptyConstructible {
 	typealias FieldValueType = Options.ValueType
 
 	public let title: String
@@ -18,7 +18,7 @@ public struct FieldConfig<Options: FieldOptions>: EmptyType {
 	public func getViewModel(for key: FieldKey, in storage: FormStorage, rules: [FieldRule<FieldValueType>], considering checkValue: (FieldValue) -> FieldValueType?) -> FieldViewModel {
 		guard let availableOptions = [storage.getOptions(at: key) as? Options,
 		                              deferredOptions.peek]
-			.firstNonNilOrNil else {
+			.firstUnwrappedOrNil else {
 
 				deferredOptions.upon { storage.set(options: $0, at: key) }
 
@@ -28,11 +28,11 @@ public struct FieldConfig<Options: FieldOptions>: EmptyType {
 		}
 
 		let value = storage.getValue(at: key)
-		let errorMessage = rules.joined()
+		let errorMessage = rules.joinAll()
 			.isValid(value: value.flatMap(checkValue), storage: storage)
 			.invalidMessages
 			.map { "\(title): \($0)" }
-			.joined(separator: "\n")
+			.joinAll(separator: "\n")
 
 		return FieldViewModel(
 			title: title,
@@ -45,7 +45,7 @@ public struct FieldConfig<Options: FieldOptions>: EmptyType {
 
 	public static var empty: FieldConfig<Options> {
 		return FieldConfig(
-			title: String.empty,
+			title: String.zero,
 			options: Options.empty)
 	}
 }

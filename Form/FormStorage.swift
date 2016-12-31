@@ -1,10 +1,14 @@
 import Functional
+import Signals
 
-public final class FormStorage: WeakObserversCollectionEmitterType {
+public final class FormStorage {
 	public typealias EmittedType = FieldKey
 
-	public var weakObservers: [AnyWeakObserver<FieldKey>] = []
-	
+	private let variableFieldKey = Emitter<FieldKey>()
+	public private(set) lazy var observableFieldKey: AnyObservable<FieldKey> = {
+		return self.variableFieldKey.any
+	}()
+
 	fileprivate var fieldValues: [FieldKey:FieldValue] = [:]
 	fileprivate var fieldOptions: [FieldKey:Any] = [:]
 	fileprivate var hiddenFieldKeys: Set<FieldKey> = []
@@ -24,7 +28,7 @@ public final class FormStorage: WeakObserversCollectionEmitterType {
 			return
 		default:
 			fieldValues[key] = value
-			send(key)
+			variableFieldKey.update(key)
 		}
 	}
 
@@ -39,7 +43,7 @@ public final class FormStorage: WeakObserversCollectionEmitterType {
             return
         default:
             fieldOptions[key] = options
-            send(key)
+			variableFieldKey.update(key)
         }
 	}
 
@@ -55,7 +59,7 @@ public final class FormStorage: WeakObserversCollectionEmitterType {
 			hiddenFieldKeys.remove(key)
 		}
 		if shouldNotify {
-			send(key)
+			variableFieldKey.update(key)
 		}
 	}
 
@@ -63,11 +67,15 @@ public final class FormStorage: WeakObserversCollectionEmitterType {
 		return hiddenFieldKeys.contains(key)
 	}
 
+	public func notify(at key: FieldKey) {
+		variableFieldKey.update(key)
+	}
+
 	public func clear() {
 		let keys = Set(fieldValues.keys).union(hiddenFieldKeys)
 		fieldValues.removeAll()
 		hiddenFieldKeys.removeAll()
-		keys.forEach(send)
+		keys.forEach { variableFieldKey.update($0) }
 	}
 
 	public func hasSameFieldValuesAndHiddenFieldKeys(of other: FormStorage) -> Bool {
