@@ -33,17 +33,46 @@ extension FieldAction {
 	}
 }
 
+extension FieldCondition {
+    public func isEqual(to other: FieldCondition) -> (Value?) -> Bool {
+        return { optValue in
+            
+            let storage1 = FormStorage()
+            let storage2 = FormStorage()
+            
+            let check1 = self.check(value: optValue, storage: storage1)
+            let check2 = other.check(value: optValue, storage: storage2)
+            
+            return (check1 && check2) || (!check1 && !check2)
+        }
+    }
+}
+
 extension FieldAction: Arbitrary {
-	public static var arbitrary: Gen<FieldAction<Value>> {
-		return Gen<(FieldKey,Bool)>
-			.zip(FieldKey.arbitrary, Bool.arbitrary)
-			.map { (key,hidden) in
-				FieldAction { (optValue,storage) in
-					storage.set(value: optValue, at: key)
-					storage.set(hidden: hidden, at: key)
-				}
-		}
-	}
+    public static var arbitrary: Gen<FieldAction<Value>> {
+        return Gen<(FieldKey,Bool)>
+            .zip(FieldKey.arbitrary, Bool.arbitrary)
+            .map { (key,hidden) in
+                FieldAction { (optValue,storage) in
+                    storage.set(value: optValue, at: key)
+                    storage.set(hidden: hidden, at: key)
+                }
+        }
+    }
+}
+
+extension FieldCondition: Arbitrary {
+    public static var arbitrary: Gen<FieldCondition<Value>> {
+        return Gen<(FieldKey,Bool)>
+            .zip(FieldKey.arbitrary, Bool.arbitrary)
+            .map { (key,hidden) in
+                FieldCondition { (optValue,storage) in
+                    let optValue = storage.getValue(at: key)
+                    if optValue != nil { return true }
+                    else { return false }
+                }
+        }
+    }
 }
 
 func optFieldValuesAreEqual(_ optFirst: FieldValue?, _ optSecond: FieldValue?) -> Bool {

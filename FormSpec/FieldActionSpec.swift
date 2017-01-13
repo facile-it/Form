@@ -79,4 +79,25 @@ class FieldActionSpec: XCTestCase {
             return storage.getHidden(at: key) && storage.getValue(at: key) == nil
         }
 	}
+    
+    func testNotify() {
+        
+        let storage = FormStorage()
+        let value: Int? = 23
+        let key = "MJ"
+        storage.set(value: value, at: key)
+        
+        let storageReactedToNotify = expectation(description: "storageReactedToNotify")
+        
+        let observer = CustomObserver<FieldKey>(identifier: "") { sentKey in
+                storageReactedToNotify.fulfill()
+        }
+        
+        self.actionObserver = observer
+        storage.addObserver(observer)
+        
+        Tested.notify(at: key).apply(value: value, storage: storage)
+
+        waitForExpectations(timeout: 1, handler: nil)
+    }
 }
