@@ -5,8 +5,7 @@ xcode_scheme: Form
 xcode_sdk: iphonesimulator10.2
 
 script:
-  - xcodebuild clean build -project "Form.xcodeproj" -scheme "Form" -destination 'platform=iOS Simulator,id=22FA2149-1241-469C-BF6D-462D3837DB72,OS=10.2' | xcpretty -s
-  - xcodebuild test -project "Form.xcodeproj" -scheme "Form" -destination 'platform=iOS Simulator,id=22FA2149-1241-469C-BF6D-462D3837DB72,OS=10.2' | xcpretty -s
+  - xcodebuild clean build test -project "Form.xcodeproj" -scheme "Form" -destination 'platform=iOS Simulator,id=22FA2149-1241-469C-BF6D-462D3837DB72,OS=10.2' | xcpretty && exit ${PIPESTATUS[0]}
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
