@@ -2,6 +2,7 @@ import Foundation
 import SwiftCheck
 import Form
 import JSONObject
+import Functional
 
 struct ArbitraryPair<A: Arbitrary, B: Arbitrary>: Arbitrary {
 	let left: A
@@ -61,17 +62,60 @@ extension FieldAction: Arbitrary {
     }
 }
 
-extension FieldCondition: Arbitrary {
-    public static var arbitrary: Gen<FieldCondition<Value>> {
-        return Gen<(FieldKey,Bool)>
-            .zip(FieldKey.arbitrary, Bool.arbitrary)
-            .map { (key,hidden) in
-                FieldCondition { (optValue,storage) in
-                    let optValue = storage.getValue(at: key)
-                    if optValue != nil { return true }
-                    else { return false }
-                }
+//extension FieldCondition: Arbitrary {
+//    public static var arbitrary: Gen<FieldCondition<Value>> {
+//        return Gen<(FieldKey,Bool)>
+//            .zip(FieldKey.arbitrary, Bool.arbitrary)
+//            .map { (key,hidden) in
+//                FieldCondition { (optValue,storage) in
+//                    let optValue = storage.getValue(at: key)
+//                    if optValue != nil { return true }
+//                    else { return false }
+//                }
+//        }
+//    }
+//}
+
+struct CoArbitraryOptionalOf<Value: Arbitrary & Hashable & CoArbitrary>: Hashable, CoArbitrary {
+    let get: OptionalOf<Value>
+    init(get: OptionalOf<Value>) {
+        self.get = get
+    }
+    
+    var hashValue: Int {
+        return get.getOptional?.hashValue ?? 0
+    }
+    
+    static func == (left: CoArbitraryOptionalOf, right: CoArbitraryOptionalOf) -> Bool {
+        return left.get.getOptional == right.get.getOptional
+    }
+    
+    static func coarbitrary<C>(_ x: CoArbitraryOptionalOf<Value>) -> ((Gen<C>) -> Gen<C>) {
+        return { gen in
+            if let value = x.get.getOptional {
+                return gen |> Value.coarbitrary(value)
+            } else {
+                return gen.variant(0)
+            }
         }
+    }
+}
+
+struct ArbitraryFieldCondition<Value: FieldValue & Hashable & Arbitrary & CoArbitrary>: Arbitrary {
+    
+    let get: FieldCondition<Value>
+    init(get: FieldCondition<Value>) {
+        self.get = get
+    }
+
+    static var arbitrary: Gen<ArbitraryFieldCondition<Value>> {
+        return ArrowOf<CoArbitraryOptionalOf<Value>,Bool>.arbitrary
+            .map({ (arrow) -> FieldCondition<Value> in
+                return FieldCondition<Value> { (optionalValue,_) in
+                    arrow.getArrow(CoArbitraryOptionalOf(get: OptionalOf(optionalValue)))
+                }
+            })
+            .map(ArbitraryFieldCondition<Value>.init)
     }
 }
 
