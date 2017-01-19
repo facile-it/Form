@@ -103,6 +103,6 @@ public struct Field: FieldKeyOwnerType, EmptyConstructible {
 	}
 
 	public static var empty: Field {
-		return Field(.fixed(.empty))
+		return Field(FieldModelStyle.fixed(FieldModel.empty))
 	}
 }

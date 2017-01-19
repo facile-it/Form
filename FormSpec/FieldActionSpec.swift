@@ -2,12 +2,11 @@ import XCTest
 import SwiftCheck
 import Form
 import Functional
+import Signals
 
 typealias Tested = FieldAction<Int>
 
 class FieldActionSpec: XCTestCase {
-    var actionObserver: CustomObserver<FieldKey>? = nil
-    
 	func testMonoidLaws() {
 		property("1•a = a") <- forAll { (av: OptionalOf<Int>, object: Tested) in
 			Tested.zero.join(object).isEqual(to: object) § av.getOptional
@@ -88,14 +87,12 @@ class FieldActionSpec: XCTestCase {
         storage.set(value: value, at: key)
         
         let storageReactedToNotify = expectation(description: "storageReactedToNotify")
-        
-        let observer = CustomObserver<FieldKey>(identifier: "") { sentKey in
-                storageReactedToNotify.fulfill()
-        }
-        
-        self.actionObserver = observer
-        storage.addObserver(observer)
-        
+
+		storage.observableFieldKey.onNext { key in
+			storageReactedToNotify.fulfill()
+			return .again
+		}
+
         Tested.notify(at: key).apply(value: value, storage: storage)
 
         waitForExpectations(timeout: 1, handler: nil)

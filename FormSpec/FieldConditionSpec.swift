@@ -11,12 +11,12 @@ class FieldConditionSpec: XCTestCase {
     func testMonoidLaws() {
         property("1•a = a") <- forAll { (av: OptionalOf<Int>, ac: ArbitraryTestedCondition) in
             let object = ac.get
-            return TestedCondition.empty.join(object).isEqual(to: object) § av.getOptional
+            return TestedCondition.zero.join(object).isEqual(to: object) § av.getOptional
         }
         
         property("a•1 = a") <- forAll { (av: OptionalOf<Int>, ac: ArbitraryTestedCondition) in
             let object = ac.get
-            return object.join(TestedCondition.empty).isEqual(to: object) § av.getOptional
+            return object.join(TestedCondition.zero).isEqual(to: object) § av.getOptional
         }
         
         property("(a•b)•c = a•(b•c)") <- forAll { (av: OptionalOf<Int>, ac1: ArbitraryTestedCondition, ac2: ArbitraryTestedCondition, ac3: ArbitraryTestedCondition) in
