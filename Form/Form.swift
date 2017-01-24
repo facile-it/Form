@@ -74,12 +74,12 @@ public final class Form {
 		field.updateValueAndApplyActions(with: pair.fieldValue, in: storage)
 	}
 
-	public var jsonObject: JSONObject? {
+	public func transform<T>(object: T) -> T? {
 		return model.subelements
 			.flatMap { $0.subelements }
 			.flatMap { $0.subelements }
-			.mapSome { $0.getJSONObject(in: storage) }
-			.joinAll()
+			.reduce(object) { $1.transform(object: $0, considering: self.storage) }
+			as? T
 	}
 
 	fileprivate static func getFieldViewModelIndexPathPair(model: FormModel, storage: FormStorage) -> (FieldKey) -> FieldViewModelPair {
