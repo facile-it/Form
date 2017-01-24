@@ -23,7 +23,7 @@ public struct FieldModel<Options: FieldOptions>: FieldKeyOwnerType, EmptyConstru
 	}
 
 	public func getViewModel(in storage: FormStorage) -> FieldViewModel {
-		return config.getViewModel(for: key, in: storage, rules: rules, considering: Options.sanitizeValue)
+		return config.getViewModel(for: key, in: storage, rules: rules)
 	}
 
 	public func updateValueAndApplyActions(with value: FieldValue?, in storage: FormStorage) {
