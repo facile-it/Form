@@ -43,7 +43,6 @@
 		38AFB0B01D9EB64400A8C890 /* FieldSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFB0AF1D9EB64400A8C890 /* FieldSerialization.swift */; };
 		38C163331E0016DB0035D06A /* FormStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C163321E0016DB0035D06A /* FormStorageSpec.swift */; };
 		38C163351E0018D60035D06A /* SpecTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C163341E0018D60035D06A /* SpecTools.swift */; };
-		AA55477D1E3115300002D6B6 /* FieldSerializationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA55477B1E3115300002D6B6 /* FieldSerializationSpec.swift */; };
 		AA7AD5361E366AE70058FC1A /* FieldRuleSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7AD5351E366AE70058FC1A /* FieldRuleSpec.swift */; };
 		AA7E82DA1E02F03300E52641 /* FieldConditionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7E82D91E02F03300E52641 /* FieldConditionSpec.swift */; };
 /* End PBXBuildFile section */
@@ -107,7 +106,6 @@
 		38AFB0AF1D9EB64400A8C890 /* FieldSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldSerialization.swift; sourceTree = "<group>"; };
 		38C163321E0016DB0035D06A /* FormStorageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormStorageSpec.swift; sourceTree = "<group>"; };
 		38C163341E0018D60035D06A /* SpecTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecTools.swift; sourceTree = "<group>"; };
-		AA55477B1E3115300002D6B6 /* FieldSerializationSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldSerializationSpec.swift; sourceTree = "<group>"; };
 		AA7AD5351E366AE70058FC1A /* FieldRuleSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldRuleSpec.swift; sourceTree = "<group>"; };
 		AA7E82D91E02F03300E52641 /* FieldConditionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldConditionSpec.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -147,7 +145,6 @@
 				38C163341E0018D60035D06A /* SpecTools.swift */,
 				38888C291E01323B002184C5 /* FieldActionSpec.swift */,
 				AA7E82D91E02F03300E52641 /* FieldConditionSpec.swift */,
-				AA55477B1E3115300002D6B6 /* FieldSerializationSpec.swift */,
 				AA7AD5351E366AE70058FC1A /* FieldRuleSpec.swift */,
 			);
 			path = FormSpec;
@@ -325,7 +322,6 @@
 				AA7AD5361E366AE70058FC1A /* FieldRuleSpec.swift in Sources */,
 				AA7E82DA1E02F03300E52641 /* FieldConditionSpec.swift in Sources */,
 				38C163331E0016DB0035D06A /* FormStorageSpec.swift in Sources */,
-				AA55477D1E3115300002D6B6 /* FieldSerializationSpec.swift in Sources */,
 				38888C2A1E01323B002184C5 /* FieldActionSpec.swift in Sources */,
 				38C163351E0018D60035D06A /* SpecTools.swift in Sources */,
 				382A22E31DEC356B00305D64 /* FormSpec.swift in Sources */,
