@@ -46,3 +46,17 @@ extension AnyFieldChange: Monoid {
 		return .identity
 	}
 }
+
+public enum FieldChangeCondition<Value> {
+	case always(AnyFieldChange<Value>)
+	case ifVisible(AnyFieldChange<Value>)
+
+	var getChange: AnyFieldChange<Value> {
+		switch self {
+		case .always(let change):
+			return change
+		case .ifVisible(let change):
+			return change
+		}
+	}
+}
