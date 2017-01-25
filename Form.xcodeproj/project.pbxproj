@@ -30,6 +30,7 @@
 		38509FFD1E0AA0270047CAAF /* Functional.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38AFB0A51D9EA87000A8C890 /* Functional.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		38661A6E1DAD35C900C4F270 /* FieldValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38661A6D1DAD35C900C4F270 /* FieldValue.swift */; };
 		38661A701DAD443900C4F270 /* FieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38661A6F1DAD443900C4F270 /* FieldStyle.swift */; };
+		388352641E37BAAC00A376B0 /* FieldChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388352631E37BAAC00A376B0 /* FieldChange.swift */; };
 		38888C2A1E01323B002184C5 /* FieldActionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38888C291E01323B002184C5 /* FieldActionSpec.swift */; };
 		38A0D63D1DAB8A2C00C5FF06 /* FormContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0D63C1DAB8A2C00C5FF06 /* FormContainer.swift */; };
 		38A0D63F1DAB8EDC00C5FF06 /* FieldKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0D63E1DAB8EDC00C5FF06 /* FieldKey.swift */; };
@@ -91,6 +92,7 @@
 		38509FF61E0A9FF40047CAAF /* Signals.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Signals.framework; path = Carthage/Build/iOS/Signals.framework; sourceTree = "<group>"; };
 		38661A6D1DAD35C900C4F270 /* FieldValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldValue.swift; sourceTree = "<group>"; };
 		38661A6F1DAD443900C4F270 /* FieldStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldStyle.swift; sourceTree = "<group>"; };
+		388352631E37BAAC00A376B0 /* FieldChange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldChange.swift; sourceTree = "<group>"; };
 		38888C291E01323B002184C5 /* FieldActionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldActionSpec.swift; sourceTree = "<group>"; };
 		38A0D63C1DAB8A2C00C5FF06 /* FormContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormContainer.swift; sourceTree = "<group>"; };
 		38A0D63E1DAB8EDC00C5FF06 /* FieldKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldKey.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 			children = (
 				38AEC9901DAE7CFA003587E6 /* Field.swift */,
 				3815496E1DA6609700210634 /* FieldAction.swift */,
+				388352631E37BAAC00A376B0 /* FieldChange.swift */,
 				3815496C1DA6608E00210634 /* FieldCondition.swift */,
 				38AFB0AD1D9EAF9600A8C890 /* FieldConfig.swift */,
 				381549681DA6559000210634 /* FieldConformance.swift */,
@@ -338,6 +341,7 @@
 				38AFB0AE1D9EAF9600A8C890 /* FieldConfig.swift in Sources */,
 				38A0D6461DABA7E700C5FF06 /* Form.swift in Sources */,
 				38AFB0B01D9EB64400A8C890 /* FieldSerialization.swift in Sources */,
+				388352641E37BAAC00A376B0 /* FieldChange.swift in Sources */,
 				38661A701DAD443900C4F270 /* FieldStyle.swift in Sources */,
 				381549671DA6403200210634 /* FormStorage.swift in Sources */,
 				381549771DA69B5300210634 /* FieldOptions.swift in Sources */,

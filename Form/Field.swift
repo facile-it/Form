@@ -39,24 +39,24 @@ public struct Field: FieldKeyOwnerType, EmptyConstructible {
 		}
 	}
 
-	public func getJSONObject(in storage: FormStorage) -> JSONObject? {
+	public func transform(object: Any, considering storage: FormStorage) -> Any {
 		switch modelStyle {
 		case .fixed(let model):
-			return model.getJSONObject(in: storage)
+			return model.transform(object: model, considering: storage)
 		case .onOff(let model):
-			return model.getJSONObject(in: storage)
+			return model.transform(object: model, considering: storage)
 		case .textEntry(let model):
-			return model.getJSONObject(in: storage)
+			return model.transform(object: model, considering: storage)
 		case .datePicker(let model):
-			return model.getJSONObject(in: storage)
+			return model.transform(object: model, considering: storage)
 		case .intPicker(let model):
-			return model.getJSONObject(in: storage)
+			return model.transform(object: model, considering: storage)
 		case .stringPicker(let model):
-			return model.getJSONObject(in: storage)
+			return model.transform(object: model, considering: storage)
 		case .anyPicker(let model):
-			return model.getJSONObject(in: storage)
+			return model.transform(object: model, considering: storage)
 		case .custom(let model):
-			return model.getJSONObject(in: storage)
+			return model.transform(object: model, considering: storage)
 		}
 	}
 
