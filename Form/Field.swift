@@ -12,7 +12,7 @@ public typealias FieldModelStyle = FieldStyle<
 	FieldModel<FieldOptionsCustom>
 >
 
-public struct Field: FieldKeyOwnerType, EmptyConstructible {
+public struct Field: FieldKeyOwnerType {
 	fileprivate let modelStyle: FieldModelStyle
 	public init(_ modelStyle: FieldModelStyle) {
 		self.modelStyle = modelStyle
@@ -100,9 +100,5 @@ public struct Field: FieldKeyOwnerType, EmptyConstructible {
 		case .custom(let model):
 			model.updateValueAndApplyActions(with: value, in: storage)
 		}
-	}
-
-	public static var empty: Field {
-		return Field(FieldModelStyle.fixed(FieldModel.empty))
 	}
 }

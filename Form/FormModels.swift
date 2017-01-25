@@ -2,14 +2,10 @@ import Functional
 
 // MARK: - Section
 
-public struct FormSectionConfiguration: EmptyConstructible {
+public struct FormSectionConfiguration {
 	public let title: String?
 	public init(title: String?) {
 		self.title = title
-	}
-
-	public static var empty: FormSectionConfiguration {
-		return FormSectionConfiguration(title: nil)
 	}
 }
 
@@ -32,14 +28,10 @@ public struct FormSectionModel: FormContainerType {
 
 // MARK: - Step
 
-public struct FormStepConfiguration: EmptyConstructible {
+public struct FormStepConfiguration {
 	public let title: String?
 	public init(title: String?) {
 		self.title = title
-	}
-
-	public static var empty: FormStepConfiguration {
-		return FormStepConfiguration(title: nil)
 	}
 }
 
@@ -62,14 +54,10 @@ public struct FormStepModel: FormContainerType {
 
 // MARK: - Form
 
-public struct FormConfiguration: EmptyConstructible {
+public struct FormConfiguration {
 	public let title: String?
 	public init(title: String?) {
 		self.title = title
-	}
-
-	public static var empty: FormConfiguration {
-		return FormConfiguration(title: nil)
 	}
 }
 

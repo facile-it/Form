@@ -19,9 +19,8 @@ public final class Form {
 	public init(storage: FormStorage, model: FormModel) {
 		self.storage = storage
 		self.model = model
-		self.storageBinding = self.variableFieldViewModelPair.bind(
-			to: storage.observableFieldKey
-				.map(Form.getFieldViewModelIndexPathPair(model: model, storage: storage)))
+		self.storageBinding = self.variableFieldViewModelPair.bind(to: storage.observableFieldKey
+			.mapSome(Form.getFieldViewModelIndexPathPair(model: model, storage: storage)))
 	}
 
 	deinit {
@@ -53,7 +52,7 @@ public final class Form {
 			.flatMap { $0.subelements }
 			.flatMap { $0.subelements }
 			.map { $0.key }
-			.map(Form.getFieldViewModelIndexPathPair(model: model, storage: storage))
+			.mapSome(Form.getFieldViewModelIndexPathPair(model: model, storage: storage))
 	}
 
 	public func update(pair: FieldValueCompletePair) {
@@ -82,20 +81,14 @@ public final class Form {
 			as? T
 	}
 
-	fileprivate static func getFieldViewModelIndexPathPair(model: FormModel, storage: FormStorage) -> (FieldKey) -> FieldViewModelPair {
+	fileprivate static func getFieldViewModelIndexPathPair(model: FormModel, storage: FormStorage) -> (FieldKey) -> FieldViewModelPair? {
 		return { key in
-			Writer<FormModel,FieldIndexPath>(model)
-				.flatMap(FormModel.getSubelement >< key)
-				.flatMap(FormStepModel.getSubelement >< key)
-				.flatMap(FormSectionModel.getSubelement >< key)
-				.map(Field.getViewModel >< storage)
+			Optional(Writer<FormModel,FieldIndexPath>(model))
+				.flatMapT(FormModel.getSubelement >< key)
+				.flatMapT(FormStepModel.getSubelement >< key)
+				.flatMapT(FormSectionModel.getSubelement >< key)
+				.mapT(Field.getViewModel >< storage)?
 				.run
 		}
-	}
-}
-
-extension Form: EmptyConstructible {
-	public static var empty: Form {
-		return Form(storage: FormStorage(), model: FormModel.empty)
 	}
 }

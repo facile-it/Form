@@ -1,7 +1,7 @@
 import Functional
 import JSONObject
 
-public struct FieldModel<Options: FieldOptions>: FieldKeyOwnerType, EmptyConstructible {
+public struct FieldModel<Options: FieldOptions>: FieldKeyOwnerType {
 	public typealias ValueType = Options.ValueType
 
 	public let key: FieldKey
@@ -23,7 +23,7 @@ public struct FieldModel<Options: FieldOptions>: FieldKeyOwnerType, EmptyConstru
 		return changes
 			.filter {
 				if case .ifVisible = $0 {
-					return storage.getHidden(at: key).inverse
+					return storage.getHidden(at: key).not
 				} else {
 					return true
 				}
@@ -40,16 +40,5 @@ public struct FieldModel<Options: FieldOptions>: FieldKeyOwnerType, EmptyConstru
 	public func updateValueAndApplyActions(with value: FieldValue?, in storage: FormStorage) {
 		storage.set(value: value, at: key)
 		actions.joinAll().apply(value: value.flatMap(Options.sanitizeValue), storage: storage)
-	}
-
-	public static var empty: FieldModel<Options> {
-		return FieldModel(
-			key: "",
-			config: FieldConfig(
-				title: "",
-				options: Options.empty),
-			changes: [],
-			rules: [],
-			actions: [])
 	}
 }

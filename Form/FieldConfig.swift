@@ -1,6 +1,6 @@
 import Functional
 
-public struct FieldConfig<Options: FieldOptions>: EmptyConstructible {
+public struct FieldConfig<Options: FieldOptions> {
 	typealias FieldValueType = Options.ValueType
 
 	public let title: String
@@ -41,11 +41,5 @@ public struct FieldConfig<Options: FieldOptions>: EmptyConstructible {
 			errorMessage: errorMessage,
 			isHidden: storage.getHidden(at: key),
 			isLoading: false)
-	}
-
-	public static var empty: FieldConfig<Options> {
-		return FieldConfig(
-			title: String.zero,
-			options: Options.empty)
 	}
 }

@@ -1,11 +1,7 @@
 import Functional
 
-public protocol EmptyConstructible {
-	static var empty: Self { get }
-}
-
-public protocol FormContainerType: EmptyConstructible {
-	associatedtype ConfigurationType: EmptyConstructible
+public protocol FormContainerType {
+	associatedtype ConfigurationType
 	associatedtype Subtype
 
 	var configuration: ConfigurationType { get }
@@ -15,12 +11,6 @@ public protocol FormContainerType: EmptyConstructible {
 
 	func getFieldIndexPath(for subelementIndex: UInt) -> FieldIndexPath
 	func getSubelementIndex(at key: FieldKey) -> UInt?
-}
-
-extension FormContainerType where ConfigurationType: EmptyConstructible {
-	public static var empty: Self {
-		return Self(configuration: ConfigurationType.empty, subelements: [])
-	}
 }
 
 extension FormContainerType where Self.Subtype : FieldKeyOwnerType {
@@ -39,13 +29,9 @@ extension FormContainerType where Self.Subtype : FormContainerType {
 	}
 }
 
-extension FormContainerType where Self.Subtype: EmptyConstructible {
-	public func getSubelement(at key: FieldKey) -> Writer<Subtype,FieldIndexPath> {
-		if let index = getSubelementIndex(at: key) {
-			return Writer(subelements[Int(index)])
-				.tell(getFieldIndexPath(for: index))
-		} else {
-			return Writer(Subtype.empty)
-		}
+extension FormContainerType {
+	public func getSubelement(at key: FieldKey) -> Writer<Subtype,FieldIndexPath>? {
+		guard let index = getSubelementIndex(at: key) else { return nil }
+		return Writer(subelements[Int(index)]).tell(getFieldIndexPath(for: index))
 	}
 }

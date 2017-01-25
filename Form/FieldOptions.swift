@@ -11,7 +11,7 @@ public typealias FieldOptionsStyle = FieldStyle<
 	FieldOptionsCustom
 >
 
-public protocol FieldOptions: EmptyConstructible {
+public protocol FieldOptions {
 	associatedtype ValueType: FieldValue
 
 	var style: FieldOptionsStyle { get }
@@ -45,10 +45,6 @@ public struct FieldOptionsFixed: FieldOptions {
 		self.text = text
 	}
 
-	public static var empty: FieldOptionsFixed {
-		return FieldOptionsFixed(text: "")
-	}
-
 	public var style: FieldOptionsStyle {
 		return .fixed(self)
 	}
@@ -61,10 +57,6 @@ public struct FieldOptionsSwitch: FieldOptions {
 
 	public init(getDescription: @escaping (Bool) -> String?) {
 		self.getDescription = getDescription
-	}
-
-	public static var empty: FieldOptionsSwitch {
-		return FieldOptionsSwitch { _ in nil }
 	}
 
 	public var style: FieldOptionsStyle {
@@ -83,10 +75,6 @@ public struct FieldOptionsText: FieldOptions {
 		self.keyboardType = keyboardType
 	}
 
-	public static var empty: FieldOptionsText {
-		return FieldOptionsText(placeholder: nil, keyboardType: .text)
-	}
-
 	public var style: FieldOptionsStyle {
 		return .textEntry(self)
 	}
@@ -103,10 +91,6 @@ public struct FieldOptionsDate: FieldOptions {
 		self.formatter = formatter
 	}
 
-	public static var empty: FieldOptionsDate {
-		return FieldOptionsDate(possibleValues: DateRange(nil, nil), formatter: { _ in "" })
-	}
-
 	public var style: FieldOptionsStyle {
 		return .datePicker(self)
 	}
@@ -119,10 +103,6 @@ public struct FieldOptionsIntPicker: FieldOptionsPicker {
 
 	public init(possibleValues: [(Int,CustomStringConvertible)]) {
 		self.possibleValues = possibleValues
-	}
-
-	public static var empty: FieldOptionsIntPicker {
-		return FieldOptionsIntPicker(possibleValues: [])
 	}
 
 	public var style: FieldOptionsStyle {
@@ -139,10 +119,6 @@ public struct FieldOptionsStringPicker: FieldOptionsPicker {
 		self.possibleValues = possibleValues
 	}
 
-	public static var empty: FieldOptionsStringPicker {
-		return FieldOptionsStringPicker(possibleValues: [])
-	}
-
 	public var style: FieldOptionsStyle {
 		return .stringPicker(self)
 	}
@@ -155,10 +131,6 @@ public struct FieldOptionsAnyPicker: FieldOptionsPicker {
 
 	public init(possibleValues: [(AnyFieldValue,CustomStringConvertible)]) {
 		self.possibleValues = possibleValues
-	}
-
-	public static var empty: FieldOptionsAnyPicker {
-		return FieldOptionsAnyPicker(possibleValues: [])
 	}
 
 	public var style: FieldOptionsStyle {
@@ -175,10 +147,6 @@ public struct FieldOptionsCustom: FieldOptions {
 	public init(identifier: String, valueDescription: @escaping (AnyFieldValue?) -> String = { $0?.optionalString ?? "" }) {
 		self.identifier = identifier
 		self.valueDescription = valueDescription
-	}
-
-	public static var empty: FieldOptionsCustom {
-		return FieldOptionsCustom(identifier: "")
 	}
 
 	public var style: FieldOptionsStyle {
