@@ -49,6 +49,24 @@ extension FieldCondition {
     }
 }
 
+extension FieldRule {
+    public func isEqual(to other: FieldRule) -> (Value?) -> Bool {
+        return { optValue in
+            
+            let storage1 = FormStorage()
+            let storage2 = FormStorage()
+            
+            let conformance1 = self.isValid(value: optValue, storage: storage1)
+            let conformance2 = other.isValid(value: optValue, storage: storage2)
+            
+            let isValid1 = conformance1.isValid
+            let isValid2 = conformance2.isValid
+            
+            return (isValid1 && isValid2) || (!isValid1 && !isValid2)
+        }
+    }
+}
+
 extension FieldAction: Arbitrary {
     public static var arbitrary: Gen<FieldAction<Value>> {
         return Gen<(FieldKey,Bool)>
@@ -61,20 +79,6 @@ extension FieldAction: Arbitrary {
         }
     }
 }
-
-//extension FieldCondition: Arbitrary {
-//    public static var arbitrary: Gen<FieldCondition<Value>> {
-//        return Gen<(FieldKey,Bool)>
-//            .zip(FieldKey.arbitrary, Bool.arbitrary)
-//            .map { (key,hidden) in
-//                FieldCondition { (optValue,storage) in
-//                    let optValue = storage.getValue(at: key)
-//                    if optValue != nil { return true }
-//                    else { return false }
-//                }
-//        }
-//    }
-//}
 
 struct CoArbitraryOptionalOf<Value: Arbitrary & Hashable & CoArbitrary>: Hashable, CoArbitrary {
     let get: OptionalOf<Value>
@@ -107,7 +111,7 @@ struct ArbitraryFieldCondition<Value: FieldValue & Hashable & Arbitrary & CoArbi
     init(get: FieldCondition<Value>) {
         self.get = get
     }
-
+    
     static var arbitrary: Gen<ArbitraryFieldCondition<Value>> {
         return ArrowOf<CoArbitraryOptionalOf<Value>,Bool>.arbitrary
             .map({ (arrow) -> FieldCondition<Value> in
@@ -116,6 +120,42 @@ struct ArbitraryFieldCondition<Value: FieldValue & Hashable & Arbitrary & CoArbi
                 }
             })
             .map(ArbitraryFieldCondition<Value>.init)
+    }
+}
+
+struct ArbitraryFieldConformance: Arbitrary, CustomStringConvertible {
+    let get: FieldConformance
+    var description: String
+    
+    init(value: FieldConformance) {
+        self.get = value
+        self.description = ""
+    }
+    
+    static var arbitrary: Gen<ArbitraryFieldConformance> {
+        return Bool.arbitrary.map{ (bool) -> ArbitraryFieldConformance in
+            return bool
+                ? ArbitraryFieldConformance.init(value: FieldConformance.valid)
+                : ArbitraryFieldConformance.init(value: FieldConformance.invalid(message: "Not valid"))
+        }
+    }
+}
+
+struct ArbitraryFieldRule<Value: FieldValue & Hashable & Arbitrary & CoArbitrary>: Arbitrary {
+    
+    let get: FieldRule<Value>
+    init(get: FieldRule<Value>) {
+        self.get = get
+    }
+    
+    static var arbitrary: Gen<ArbitraryFieldRule<Value>> {
+        return ArrowOf<CoArbitraryOptionalOf<Value>,ArbitraryFieldConformance>.arbitrary
+            .map({ (arrow) -> FieldRule<Value> in
+                return FieldRule<Value> { (optionalValue,_) in
+                    arrow.getArrow(CoArbitraryOptionalOf(get: OptionalOf(optionalValue))).get
+                }
+            })
+            .map(ArbitraryFieldRule<Value>.init)
     }
 }
 
