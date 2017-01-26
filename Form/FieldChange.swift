@@ -26,6 +26,14 @@ public struct AnyFieldChange<Value> {
 		return AnyFieldChange<Value>(change: FieldChange<Value,T>(transform: transform))
 	}
 
+	public static func change<T>(_ transform: @escaping (Value,inout T) -> ()) -> AnyFieldChange<Value> {
+		return change { (value: Value, model: T) -> T in
+			var m_model = model
+			transform(value,&m_model)
+			return m_model
+		}
+	}
+
 	public func apply(with value: Value, to object: Any) -> Any {
 		return self.transform(value,object)
 	}
