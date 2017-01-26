@@ -68,21 +68,25 @@ extension FieldCondition where Value: Equatable {
 public typealias If<Value: FieldValue> = FieldCondition<Value>
 
 extension FieldCondition {
-	public func run(ifTrue actionTrue: FieldAction<Value>, ifFalse actionFalse: FieldAction<Value>) -> FieldAction<Value> {
+	public func run(ifTrue actionsTrue: [FieldAction<Value>], ifFalse actionsFalse: [FieldAction<Value>]) -> FieldAction<Value> {
 		return FieldAction<Value> {
 			if self.predicate($0.0,$0.1) {
-				actionTrue.apply(value: $0.0, storage: $0.1)
+				actionsTrue.joinAll().apply(value: $0.0, storage: $0.1)
 			} else {
-				actionFalse.apply(value: $0.0, storage: $0.1)
+				actionsFalse.joinAll().apply(value: $0.0, storage: $0.1)
 			}
 		}
 	}
 
-	public func ifTrue(_ action: FieldAction<Value>) -> FieldAction<Value> {
-		return run(ifTrue: action, ifFalse: FieldAction<Value>.zero)
+	public func run(ifTrue actionTrue: FieldAction<Value>, ifFalse actionFalse: FieldAction<Value>) -> FieldAction<Value> {
+		return run(ifTrue: [actionTrue], ifFalse: [actionFalse])
 	}
 
-	public func ifFalse(_ action: FieldAction<Value>) -> FieldAction<Value> {
-		return run(ifTrue: FieldAction<Value>.zero, ifFalse: action)
+	public func ifTrue(_ actions: FieldAction<Value>...) -> FieldAction<Value> {
+		return run(ifTrue: actions.joinAll(), ifFalse: .zero)
+	}
+
+	public func ifFalse(_ actions: FieldAction<Value>...) -> FieldAction<Value> {
+		return run(ifTrue: .zero, ifFalse: actions.joinAll())
 	}
 }
