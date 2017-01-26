@@ -6,16 +6,16 @@ public struct FieldModel<Options: FieldOptions>: FieldKeyOwnerType {
 
 	public let key: FieldKey
 	public let config: FieldConfig<Options>
-	public let changes: [FieldChangeCondition<ValueType>]
 	public let rules: [FieldRule<ValueType>]
 	public let actions: [FieldAction<ValueType>]
+	public let changes: [FieldChangeCondition<ValueType>]
 
-	public init(key: FieldKey, config: FieldConfig<Options>, changes: [FieldChangeCondition<ValueType>], rules: [FieldRule<ValueType>], actions: [FieldAction<ValueType>]) {
+	public init(key: FieldKey, config: FieldConfig<Options>, rules: [FieldRule<ValueType>], actions: [FieldAction<ValueType>], changes: [FieldChangeCondition<ValueType>]) {
 		self.key = key
 		self.config = config
-		self.changes = changes
 		self.rules = rules
 		self.actions = actions
+		self.changes = changes
 	}
 
 	public func transform(object: Any, considering storage: FormStorage) -> Any {
