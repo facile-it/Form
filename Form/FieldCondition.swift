@@ -64,6 +64,9 @@ extension FieldCondition where Value: Equatable {
 }
 
 /// FieldAction related methods
+
+public typealias If<Value: FieldValue> = FieldCondition<Value>
+
 extension FieldCondition {
 	public func run(ifTrue actionTrue: FieldAction<Value>, ifFalse actionFalse: FieldAction<Value>) -> FieldAction<Value> {
 		return FieldAction<Value> {

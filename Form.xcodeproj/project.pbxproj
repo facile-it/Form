@@ -44,6 +44,33 @@
 		38AFB0B01D9EB64400A8C890 /* FieldSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFB0AF1D9EB64400A8C890 /* FieldSerialization.swift */; };
 		38C163331E0016DB0035D06A /* FormStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C163321E0016DB0035D06A /* FormStorageSpec.swift */; };
 		38C163351E0018D60035D06A /* SpecTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C163341E0018D60035D06A /* SpecTools.swift */; };
+		38FD66311E3A411100FA9E4F /* FormPackaged.h in Headers */ = {isa = PBXBuildFile; fileRef = 38FD662F1E3A411100FA9E4F /* FormPackaged.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		38FD66351E3A413300FA9E4F /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AEC9901DAE7CFA003587E6 /* Field.swift */; };
+		38FD66361E3A413300FA9E4F /* FieldAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3815496E1DA6609700210634 /* FieldAction.swift */; };
+		38FD66371E3A413300FA9E4F /* FieldChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388352631E37BAAC00A376B0 /* FieldChange.swift */; };
+		38FD66381E3A413300FA9E4F /* FieldCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3815496C1DA6608E00210634 /* FieldCondition.swift */; };
+		38FD66391E3A413300FA9E4F /* FieldConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFB0AD1D9EAF9600A8C890 /* FieldConfig.swift */; };
+		38FD663A1E3A413300FA9E4F /* FieldConformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381549681DA6559000210634 /* FieldConformance.swift */; };
+		38FD663B1E3A413300FA9E4F /* FieldIndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3841A3B71DA7A79200519DF4 /* FieldIndexPath.swift */; };
+		38FD663C1E3A413300FA9E4F /* FieldKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0D63E1DAB8EDC00C5FF06 /* FieldKey.swift */; };
+		38FD663D1E3A413300FA9E4F /* FieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFB0A91D9EA9D200A8C890 /* FieldModel.swift */; };
+		38FD663E1E3A413300FA9E4F /* FieldOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381549761DA69B5300210634 /* FieldOptions.swift */; };
+		38FD663F1E3A413300FA9E4F /* FieldRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3815496A1DA657CC00210634 /* FieldRule.swift */; };
+		38FD66401E3A413300FA9E4F /* FieldSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AFB0AF1D9EB64400A8C890 /* FieldSerialization.swift */; };
+		38FD66411E3A413300FA9E4F /* FieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38661A6F1DAD443900C4F270 /* FieldStyle.swift */; };
+		38FD66421E3A413300FA9E4F /* FieldValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38661A6D1DAD35C900C4F270 /* FieldValue.swift */; };
+		38FD66431E3A413300FA9E4F /* FieldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381549721DA67EBE00210634 /* FieldViewModel.swift */; };
+		38FD66441E3A413300FA9E4F /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0D6451DABA7E700C5FF06 /* Form.swift */; };
+		38FD66451E3A413300FA9E4F /* FormContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0D63C1DAB8A2C00C5FF06 /* FormContainer.swift */; };
+		38FD66461E3A413300FA9E4F /* FormModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0D6401DAB8F0B00C5FF06 /* FormModels.swift */; };
+		38FD66471E3A413300FA9E4F /* FormStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381549661DA6403200210634 /* FormStorage.swift */; };
+		38FD66481E3A413300FA9E4F /* UtilityModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3841A3B51DA7991800519DF4 /* UtilityModels.swift */; };
+		38FD66491E3A414A00FA9E4F /* Signals.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38509FF61E0A9FF40047CAAF /* Signals.framework */; };
+		38FD664A1E3A414A00FA9E4F /* JSONObject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 383F83BD1DEC68270024D32B /* JSONObject.framework */; };
+		38FD664B1E3A414A00FA9E4F /* Functional.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38AFB0A51D9EA87000A8C890 /* Functional.framework */; };
+		38FD664D1E3A415400FA9E4F /* Signals.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38509FF61E0A9FF40047CAAF /* Signals.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		38FD664E1E3A415400FA9E4F /* JSONObject.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 383F83BD1DEC68270024D32B /* JSONObject.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		38FD664F1E3A415400FA9E4F /* Functional.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38AFB0A51D9EA87000A8C890 /* Functional.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AA7AD5361E366AE70058FC1A /* FieldRuleSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7AD5351E366AE70058FC1A /* FieldRuleSpec.swift */; };
 		AA7E82DA1E02F03300E52641 /* FieldConditionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7E82D91E02F03300E52641 /* FieldConditionSpec.swift */; };
 /* End PBXBuildFile section */
@@ -69,6 +96,18 @@
 				38509FFB1E0AA0270047CAAF /* Signals.framework in CopyFiles */,
 				38509FFC1E0AA0270047CAAF /* JSONObject.framework in CopyFiles */,
 				38509FFD1E0AA0270047CAAF /* Functional.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38FD664C1E3A415000FA9E4F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				38FD664D1E3A415400FA9E4F /* Signals.framework in CopyFiles */,
+				38FD664E1E3A415400FA9E4F /* JSONObject.framework in CopyFiles */,
+				38FD664F1E3A415400FA9E4F /* Functional.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +147,9 @@
 		38AFB0AF1D9EB64400A8C890 /* FieldSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldSerialization.swift; sourceTree = "<group>"; };
 		38C163321E0016DB0035D06A /* FormStorageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormStorageSpec.swift; sourceTree = "<group>"; };
 		38C163341E0018D60035D06A /* SpecTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecTools.swift; sourceTree = "<group>"; };
+		38FD662D1E3A411100FA9E4F /* FormPackaged.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FormPackaged.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		38FD662F1E3A411100FA9E4F /* FormPackaged.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FormPackaged.h; sourceTree = "<group>"; };
+		38FD66301E3A411100FA9E4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA7AD5351E366AE70058FC1A /* FieldRuleSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldRuleSpec.swift; sourceTree = "<group>"; };
 		AA7E82D91E02F03300E52641 /* FieldConditionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldConditionSpec.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -135,6 +177,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		38FD66291E3A411100FA9E4F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38FD66491E3A414A00FA9E4F /* Signals.framework in Frameworks */,
+				38FD664A1E3A414A00FA9E4F /* JSONObject.framework in Frameworks */,
+				38FD664B1E3A414A00FA9E4F /* Functional.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -157,6 +209,7 @@
 			children = (
 				38AFB0971D9EA6D700A8C890 /* Form */,
 				382A22E11DEC356B00305D64 /* FormSpec */,
+				38FD662E1E3A411100FA9E4F /* FormPackaged */,
 				38AFB0A41D9EA83800A8C890 /* Frameworks */,
 				38AFB0961D9EA6D700A8C890 /* Products */,
 			);
@@ -167,6 +220,7 @@
 			children = (
 				38AFB0951D9EA6D700A8C890 /* Form.framework */,
 				382A22E01DEC356B00305D64 /* FormSpec.xctest */,
+				38FD662D1E3A411100FA9E4F /* FormPackaged.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -227,6 +281,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		38FD662E1E3A411100FA9E4F /* FormPackaged */ = {
+			isa = PBXGroup;
+			children = (
+				38FD662F1E3A411100FA9E4F /* FormPackaged.h */,
+				38FD66301E3A411100FA9E4F /* Info.plist */,
+			);
+			path = FormPackaged;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -235,6 +298,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				38AFB09A1D9EA6D700A8C890 /* Form.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38FD662A1E3A411100FA9E4F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38FD66311E3A411100FA9E4F /* FormPackaged.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +347,25 @@
 			productReference = 38AFB0951D9EA6D700A8C890 /* Form.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		38FD662C1E3A411100FA9E4F /* FormPackaged */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 38FD66321E3A411100FA9E4F /* Build configuration list for PBXNativeTarget "FormPackaged" */;
+			buildPhases = (
+				38FD66281E3A411100FA9E4F /* Sources */,
+				38FD66291E3A411100FA9E4F /* Frameworks */,
+				38FD662A1E3A411100FA9E4F /* Headers */,
+				38FD662B1E3A411100FA9E4F /* Resources */,
+				38FD664C1E3A415000FA9E4F /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FormPackaged;
+			productName = FormPackaged;
+			productReference = 38FD662D1E3A411100FA9E4F /* FormPackaged.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -297,6 +387,11 @@
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
+					38FD662C1E3A411100FA9E4F = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 5MTJLVM7R2;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 38AFB08F1D9EA6D700A8C890 /* Build configuration list for PBXProject "Form" */;
@@ -313,9 +408,20 @@
 			targets = (
 				38AFB0941D9EA6D700A8C890 /* Form */,
 				382A22DF1DEC356B00305D64 /* FormSpec */,
+				38FD662C1E3A411100FA9E4F /* FormPackaged */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		38FD662B1E3A411100FA9E4F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		382A22DC1DEC356B00305D64 /* Sources */ = {
@@ -355,6 +461,33 @@
 				3815496F1DA6609700210634 /* FieldAction.swift in Sources */,
 				3841A3B61DA7991800519DF4 /* UtilityModels.swift in Sources */,
 				381549691DA6559000210634 /* FieldConformance.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38FD66281E3A411100FA9E4F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38FD66421E3A413300FA9E4F /* FieldValue.swift in Sources */,
+				38FD663A1E3A413300FA9E4F /* FieldConformance.swift in Sources */,
+				38FD66391E3A413300FA9E4F /* FieldConfig.swift in Sources */,
+				38FD663D1E3A413300FA9E4F /* FieldModel.swift in Sources */,
+				38FD663E1E3A413300FA9E4F /* FieldOptions.swift in Sources */,
+				38FD66461E3A413300FA9E4F /* FormModels.swift in Sources */,
+				38FD66411E3A413300FA9E4F /* FieldStyle.swift in Sources */,
+				38FD663B1E3A413300FA9E4F /* FieldIndexPath.swift in Sources */,
+				38FD66471E3A413300FA9E4F /* FormStorage.swift in Sources */,
+				38FD66401E3A413300FA9E4F /* FieldSerialization.swift in Sources */,
+				38FD66361E3A413300FA9E4F /* FieldAction.swift in Sources */,
+				38FD66441E3A413300FA9E4F /* Form.swift in Sources */,
+				38FD66351E3A413300FA9E4F /* Field.swift in Sources */,
+				38FD66381E3A413300FA9E4F /* FieldCondition.swift in Sources */,
+				38FD66431E3A413300FA9E4F /* FieldViewModel.swift in Sources */,
+				38FD663F1E3A413300FA9E4F /* FieldRule.swift in Sources */,
+				38FD663C1E3A413300FA9E4F /* FieldKey.swift in Sources */,
+				38FD66371E3A413300FA9E4F /* FieldChange.swift in Sources */,
+				38FD66481E3A413300FA9E4F /* UtilityModels.swift in Sources */,
+				38FD66451E3A413300FA9E4F /* FormContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -553,6 +686,54 @@
 			};
 			name = Release;
 		};
+		38FD66331E3A411100FA9E4F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 5MTJLVM7R2;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = FormPackaged/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = it.broomburgo.FormPackaged;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		38FD66341E3A411100FA9E4F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 5MTJLVM7R2;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = FormPackaged/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = it.broomburgo.FormPackaged;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -582,6 +763,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		38FD66321E3A411100FA9E4F /* Build configuration list for PBXNativeTarget "FormPackaged" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				38FD66331E3A411100FA9E4F /* Debug */,
+				38FD66341E3A411100FA9E4F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

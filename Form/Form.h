@@ -6,7 +6,7 @@
 //  Copyright © 2016 Facile.it. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for Form.
 FOUNDATION_EXPORT double FormVersionNumber;
