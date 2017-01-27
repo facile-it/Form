@@ -45,7 +45,7 @@ extension FieldCondition where Value: Equatable {
 		return FieldCondition { (value, _) in value == otherValue }
 	}
 
-	public static func valueIs(includedIn options: [Value]) -> FieldCondition {
+	public static func valueIs(containedIn options: [Value]) -> FieldCondition {
 		return FieldCondition { (value, _) in value.map(options.contains).get(or: false) }
 	}
 
@@ -53,7 +53,7 @@ extension FieldCondition where Value: Equatable {
 		return FieldCondition { (value, _) in value != otherValue }
 	}
 
-	public static func valueIs(notIncludedIn options: [Value]) -> FieldCondition {
+	public static func valueIs(notContainedIn options: [Value]) -> FieldCondition {
 		return FieldCondition { (value, _) in value.map(options.contains).map { $0.not }.get(or: true) }
 	}
 
