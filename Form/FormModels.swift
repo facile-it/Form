@@ -7,6 +7,10 @@ public struct FormSectionConfiguration {
 	public init(title: String?) {
 		self.title = title
 	}
+
+	public static var empty: FormSectionConfiguration {
+		return FormSectionConfiguration(title: nil)
+	}
 }
 
 public struct FormSectionModel: FormContainerType {
@@ -16,7 +20,7 @@ public struct FormSectionModel: FormContainerType {
 	public let configuration: FormSectionConfiguration
 	public let subelements: [Field]
 
-	public init(configuration: FormSectionConfiguration, subelements: [Field]) {
+	public init(configuration: FormSectionConfiguration = .empty, subelements: [Field]) {
 		self.configuration = configuration
 		self.subelements = subelements
 	}
@@ -33,6 +37,10 @@ public struct FormStepConfiguration {
 	public init(title: String?) {
 		self.title = title
 	}
+
+	public static var empty: FormStepConfiguration {
+		return FormStepConfiguration(title: nil)
+	}
 }
 
 public struct FormStepModel: FormContainerType {
@@ -42,7 +50,7 @@ public struct FormStepModel: FormContainerType {
 	public let configuration: FormStepConfiguration
 	public let subelements: [FormSectionModel]
 
-	public init(configuration: FormStepConfiguration, subelements: [FormSectionModel]) {
+	public init(configuration: FormStepConfiguration = .empty, subelements: [FormSectionModel]) {
 		self.configuration = configuration
 		self.subelements = subelements
 	}
@@ -59,6 +67,10 @@ public struct FormConfiguration {
 	public init(title: String?) {
 		self.title = title
 	}
+
+	public static var empty: FormConfiguration {
+		return FormConfiguration(title: nil)
+	}
 }
 
 public struct FormModel: FormContainerType {
@@ -68,7 +80,7 @@ public struct FormModel: FormContainerType {
 	public let configuration: FormConfiguration
 	public let subelements: [FormStepModel]
 
-	public init(configuration: FormConfiguration, subelements: [FormStepModel]) {
+	public init(configuration: FormConfiguration = .empty, subelements: [FormStepModel]) {
 		self.configuration = configuration
 		self.subelements = subelements
 	}
