@@ -23,6 +23,7 @@ extension FieldOptions {
 		return storageValue as? ValueType
 	}
 }
+
 extension FieldOptions where ValueType == AnyFieldValue {
 	public static func sanitizeValue(for storageValue: FieldValue) -> AnyFieldValue? {
 		if let value = storageValue as? AnyFieldValue {
@@ -144,7 +145,7 @@ public struct FieldOptionsCustom: FieldOptions {
 	public let identifier: String
 	public let valueDescription: (AnyFieldValue?) -> String
 
-	public init(identifier: String, valueDescription: @escaping (AnyFieldValue?) -> String = { $0?.optionalString ?? "" }) {
+	public init(identifier: String, valueDescription: @escaping (AnyFieldValue?) -> String = { $0.map { "\($0)"} ?? "" }) {
 		self.identifier = identifier
 		self.valueDescription = valueDescription
 	}
