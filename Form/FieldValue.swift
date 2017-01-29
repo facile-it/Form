@@ -5,19 +5,19 @@ public protocol JSONObjectConvertible {
 }
 
 public protocol AnyHashableConvertible {
-	var hashable: AnyHashable { get }
+	var anyHashable: AnyHashable { get }
 }
 
 public protocol FieldValue: JSONObjectConvertible, AnyHashableConvertible {}
 
 extension FieldValue {
 	public func isEqual(to other: FieldValue) -> Bool {
-		return self.jsonObject == other.jsonObject && self.hashable == other.hashable
+		return self.jsonObject == other.jsonObject && self.anyHashable == other.anyHashable
 	}
 }
 
 extension FieldValue where Self: Hashable {
-	public var hashable: AnyHashable {
+	public var anyHashable: AnyHashable {
 		return AnyHashable(self)
 	}
 }
@@ -57,7 +57,7 @@ public struct AnyFieldValue: FieldValue {
 		return get.jsonObject
 	}
 
-	public var hashable: AnyHashable {
-		return get.hashable
+	public var anyHashable: AnyHashable {
+		return get.anyHashable
 	}
 }
