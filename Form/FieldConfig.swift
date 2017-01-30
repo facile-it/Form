@@ -38,7 +38,7 @@ public struct FieldConfig<Options: FieldOptions> {
 			title: title,
 			value: value,
 			style: availableOptions.style,
-			errorMessage: errorMessage,
+			errorMessage: Optional(errorMessage).filter { $0.isEmpty == false },
 			isHidden: storage.getHidden(at: key),
 			isLoading: false)
 	}
