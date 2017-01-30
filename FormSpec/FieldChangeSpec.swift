@@ -34,7 +34,10 @@ class FieldChangeSpec: XCTestCase {
             
             let result = FieldModel<FieldOptionsIntPicker>(
                 key: "test",
-                config: .empty,
+                config: .init(
+                    title: "",
+                    options: .init(
+                        possibleValues: [0 : "0"])),
                 rules: [],
                 actions: [],
                 changes: [
