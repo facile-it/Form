@@ -12,8 +12,8 @@ public final class Form {
 	private var storageBinding: Binding<FieldViewModelPair>? = nil
 
 	private let variableFieldViewModelPair = Emitter<FieldViewModelPair>()
-	public private(set) lazy var observableFieldViewModelPair: AnyObservable<FieldViewModelPair> = {
-		return self.variableFieldViewModelPair.any
+	public private(set) lazy var observableFieldViewModelPair: AnyWeakObservable<FieldViewModelPair> = {
+		return self.variableFieldViewModelPair.anyWeak
 	}()
 
 	public init(storage: FormStorage, model: FormModel) {

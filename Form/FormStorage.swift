@@ -5,8 +5,8 @@ public final class FormStorage {
 	public typealias EmittedType = FieldKey
 
 	private let variableFieldKey = Emitter<FieldKey>()
-	public private(set) lazy var observableFieldKey: AnyObservable<FieldKey> = {
-		return self.variableFieldKey.any
+	public private(set) lazy var observableFieldKey: AnyWeakObservable<FieldKey> = {
+		return self.variableFieldKey.anyWeak
 	}()
 
 	fileprivate var fieldValues: [FieldKey:FieldValue] = [:]
