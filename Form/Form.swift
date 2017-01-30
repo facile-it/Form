@@ -13,7 +13,7 @@ public final class Form {
 
 	private let variableFieldViewModelPair = Emitter<FieldViewModelPair>()
 	public private(set) lazy var observableFieldViewModelPair: AnyWeakObservable<FieldViewModelPair> = {
-		return self.variableFieldViewModelPair.anyWeak
+		return AnyWeakObservable(self.variableFieldViewModelPair)
 	}()
 
 	public init(storage: FormStorage, model: FormModel) {
@@ -77,6 +77,7 @@ public final class Form {
 		return model.subelements
 			.flatMap { $0.subelements }
 			.flatMap { $0.subelements }
+			.reduce(object) { $1.transform(object: $0, considering: self.storage) }
 			as? T
 	}
 
