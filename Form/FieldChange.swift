@@ -75,7 +75,7 @@ public struct ObjectChange {
 		self.transform = transform
 	}
 
-	func apply<T>(to object: T) -> T? {
+	public func apply<T>(to object: T) -> T? {
 		return transform(object) as? T
 	}
 }
