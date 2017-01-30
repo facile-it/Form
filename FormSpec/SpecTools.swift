@@ -213,11 +213,6 @@ struct ArbitraryAnyFieldChange<Value: CoArbitrary & Hashable, Object: CoArbitrar
     static var arbitrary: Gen<ArbitraryAnyFieldChange<Value, Object>>{
         return ArrowOf<CoArbitraryPair<Value, Object>, Object>.arbitrary
             .map { $0.getArrow }
-//            .map { (f: @escaping (CoArbitraryPair<Value, Object>) -> Object) -> (Value, Object) -> Object in
-//                return { (value, object) in
-//                    f(CoArbitraryPair(left: value, right: object))
-//                }
-//            }
             .map { f in { f(CoArbitraryPair(left:$0, right:$1)) }}
             .map(FieldChange<Value, Object>.init)
             .map(AnyFieldChange<Value>.init)
