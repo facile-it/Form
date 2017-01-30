@@ -77,7 +77,6 @@ public final class Form {
 		return model.subelements
 			.flatMap { $0.subelements }
 			.flatMap { $0.subelements }
-			.reduce(object) { $1.transform(object: $0, considering: self.storage) }
 			as? T
 	}
 
