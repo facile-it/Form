@@ -145,7 +145,7 @@ public struct FieldOptionsCustom: FieldOptions {
 	public let identifier: String
 	public let valueDescription: (AnyFieldValue?) -> String
 
-	public init(identifier: String, valueDescription: @escaping (AnyFieldValue?) -> String = { $0.map { "\($0)"} ?? "" }) {
+	public init(identifier: String, valueDescription: @escaping (AnyFieldValue?) -> String = { ($0?.get).map { "\($0)"} ?? "" }) {
 		self.identifier = identifier
 		self.valueDescription = valueDescription
 	}

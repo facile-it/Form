@@ -31,19 +31,18 @@ class FieldChangeSpec: XCTestCase {
             let expectedTestObject = TestObject(value: 43)
             let storage = FormStorage()
             storage.set(value: 1, at: "test")
-            
+
             let result = FieldModel<FieldOptionsIntPicker>(
                 key: "test",
                 config: .init(
                     title: "",
                     options: .init(
-                        possibleValues: [0 : "0"])),
+                        possibleValues: [(0, "0")])),
                 rules: [],
                 actions: [],
                 changes: [
-                    .always(.change { (value, object: inout TestObject) in
-                        object.value += value
-                    })])
+					.always(.change { (value, object: inout TestObject) in
+						object.value += value })])
                 .transform(
                     object: testObject,
                     considering: storage)
