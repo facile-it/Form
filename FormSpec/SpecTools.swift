@@ -188,3 +188,98 @@ struct ArbitraryFieldValue: Arbitrary, CustomStringConvertible {
                             Date.arbitrary.map(ArbitraryFieldValue.init)])
     }
 }
+
+extension AnyFieldChange {
+    public func isEqual<Object>(to other: AnyFieldChange) -> (Value, Object) -> Bool {
+        return { (value, object) in
+            let result1 = self.apply(with: value, to: object)
+            let result2 = other.apply(with: value, to: object)
+            
+            guard let res1 = result1 as? TestObject, let res2 = result2 as? TestObject else {
+                return false
+            }
+            return res1 == res2
+        }
+    }
+}
+
+struct ArbitraryAnyFieldChange<Value: CoArbitrary & Hashable, Object: CoArbitrary & Hashable & Arbitrary>: Arbitrary {
+    let value: AnyFieldChange<Value>
+    
+    init(value: AnyFieldChange<Value>) {
+        self.value = value
+    }
+    
+    static var arbitrary: Gen<ArbitraryAnyFieldChange<Value, Object>>{
+        return ArrowOf<CoArbitraryPair<Value, Object>, Object>.arbitrary
+            .map { $0.getArrow }
+//            .map { (f: @escaping (CoArbitraryPair<Value, Object>) -> Object) -> (Value, Object) -> Object in
+//                return { (value, object) in
+//                    f(CoArbitraryPair(left: value, right: object))
+//                }
+//            }
+            .map { f in { f(CoArbitraryPair(left:$0, right:$1)) }}
+            .map(FieldChange<Value, Object>.init)
+            .map(AnyFieldChange<Value>.init)
+            .map(ArbitraryAnyFieldChange.init)
+    }
+}
+
+struct TestObject {
+    var value: Int
+    
+    init(value: Int) {
+        self.value = value
+    }
+}
+
+extension TestObject: Arbitrary {
+    static var arbitrary: Gen<TestObject> {
+        return Int.arbitrary
+            .map(TestObject.init)
+    }
+}
+
+extension TestObject: Hashable {
+    var hashValue: Int {
+        return value.hashValue
+    }
+    
+    static func ==(lhs: TestObject, rhs: TestObject) -> Bool {
+        return lhs.value == rhs.value
+    }
+}
+
+extension TestObject: CoArbitrary {
+    static func coarbitrary<C>(_ x: TestObject) -> ((Gen<C>) -> Gen<C>) {
+        return { gen in
+            return Int.coarbitrary(x.value)(gen)
+        }
+    }
+}
+
+struct CoArbitraryPair<Left: Hashable & CoArbitrary, Right: Hashable & CoArbitrary>: Hashable, CoArbitrary {
+    var left: Left
+    var right: Right
+    init(left: Left, right: Right) {
+        self.left = left
+        self.right = right
+    }
+    
+    var hashValue: Int {
+        return left.hashValue ^ right.hashValue
+    }
+    
+    static func ==(lhs: CoArbitraryPair, rhs: CoArbitraryPair) -> Bool {
+        return lhs.left == rhs.left && lhs.right == rhs.right
+    }
+    
+    static func coarbitrary<C>(_ x: CoArbitraryPair) -> (Gen<C>) -> Gen<C> {
+        return { $0
+            |> Left.coarbitrary(x.left)
+            |> Right.coarbitrary(x.right)
+        }
+    }
+}
+
+

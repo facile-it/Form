@@ -46,6 +46,7 @@
 		38C163351E0018D60035D06A /* SpecTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C163341E0018D60035D06A /* SpecTools.swift */; };
 		AA7AD5361E366AE70058FC1A /* FieldRuleSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7AD5351E366AE70058FC1A /* FieldRuleSpec.swift */; };
 		AA7E82DA1E02F03300E52641 /* FieldConditionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7E82D91E02F03300E52641 /* FieldConditionSpec.swift */; };
+		AAB01CE51E38A7EA00AF3BF4 /* FieldChangeSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB01CE41E38A7EA00AF3BF4 /* FieldChangeSpec.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,7 @@
 		38C163341E0018D60035D06A /* SpecTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecTools.swift; sourceTree = "<group>"; };
 		AA7AD5351E366AE70058FC1A /* FieldRuleSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldRuleSpec.swift; sourceTree = "<group>"; };
 		AA7E82D91E02F03300E52641 /* FieldConditionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldConditionSpec.swift; sourceTree = "<group>"; };
+		AAB01CE41E38A7EA00AF3BF4 /* FieldChangeSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldChangeSpec.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 				38888C291E01323B002184C5 /* FieldActionSpec.swift */,
 				AA7E82D91E02F03300E52641 /* FieldConditionSpec.swift */,
 				AA7AD5351E366AE70058FC1A /* FieldRuleSpec.swift */,
+				AAB01CE41E38A7EA00AF3BF4 /* FieldChangeSpec.swift */,
 			);
 			path = FormSpec;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				AA7E82DA1E02F03300E52641 /* FieldConditionSpec.swift in Sources */,
 				38C163331E0016DB0035D06A /* FormStorageSpec.swift in Sources */,
 				38888C2A1E01323B002184C5 /* FieldActionSpec.swift in Sources */,
+				AAB01CE51E38A7EA00AF3BF4 /* FieldChangeSpec.swift in Sources */,
 				38C163351E0018D60035D06A /* SpecTools.swift in Sources */,
 				382A22E31DEC356B00305D64 /* FormSpec.swift in Sources */,
 			);
