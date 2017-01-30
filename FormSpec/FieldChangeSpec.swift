@@ -34,14 +34,13 @@ class FieldChangeSpec: XCTestCase {
             
             let result = FieldModel<FieldOptionsIntPicker>(
                 key: "test",
-                config: FieldConfig<FieldOptionsIntPicker>.empty,
-                changes: [FieldChangeCondition
-                    .always(AnyFieldChange(
-                        change: FieldChange<Int, TestObject> { (value, object) in
-                            return TestObject(value: object.value + value);
-                    }))],
+                config: .empty,
                 rules: [],
-                actions: [])
+                actions: [],
+                changes: [
+                    .always(.change { (value, object: inout TestObject) in
+                        object.value += value
+                    })])
                 .transform(
                     object: testObject,
                     considering: storage)
