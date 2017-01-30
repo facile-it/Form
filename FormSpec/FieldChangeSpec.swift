@@ -24,4 +24,30 @@ class FieldChangeSpec: XCTestCase {
             return (object1.join(object2)).join(object3).isEqual(to:object1.join(object2.join(object3))) § (ai, at)
         }
     }
+    
+    func testChange() {
+        property("'init(change:)' makes changes as expected") <- {
+            let testObject = TestObject(value: 42)
+            let expectedTestObject = TestObject(value: 43)
+            let storage = FormStorage()
+            storage.set(value: 1, at: "test")
+            
+            let result = FieldModel<FieldOptionsIntPicker>(
+                key: "test",
+                config: FieldConfig<FieldOptionsIntPicker>.empty,
+                changes: [FieldChangeCondition
+                    .always(AnyFieldChange(
+                        change: FieldChange<Int, TestObject> { (value, object) in
+                            return TestObject(value: object.value + value);
+                    }))],
+                rules: [],
+                actions: [])
+                .transform(
+                    object: testObject,
+                    considering: storage)
+            
+            guard let res = result as? TestObject else { return false }
+            return res == expectedTestObject
+        }
+    }
 }
