@@ -68,3 +68,14 @@ public enum FieldChangeCondition<Value> {
 		}
 	}
 }
+
+public struct ObjectChange {
+	let transform: (Any) -> Any?
+	init(transform: @escaping (Any) -> Any?) {
+		self.transform = transform
+	}
+
+	func apply<T>(to object: T) -> T? {
+		return transform(object) as? T
+	}
+}

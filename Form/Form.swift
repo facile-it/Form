@@ -73,12 +73,13 @@ public final class Form {
 		field.updateValueAndApplyActions(with: pair.fieldValue, in: storage)
 	}
 
-	public func transform<T>(object: T) -> T? {
-		return model.subelements
-			.flatMap { $0.subelements }
-			.flatMap { $0.subelements }
-			.reduce(object) { $1.transform(object: $0, considering: self.storage) }
-			as? T
+	public var getObjectChange: ObjectChange {
+		return ObjectChange {
+			self.model.subelements
+				.flatMap { $0.subelements }
+				.flatMap { $0.subelements }
+				.reduce($0) { $1.transform(object: $0, considering: self.storage) }
+		}
 	}
 
 	fileprivate static func getFieldViewModelIndexPathPair(model: FormModel, storage: FormStorage) -> (FieldKey) -> FieldViewModelPair? {
