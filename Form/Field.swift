@@ -42,21 +42,21 @@ public struct Field: FieldKeyOwnerType {
 	public func transform(object: Any, considering storage: FormStorage) -> Any {
 		switch modelStyle {
 		case .fixed(let model):
-			return model.transform(object: model, considering: storage)
+			return model.transform(object: object, considering: storage)
 		case .onOff(let model):
-			return model.transform(object: model, considering: storage)
+			return model.transform(object: object, considering: storage)
 		case .textEntry(let model):
-			return model.transform(object: model, considering: storage)
+			return model.transform(object: object, considering: storage)
 		case .datePicker(let model):
-			return model.transform(object: model, considering: storage)
+			return model.transform(object: object, considering: storage)
 		case .intPicker(let model):
-			return model.transform(object: model, considering: storage)
+			return model.transform(object: object, considering: storage)
 		case .stringPicker(let model):
-			return model.transform(object: model, considering: storage)
+			return model.transform(object: object, considering: storage)
 		case .anyPicker(let model):
-			return model.transform(object: model, considering: storage)
+			return model.transform(object: object, considering: storage)
 		case .custom(let model):
-			return model.transform(object: model, considering: storage)
+			return model.transform(object: object, considering: storage)
 		}
 	}
 

@@ -253,6 +253,14 @@ extension TestObject: CoArbitrary {
     }
 }
 
+struct AltTestObject {
+	var value: String
+
+	init(value: String) {
+		self.value = value
+	}
+}
+
 struct CoArbitraryPair<Left: Hashable & CoArbitrary, Right: Hashable & CoArbitrary>: Hashable, CoArbitrary {
     var left: Left
     var right: Right

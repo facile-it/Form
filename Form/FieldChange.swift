@@ -71,7 +71,7 @@ public enum FieldChangeCondition<Value> {
 
 public struct ObjectChange {
 	let transform: (Any) -> Any?
-	init(transform: @escaping (Any) -> Any?) {
+	public init(transform: @escaping (Any) -> Any?) {
 		self.transform = transform
 	}
 

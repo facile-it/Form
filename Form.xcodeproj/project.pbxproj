@@ -195,14 +195,14 @@
 		382A22E11DEC356B00305D64 /* FormSpec */ = {
 			isa = PBXGroup;
 			children = (
-				382A22E21DEC356B00305D64 /* FormSpec.swift */,
 				382A22E41DEC356B00305D64 /* Info.plist */,
-				38C163321E0016DB0035D06A /* FormStorageSpec.swift */,
-				38C163341E0018D60035D06A /* SpecTools.swift */,
 				38888C291E01323B002184C5 /* FieldActionSpec.swift */,
+				AAB01CE41E38A7EA00AF3BF4 /* FieldChangeSpec.swift */,
 				AA7E82D91E02F03300E52641 /* FieldConditionSpec.swift */,
 				AA7AD5351E366AE70058FC1A /* FieldRuleSpec.swift */,
-				AAB01CE41E38A7EA00AF3BF4 /* FieldChangeSpec.swift */,
+				382A22E21DEC356B00305D64 /* FormSpec.swift */,
+				38C163321E0016DB0035D06A /* FormStorageSpec.swift */,
+				38C163341E0018D60035D06A /* SpecTools.swift */,
 			);
 			path = FormSpec;
 			sourceTree = "<group>";
@@ -775,6 +775,7 @@
 				38FD66341E3A411100FA9E4F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
