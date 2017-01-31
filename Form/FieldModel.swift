@@ -19,7 +19,7 @@ public struct FieldModel<Options: FieldOptions>: FieldKeyOwnerType {
 	}
 
 	public func transform(object: Any, considering storage: FormStorage) -> Any {
-		guard let value = storage.getValue(at: key) as? ValueType else { return object }
+		guard let value = storage.getValue(at: key).flatMap(Options.sanitizeValue(for:)) else { return object }
 		return changes
 			.filter {
 				if case .ifVisible = $0 {
