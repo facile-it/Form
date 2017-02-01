@@ -8,7 +8,7 @@ public protocol AnyHashableConvertible {
 	var anyHashable: AnyHashable { get }
 }
 
-public protocol FieldValue: JSONObjectConvertible, AnyHashableConvertible {}
+public protocol FieldValue: CustomStringConvertible, JSONObjectConvertible, AnyHashableConvertible {}
 
 extension FieldValue {
 	public func isEqual(to other: FieldValue) -> Bool {
@@ -53,6 +53,11 @@ public struct AnyFieldValue: FieldValue {
 	public init(_ value: FieldValue) {
 		self.get = value
 	}
+
+	public var description: String {
+		return get.description
+	}
+
 	public var jsonObject: JSONObject {
 		return get.jsonObject
 	}
