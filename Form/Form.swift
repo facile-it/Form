@@ -73,6 +73,15 @@ public final class Form {
 		field.updateValueAndApplyActions(with: pair.fieldValue, in: storage)
 	}
 
+	public func applyActions() {
+		model.subelements
+			.flatMap { $0.subelements }
+			.flatMap { $0.subelements }
+			.forEach { $0.updateValueAndApplyActions(
+				with: self.storage.getValue(at: $0.key),
+				in: self.storage) }
+	}
+
 	public var getObjectChange: ObjectChange {
 		return ObjectChange {
 			self.model.subelements
