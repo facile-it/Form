@@ -5,15 +5,15 @@ public final class FormStorage {
 	public typealias EmittedType = FieldKey
 
 	private let variableFieldKey = Emitter<FieldKey>()
-	public private(set) lazy var observableFieldKey: AnyWeakObservable<FieldKey> = {
-		return AnyWeakObservable(self.variableFieldKey)
-	}()
+	public private(set) var observableFieldKey = AnyObservable(Emitter<FieldKey>())
 
 	fileprivate var fieldValues: [FieldKey:FieldValue] = [:]
 	fileprivate var fieldOptions: [FieldKey:Any] = [:]
 	fileprivate var hiddenFieldKeys: Set<FieldKey> = []
 
-	public init() {}
+	public init() {
+        self.observableFieldKey = AnyObservable(self.variableFieldKey)
+    }
 
 	public var allKeys: Set<FieldKey> {
 		return Set(fieldValues.keys)

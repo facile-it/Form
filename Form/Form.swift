@@ -12,13 +12,13 @@ public final class Form {
 	private let disposableBag = DisposableBag()
 
 	private let variableFieldViewModelPair = Emitter<FieldViewModelPair>()
-	public private(set) lazy var observableFieldViewModelPair: AnyWeakObservable<FieldViewModelPair> = {
-		return AnyWeakObservable(self.variableFieldViewModelPair)
-	}()
-
+	public private(set) var observableFieldViewModelPair = AnyObservable(Emitter<FieldViewModelPair>())
+    
 	public init(storage: FormStorage, model: FormModel) {
 		self.storage = storage
 		self.model = model
+        
+        self.observableFieldViewModelPair = AnyObservable(self.variableFieldViewModelPair)
 
 		storage.observableFieldKey
 			.mapSome(Form.getFieldViewModelIndexPathPair(model: model, storage: storage))
