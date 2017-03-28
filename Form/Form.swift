@@ -9,7 +9,7 @@ public final class Form {
 
 	private let storage: FormStorage
 	private let model: FormModel
-	private var storageBinding: Binding<FieldViewModelPair>? = nil
+	private let disposableBag = DisposableBag()
 
 	private let variableFieldViewModelPair = Emitter<FieldViewModelPair>()
 	public private(set) lazy var observableFieldViewModelPair: AnyWeakObservable<FieldViewModelPair> = {
@@ -19,12 +19,15 @@ public final class Form {
 	public init(storage: FormStorage, model: FormModel) {
 		self.storage = storage
 		self.model = model
-		self.storageBinding = self.variableFieldViewModelPair.bind(to: storage.observableFieldKey
-			.mapSome(Form.getFieldViewModelIndexPathPair(model: model, storage: storage)))
+
+		storage.observableFieldKey
+			.mapSome(Form.getFieldViewModelIndexPathPair(model: model, storage: storage))
+			.bind(to: self.variableFieldViewModelPair)
+			.add(to: disposableBag)
 	}
 
 	deinit {
-		storageBinding?.disconnect()
+		disposableBag.dispose()
 	}
 
 	public var formConfiguration: FormConfiguration {

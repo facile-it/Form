@@ -1,4 +1,4 @@
-github "broomburgo/Functional" "f3bd8610c5a46fdbc6c4db6865359f5eb618bea8"
-github "broomburgo/Signals" "087389f90ae2f643ac010754898e489055e7fd36"
-github "typelift/SwiftCheck" "0.7.2"
-github "broomburgo/JSONObject" "5e7b454c865823ba625ebea361de7d646d9be1b6"
+github "broomburgo/Functional" "04604da494e35ccac96ea23055d8ecfdef2b978e"
+github "broomburgo/Signals" "6a161060b9b8e5d9cf56d0cb9e83bf14dec396b5"
+github "typelift/SwiftCheck" "0.7.3"
+github "broomburgo/JSONObject" "7fa45b917b75e526c344369b049074b8ecc74e54"

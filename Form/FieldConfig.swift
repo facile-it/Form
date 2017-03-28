@@ -1,7 +1,7 @@
 import Functional
 
 public struct FieldConfig<Options: FieldOptions> {
-	typealias FieldValueType = Options.ValueType
+	public typealias FieldValueType = Options.ValueType
 
 	public let title: String
 	public let deferredOptions: Deferred<Options>
