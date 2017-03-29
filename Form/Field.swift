@@ -1,7 +1,7 @@
 import Functional
 import JSONObject
-/// Hello
-/// Hello
+
+
 public typealias FieldModelStyle = FieldStyle<
 	FieldModel<FieldOptionsFixed>,
 	FieldModel<FieldOptionsSwitch>,
