@@ -9,15 +9,15 @@ typealias Tested = FieldAction<Int>
 class FieldActionSpec: XCTestCase {
 	func testMonoidLaws() {
 		property("1•a = a") <- forAll { (av: OptionalOf<Int>, object: Tested) in
-			Tested.zero.join(object).isEqual(to: object) § av.getOptional
+			Tested.zero.compose(object).isEqual(to: object) § av.getOptional
 		}
 
 		property("a•1 = a") <- forAll { (av: OptionalOf<Int>, object: Tested) in
-			object.join(Tested.zero).isEqual(to: object) § av.getOptional
+			object.compose(Tested.zero).isEqual(to: object) § av.getOptional
 		}
 
 		property("(a•b)•c = a•(b•c)") <- forAll { (av: OptionalOf<Int>, object1: Tested, object2: Tested, object3: Tested) in
-			(object1.join(object2)).join(object3).isEqual(to:object1.join(object2.join(object3))) § av.getOptional
+			(object1.compose(object2)).compose(object3).isEqual(to:object1.compose(object2.compose(object3))) § av.getOptional
 		}
 	}
 

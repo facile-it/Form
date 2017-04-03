@@ -62,7 +62,7 @@
 //		case let .single(relation):
 //			return relation.getObject(for: value)
 //		case let .multiple(relations):
-//			return relations.mapSome(WSRelation.getObject >< value).joinAll()
+//			return relations.mapSome(WSRelation.getObject >< value).composeAll()
 //		}
 //	}
 //

@@ -29,7 +29,7 @@ public struct FieldModel<Options: FieldOptions>: FieldKeyOwnerType {
 				}
 			}
 			.map { $0.getChange }
-			.joinAll()
+			.composeAll()
 			.apply(with: value, to: object)
 	}
 
@@ -39,6 +39,6 @@ public struct FieldModel<Options: FieldOptions>: FieldKeyOwnerType {
 
 	public func updateValueAndApplyActions(with value: FieldValue?, in storage: FormStorage) {
 		storage.set(value: value, at: key)
-		actions.joinAll().apply(value: value.flatMap(Options.sanitizeValue), storage: storage)
+		actions.composeAll().apply(value: value.flatMap(Options.sanitizeValue), storage: storage)
 	}
 }

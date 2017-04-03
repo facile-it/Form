@@ -148,6 +148,11 @@
 		38AFB0AF1D9EB64400A8C890 /* FieldSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldSerialization.swift; sourceTree = "<group>"; };
 		38C163321E0016DB0035D06A /* FormStorageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormStorageSpec.swift; sourceTree = "<group>"; };
 		38C163341E0018D60035D06A /* SpecTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecTools.swift; sourceTree = "<group>"; };
+		38D0416C1E925188003F7B43 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = "<group>"; };
+		38D0416D1E92519E003F7B43 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		38D0416E1E92519E003F7B43 /* Cartfile.private */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile.private; sourceTree = "<group>"; };
+		38D0416F1E9251A8003F7B43 /* codecov.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = codecov.yml; sourceTree = "<group>"; };
+		38D041701E9251B3003F7B43 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		38FD662D1E3A411100FA9E4F /* FormPackaged.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FormPackaged.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		38FD662F1E3A411100FA9E4F /* FormPackaged.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FormPackaged.h; sourceTree = "<group>"; };
 		38FD66301E3A411100FA9E4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -210,6 +215,7 @@
 		38AFB08B1D9EA6D700A8C890 = {
 			isa = PBXGroup;
 			children = (
+				38D0416B1E925177003F7B43 /* Docs */,
 				38AFB0971D9EA6D700A8C890 /* Form */,
 				382A22E11DEC356B00305D64 /* FormSpec */,
 				38FD662E1E3A411100FA9E4F /* FormPackaged */,
@@ -282,6 +288,18 @@
 				38AFB0A51D9EA87000A8C890 /* Functional.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		38D0416B1E925177003F7B43 /* Docs */ = {
+			isa = PBXGroup;
+			children = (
+				38D0416D1E92519E003F7B43 /* Cartfile */,
+				38D041701E9251B3003F7B43 /* README.md */,
+				38D0416E1E92519E003F7B43 /* Cartfile.private */,
+				38D0416C1E925188003F7B43 /* .travis.yml */,
+				38D0416F1E9251A8003F7B43 /* codecov.yml */,
+			);
+			name = Docs;
 			sourceTree = "<group>";
 		};
 		38FD662E1E3A411100FA9E4F /* FormPackaged */ = {

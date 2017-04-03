@@ -44,7 +44,7 @@ public struct AnyFieldChange<Value> {
 }
 
 extension AnyFieldChange: Monoid {
-	public func join(_ other: AnyFieldChange<Value>) -> AnyFieldChange<Value> {
+	public func compose(_ other: AnyFieldChange<Value>) -> AnyFieldChange<Value> {
 		return AnyFieldChange<Value> { (value, any) -> Any in
 			return other.apply(with: value, to: self.apply(with: value, to: any))
 		}

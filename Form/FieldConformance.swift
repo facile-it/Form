@@ -25,9 +25,9 @@ extension FieldConformance: Monoid {
 		return FieldConformance(isValid: true, invalidMessages: [])
 	}
 
-	public func join(_ other: FieldConformance) -> FieldConformance {
+	public func compose(_ other: FieldConformance) -> FieldConformance {
 		return FieldConformance(
 			isValid: isValid && other.isValid,
-			invalidMessages: invalidMessages.join(other.invalidMessages))
+			invalidMessages: invalidMessages.compose(other.invalidMessages))
 	}
 }

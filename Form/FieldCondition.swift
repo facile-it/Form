@@ -19,7 +19,7 @@ extension FieldCondition: Monoid {
 		return FieldCondition { _ in true }
 	}
 
-	public func join(_ other: FieldCondition) -> FieldCondition {
+	public func compose(_ other: FieldCondition) -> FieldCondition {
 		return FieldCondition {
 			self.check(value: $0.0, storage: $0.1) && other.check(value: $0.0, storage: $0.1)
 		}
@@ -79,9 +79,9 @@ extension FieldCondition {
 	public func run(ifTrue actionsTrue: [FieldAction<Value>], ifFalse actionsFalse: [FieldAction<Value>]) -> FieldAction<Value> {
 		return FieldAction<Value> {
 			if self.predicate($0.0,$0.1) {
-				actionsTrue.joinAll().apply(value: $0.0, storage: $0.1)
+				actionsTrue.composeAll().apply(value: $0.0, storage: $0.1)
 			} else {
-				actionsFalse.joinAll().apply(value: $0.0, storage: $0.1)
+				actionsFalse.composeAll().apply(value: $0.0, storage: $0.1)
 			}
 		}
 	}
@@ -91,10 +91,10 @@ extension FieldCondition {
 	}
 
 	public func ifTrue(_ actions: FieldAction<Value>...) -> FieldAction<Value> {
-		return run(ifTrue: actions.joinAll(), ifFalse: .zero)
+		return run(ifTrue: actions.composeAll(), ifFalse: .zero)
 	}
 
 	public func ifFalse(_ actions: FieldAction<Value>...) -> FieldAction<Value> {
-		return run(ifTrue: .zero, ifFalse: actions.joinAll())
+		return run(ifTrue: .zero, ifFalse: actions.composeAll())
 	}
 }

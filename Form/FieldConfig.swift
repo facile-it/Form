@@ -28,11 +28,11 @@ public struct FieldConfig<Options: FieldOptions> {
 		}
 
 		let value = storage.getValue(at: key)
-		let errorMessage = rules.joinAll()
+		let errorMessage = rules.composeAll()
 			.isValid(value: value.flatMap(Options.sanitizeValue), storage: storage)
 			.invalidMessages
 			.map { "\(title): \($0)" }
-			.joinAll(separator: "\n")
+			.composeAll(separator: "\n")
 
 		return FieldViewModel(
 			title: title,

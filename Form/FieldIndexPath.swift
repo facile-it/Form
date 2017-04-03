@@ -36,7 +36,7 @@ extension FieldIndexPath: Monoid {
 		return FieldIndexPath(stepIndex: nil, sectionIndex: nil, fieldIndex: nil)
 	}
 
-	public func join(_ other: FieldIndexPath) -> FieldIndexPath {
+	public func compose(_ other: FieldIndexPath) -> FieldIndexPath {
 		return FieldIndexPath(
 			stepIndex: other.stepIndex ?? stepIndex,
 			sectionIndex: other.sectionIndex ?? sectionIndex,
