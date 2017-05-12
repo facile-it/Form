@@ -1,0 +1,9 @@
+{
+  "commitish" : "0.8.0",
+  "iOS" : [
+    {
+      "hash" : "88ba4007832205196d1ad59e45d8ce0d18e7abf9e48279cafe10468dd6adef95",
+      "name" : "SwiftCheck"
+    }
+  ]
+}
