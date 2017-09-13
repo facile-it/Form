@@ -3,6 +3,8 @@ import SwiftCheck
 import Form
 import JSONObject
 import Functional
+import Abstract
+import Monads
 
 struct ArbitraryPair<A: Arbitrary, B: Arbitrary>: Arbitrary {
 	let left: A

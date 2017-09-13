@@ -1,8 +1,8 @@
 {
-  "commitish" : "ca68c94fae3b119ed3abf7676560fa8da79f929d",
+  "commitish" : "1bb84b4edac93b52a784e177a323086c2d596690",
   "iOS" : [
     {
-      "hash" : "dc824a880aadbc2196c96197fdbc8bda477c6c649567ab500c3381526c1d3f1a",
+      "hash" : "a7a257ce112f6cb4a3f4f51713301e5bf3a45a0aefbdf04e08d11e79355f86f9",
       "name" : "JSONObject"
     }
   ]

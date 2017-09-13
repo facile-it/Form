@@ -1,5 +1,7 @@
 import Foundation
 import Functional
+import Abstract
+import Monads
 
 public struct FieldChange<Value,Object> {
 	let transform: (Value,Object) -> Object
@@ -44,13 +46,13 @@ public struct AnyFieldChange<Value> {
 }
 
 extension AnyFieldChange: Monoid {
-	public func compose(_ other: AnyFieldChange<Value>) -> AnyFieldChange<Value> {
+	public static func <> (left: AnyFieldChange, right: AnyFieldChange) -> AnyFieldChange {
 		return AnyFieldChange<Value> { (value, any) -> Any in
-			return other.apply(with: value, to: self.apply(with: value, to: any))
+			return right.apply(with: value, to: left.apply(with: value, to: any))
 		}
 	}
 
-	public static var zero: AnyFieldChange<Value> {
+	public static var empty: AnyFieldChange<Value> {
 		return .identity
 	}
 }

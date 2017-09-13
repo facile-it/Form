@@ -1,4 +1,6 @@
 import Functional
+import Abstract
+import Monads
 import Signals
 import JSONObject
 
@@ -51,11 +53,14 @@ public final class Form {
 	}
 
 	public var allPairs: [FieldViewModelPair] {
-		return model.subelements
-			.flatMap { $0.subelements }
-			.flatMap { $0.subelements }
+		let elements: [Field] = model.subelements
+			.map { $0.subelements }
+			.joined
+			.map { $0.subelements }
+			.joined
+		return elements
 			.map { $0.key }
-			.mapSome(Form.getFieldViewModelIndexPathPair(model: model, storage: storage))
+			.flatMap(Form.getFieldViewModelIndexPathPair(model: model, storage: storage))
 	}
 
 	public func update(pair: FieldValueCompletePair) {
@@ -77,30 +82,34 @@ public final class Form {
 	}
 
 	public func applyActions() {
-		model.subelements
-			.flatMap { $0.subelements }
-			.flatMap { $0.subelements }
-			.forEach { $0.updateValueAndApplyActions(
+		let elements: [Field] = self.model.subelements
+			.map { $0.subelements }
+			.joined
+			.map { $0.subelements }
+			.joined
+		elements.forEach { $0.updateValueAndApplyActions(
 				with: self.storage.getValue(at: $0.key),
 				in: self.storage) }
 	}
 
 	public var getObjectChange: ObjectChange {
 		return ObjectChange {
-			self.model.subelements
-				.flatMap { $0.subelements }
-				.flatMap { $0.subelements }
-				.reduce($0) { $1.transform(object: $0, considering: self.storage) }
+			let elements: [Field] = self.model.subelements
+				.map { $0.subelements }
+				.joined
+				.map { $0.subelements }
+				.joined
+			return elements.reduce($0) { $1.transform(object: $0, considering: self.storage) }
 		}
 	}
 
 	fileprivate static func getFieldViewModelIndexPathPair(model: FormModel, storage: FormStorage) -> (FieldKey) -> FieldViewModelPair? {
 		return { key in
 			Optional(Writer<FormModel,FieldIndexPath>(model))
-				.flatMapT(FormModel.getSubelement >< key)
-				.flatMapT(FormStepModel.getSubelement >< key)
-				.flatMapT(FormSectionModel.getSubelement >< key)
-				.mapT(Field.getViewModel >< storage)?
+				.flatMapT { $0.getSubelement(at: key) }
+				.flatMapT { $0.getSubelement(at: key) }
+				.flatMapT { $0.getSubelement(at: key) }
+				.mapT { $0.getViewModel(in: storage) }?
 				.run
 		}
 	}

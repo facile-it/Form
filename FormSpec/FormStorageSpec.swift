@@ -2,6 +2,8 @@ import XCTest
 import Form
 import SwiftCheck
 import Functional
+import Abstract
+import Monads
 import Signals
 
 class FormStorageSpec: XCTestCase {

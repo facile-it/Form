@@ -1,5 +1,7 @@
 //import Foundation
 //import Functional
+import Abstract
+import Monads
 //import JSONObject
 //
 //public struct WSRelation<RootValue> {
@@ -33,7 +35,7 @@
 ////	case path([String],FieldWSRelation<Value>)
 //
 //	public static var empty: FieldSerializationStrategy<Value> {
-//		return .direct(FieldKey.zero)
+//		return .direct(FieldKey.empty)
 //	}
 //}
 //
@@ -62,7 +64,7 @@
 //		case let .single(relation):
 //			return relation.getObject(for: value)
 //		case let .multiple(relations):
-//			return relations.mapSome(WSRelation.getObject >< value).composeAll()
+//			return relations.mapSome(WSRelation.getObject >< value).concatenated
 //		}
 //	}
 //

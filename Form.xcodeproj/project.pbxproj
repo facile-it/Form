@@ -30,6 +30,21 @@
 		38509FFD1E0AA0270047CAAF /* Functional.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38AFB0A51D9EA87000A8C890 /* Functional.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		38661A6E1DAD35C900C4F270 /* FieldValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38661A6D1DAD35C900C4F270 /* FieldValue.swift */; };
 		38661A701DAD443900C4F270 /* FieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38661A6F1DAD443900C4F270 /* FieldStyle.swift */; };
+		387C44CB1F6983A20038CF42 /* Abstract.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 387C44C81F6983A20038CF42 /* Abstract.framework */; };
+		387C44CC1F6983A20038CF42 /* Abstract.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 387C44C81F6983A20038CF42 /* Abstract.framework */; };
+		387C44CD1F6983A20038CF42 /* Monads.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 387C44C91F6983A20038CF42 /* Monads.framework */; };
+		387C44CE1F6983A20038CF42 /* Monads.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 387C44C91F6983A20038CF42 /* Monads.framework */; };
+		387C44CF1F6983A20038CF42 /* Operadics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 387C44CA1F6983A20038CF42 /* Operadics.framework */; };
+		387C44D01F6983A20038CF42 /* Operadics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 387C44CA1F6983A20038CF42 /* Operadics.framework */; };
+		387C44D11F6983AF0038CF42 /* Abstract.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 387C44C81F6983A20038CF42 /* Abstract.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		387C44D21F6983AF0038CF42 /* Monads.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 387C44C91F6983A20038CF42 /* Monads.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		387C44D31F6983AF0038CF42 /* Operadics.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 387C44CA1F6983A20038CF42 /* Operadics.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		387C44D41F6983B40038CF42 /* Abstract.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 387C44C81F6983A20038CF42 /* Abstract.framework */; };
+		387C44D51F6983B40038CF42 /* Monads.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 387C44C91F6983A20038CF42 /* Monads.framework */; };
+		387C44D61F6983B40038CF42 /* Operadics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 387C44CA1F6983A20038CF42 /* Operadics.framework */; };
+		387C44D71F6983C10038CF42 /* Abstract.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 387C44C81F6983A20038CF42 /* Abstract.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		387C44D81F6983C10038CF42 /* Monads.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 387C44C91F6983A20038CF42 /* Monads.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		387C44D91F6983C10038CF42 /* Operadics.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 387C44CA1F6983A20038CF42 /* Operadics.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		388352641E37BAAC00A376B0 /* FieldChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388352631E37BAAC00A376B0 /* FieldChange.swift */; };
 		38888C2A1E01323B002184C5 /* FieldActionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38888C291E01323B002184C5 /* FieldActionSpec.swift */; };
 		38A0D63D1DAB8A2C00C5FF06 /* FormContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A0D63C1DAB8A2C00C5FF06 /* FormContainer.swift */; };
@@ -93,6 +108,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				387C44D11F6983AF0038CF42 /* Abstract.framework in CopyFiles */,
+				387C44D21F6983AF0038CF42 /* Monads.framework in CopyFiles */,
+				387C44D31F6983AF0038CF42 /* Operadics.framework in CopyFiles */,
 				383F83C21DEC68BB0024D32B /* SwiftCheck.framework in CopyFiles */,
 				38509FFB1E0AA0270047CAAF /* Signals.framework in CopyFiles */,
 				38509FFC1E0AA0270047CAAF /* JSONObject.framework in CopyFiles */,
@@ -106,6 +124,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				387C44D71F6983C10038CF42 /* Abstract.framework in CopyFiles */,
+				387C44D81F6983C10038CF42 /* Monads.framework in CopyFiles */,
+				387C44D91F6983C10038CF42 /* Operadics.framework in CopyFiles */,
 				38FD664D1E3A415400FA9E4F /* Signals.framework in CopyFiles */,
 				38FD664E1E3A415400FA9E4F /* JSONObject.framework in CopyFiles */,
 				38FD664F1E3A415400FA9E4F /* Functional.framework in CopyFiles */,
@@ -132,6 +153,9 @@
 		38509FF61E0A9FF40047CAAF /* Signals.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Signals.framework; path = Carthage/Build/iOS/Signals.framework; sourceTree = "<group>"; };
 		38661A6D1DAD35C900C4F270 /* FieldValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldValue.swift; sourceTree = "<group>"; };
 		38661A6F1DAD443900C4F270 /* FieldStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldStyle.swift; sourceTree = "<group>"; };
+		387C44C81F6983A20038CF42 /* Abstract.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Abstract.framework; path = Carthage/Build/iOS/Abstract.framework; sourceTree = "<group>"; };
+		387C44C91F6983A20038CF42 /* Monads.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Monads.framework; path = Carthage/Build/iOS/Monads.framework; sourceTree = "<group>"; };
+		387C44CA1F6983A20038CF42 /* Operadics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Operadics.framework; path = Carthage/Build/iOS/Operadics.framework; sourceTree = "<group>"; };
 		388352631E37BAAC00A376B0 /* FieldChange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldChange.swift; sourceTree = "<group>"; };
 		38888C291E01323B002184C5 /* FieldActionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldActionSpec.swift; sourceTree = "<group>"; };
 		38A0D63C1DAB8A2C00C5FF06 /* FormContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormContainer.swift; sourceTree = "<group>"; };
@@ -166,6 +190,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				387C44D41F6983B40038CF42 /* Abstract.framework in Frameworks */,
+				387C44D51F6983B40038CF42 /* Monads.framework in Frameworks */,
+				387C44D61F6983B40038CF42 /* Operadics.framework in Frameworks */,
 				382A22E51DEC356B00305D64 /* Form.framework in Frameworks */,
 				38509FF91E0AA0070047CAAF /* JSONObject.framework in Frameworks */,
 				383F83C01DEC68310024D32B /* SwiftCheck.framework in Frameworks */,
@@ -179,8 +206,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				38AFB0A61D9EA87000A8C890 /* Functional.framework in Frameworks */,
+				387C44CF1F6983A20038CF42 /* Operadics.framework in Frameworks */,
 				383F83BE1DEC68270024D32B /* JSONObject.framework in Frameworks */,
+				387C44CB1F6983A20038CF42 /* Abstract.framework in Frameworks */,
 				38509FF71E0A9FF40047CAAF /* Signals.framework in Frameworks */,
+				387C44CD1F6983A20038CF42 /* Monads.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,8 +219,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				38FD66491E3A414A00FA9E4F /* Signals.framework in Frameworks */,
+				387C44D01F6983A20038CF42 /* Operadics.framework in Frameworks */,
 				38FD664A1E3A414A00FA9E4F /* JSONObject.framework in Frameworks */,
+				387C44CC1F6983A20038CF42 /* Abstract.framework in Frameworks */,
 				38FD664B1E3A414A00FA9E4F /* Functional.framework in Frameworks */,
+				387C44CE1F6983A20038CF42 /* Monads.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +315,9 @@
 		38AFB0A41D9EA83800A8C890 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				387C44C81F6983A20038CF42 /* Abstract.framework */,
+				387C44C91F6983A20038CF42 /* Monads.framework */,
+				387C44CA1F6983A20038CF42 /* Operadics.framework */,
 				38509FF61E0A9FF40047CAAF /* Signals.framework */,
 				383F83BF1DEC68310024D32B /* SwiftCheck.framework */,
 				383F83BD1DEC68270024D32B /* JSONObject.framework */,

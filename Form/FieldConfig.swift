@@ -1,4 +1,6 @@
 import Functional
+import Abstract
+import Monads
 
 public struct FieldConfig<Options: FieldOptions> {
 	public typealias FieldValueType = Options.ValueType
@@ -18,9 +20,9 @@ public struct FieldConfig<Options: FieldOptions> {
 	public func getViewModel(for key: FieldKey, in storage: FormStorage, rules: [FieldRule<FieldValueType>]) -> FieldViewModel {
 		guard let availableOptions = [storage.getOptions(at: key) as? Options,
 		                              deferredOptions.peek]
-			.firstUnwrappedOrNil else {
+			.first(where: { $0 != nil }).joined else {
 
-				deferredOptions.upon { storage.set(options: $0, at: key) }
+				deferredOptions.run { storage.set(options: $0, at: key) }
 
 				return FieldViewModel.empty(
 					isHidden: storage.getHidden(at: key),
@@ -28,11 +30,11 @@ public struct FieldConfig<Options: FieldOptions> {
 		}
 
 		let value = storage.getValue(at: key)
-		let errorMessage = rules.composeAll()
+		let errorMessage = rules.concatenated
 			.isValid(value: value.flatMap(Options.sanitizeValue), storage: storage)
 			.invalidMessages
-			.map { "\(title): \($0)" }
-			.composeAll(separator: "\n")
+			.map { "\(self.title): \($0)\n" }
+			.concatenated
 
 		return FieldViewModel(
 			title: title,

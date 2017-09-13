@@ -1,4 +1,6 @@
 import Functional
+import Abstract
+import Monads
 
 public struct FieldIndexPath: Hashable {
 	public let stepIndex: UInt?
@@ -32,15 +34,15 @@ public func == (lhs: FieldIndexPath, rhs: FieldIndexPath) -> Bool {
 }
 
 extension FieldIndexPath: Monoid {
-	public static var zero: FieldIndexPath {
+	public static var empty: FieldIndexPath {
 		return FieldIndexPath(stepIndex: nil, sectionIndex: nil, fieldIndex: nil)
 	}
 
-	public func compose(_ other: FieldIndexPath) -> FieldIndexPath {
+	public static func <> (left: FieldIndexPath, right: FieldIndexPath) -> FieldIndexPath {
 		return FieldIndexPath(
-			stepIndex: other.stepIndex ?? stepIndex,
-			sectionIndex: other.sectionIndex ?? sectionIndex,
-			fieldIndex: other.fieldIndex ?? fieldIndex)
+			stepIndex: right.stepIndex ?? left.stepIndex,
+			sectionIndex: right.sectionIndex ?? left.sectionIndex,
+			fieldIndex: right.fieldIndex ?? left.fieldIndex)
 	}
 }
 

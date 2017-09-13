@@ -1,4 +1,6 @@
 import Functional
+import Abstract
+import Monads
 import JSONObject
 
 public struct FieldModel<Options: FieldOptions>: FieldKeyOwnerType {
@@ -29,7 +31,7 @@ public struct FieldModel<Options: FieldOptions>: FieldKeyOwnerType {
 				}
 			}
 			.map { $0.getChange }
-			.composeAll()
+			.concatenated
 			.apply(with: value, to: object)
 	}
 
@@ -39,6 +41,6 @@ public struct FieldModel<Options: FieldOptions>: FieldKeyOwnerType {
 
 	public func updateValueAndApplyActions(with value: FieldValue?, in storage: FormStorage) {
 		storage.set(value: value, at: key)
-		actions.composeAll().apply(value: value.flatMap(Options.sanitizeValue), storage: storage)
+		actions.concatenated.apply(value: value.flatMap(Options.sanitizeValue), storage: storage)
 	}
 }

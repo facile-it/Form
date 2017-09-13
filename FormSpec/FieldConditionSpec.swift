@@ -1,6 +1,8 @@
 import XCTest
 import SwiftCheck
 import Functional
+import Abstract
+import Monads
 @testable import Form
 
 typealias TestedCondition = FieldCondition<Int>
@@ -11,12 +13,12 @@ class FieldConditionSpec: XCTestCase {
     func testMonoidLaws() {
         property("1•a = a") <- forAll { (av: OptionalOf<Int>, ac: ArbitraryTestedCondition) in
             let object = ac.get
-            return TestedCondition.zero.compose(object).isEqual(to: object) § av.getOptional
+            return TestedCondition.empty.compose(object).isEqual(to: object) § av.getOptional
         }
         
         property("a•1 = a") <- forAll { (av: OptionalOf<Int>, ac: ArbitraryTestedCondition) in
             let object = ac.get
-            return object.compose(TestedCondition.zero).isEqual(to: object) § av.getOptional
+            return object.compose(TestedCondition.empty).isEqual(to: object) § av.getOptional
         }
         
         property("(a•b)•c = a•(b•c)") <- forAll { (av: OptionalOf<Int>, ac1: ArbitraryTestedCondition, ac2: ArbitraryTestedCondition, ac3: ArbitraryTestedCondition) in

@@ -1,4 +1,6 @@
 import Functional
+import Abstract
+import Monads
 
 public struct FieldRule<Value> {
 	private let validation: (Value?,FormStorage) -> FieldConformance
@@ -24,13 +26,13 @@ extension FieldRule {
 }
 
 extension FieldRule: Monoid {
-	public static var zero: FieldRule<Value> {
-		return FieldRule { _ in .zero }
+	public static var empty: FieldRule<Value> {
+		return FieldRule { _ in .empty }
 	}
 
-	public func compose(_ other: FieldRule<Value>) -> FieldRule<Value> {
+	public static func <> (left: FieldRule<Value>, right: FieldRule<Value>) -> FieldRule<Value> {
 		return FieldRule {
-			self.isValid(value: $0, storage: $1).compose(other.isValid(value: $0, storage: $1))
+			left.isValid(value: $0, storage: $1) <> right.isValid(value: $0, storage: $1)
 		}
 	}
 }

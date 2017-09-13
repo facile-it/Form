@@ -1,4 +1,6 @@
 import Functional
+import Abstract
+import Monads
 
 public typealias FieldOptionsStyle = FieldStyle<
 	FieldOptionsFixed,

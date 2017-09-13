@@ -1,4 +1,6 @@
 import Functional
+import Abstract
+import Monads
 
 public struct FieldAction<Value: FieldValue> {
 	private let transform: (Value?,FormStorage) -> ()
@@ -13,21 +15,21 @@ public struct FieldAction<Value: FieldValue> {
 }
 
 extension FieldAction: Monoid {
-	public static var zero: FieldAction {
+	public static var empty: FieldAction {
 		return FieldAction { _ in }
 	}
 
-	public func compose(_ other: FieldAction) -> FieldAction {
+	public static func <> (left: FieldAction, right: FieldAction) -> FieldAction {
 		return FieldAction {
-			self.apply(value: $0.0, storage: $0.1)
-			other.apply(value: $0.0, storage: $0.1)
+			left.apply(value: $0.0, storage: $0.1)
+			right.apply(value: $0.0, storage: $0.1)
 		}
 	}
 }
 
 extension FieldAction {
 	public func and(_ other: FieldAction) -> FieldAction {
-		return compose(other)
+		return self <> other
 	}
 }
 
@@ -61,7 +63,7 @@ extension FieldAction {
 	}
 
 	public static func removeValueAndHideField(at key: FieldKey) -> FieldAction {
-		return [removeValueForField(at: key),hideField(at: key)].composeAll()
+		return [removeValueForField(at: key),hideField(at: key)].concatenated
 	}
 
 	public static func notify(at key: FieldKey) -> FieldAction {

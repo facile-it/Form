@@ -1,4 +1,6 @@
 import Functional
+import Abstract
+import Monads
 
 public struct FieldCondition<Value: FieldValue> {
 	let predicate: (Value?,FormStorage) -> Bool
@@ -15,13 +17,13 @@ public struct FieldCondition<Value: FieldValue> {
 }
 
 extension FieldCondition: Monoid {
-	public static var zero: FieldCondition {
+	public static var empty: FieldCondition {
 		return FieldCondition { _ in true }
 	}
 
-	public func compose(_ other: FieldCondition) -> FieldCondition {
+	public static func <> (left: FieldCondition, right: FieldCondition) -> FieldCondition {
 		return FieldCondition {
-			self.check(value: $0.0, storage: $0.1) && other.check(value: $0.0, storage: $0.1)
+			left.check(value: $0.0, storage: $0.1) && right.check(value: $0.0, storage: $0.1)
 		}
 	}
 }
@@ -79,9 +81,9 @@ extension FieldCondition {
 	public func run(ifTrue actionsTrue: [FieldAction<Value>], ifFalse actionsFalse: [FieldAction<Value>]) -> FieldAction<Value> {
 		return FieldAction<Value> {
 			if self.predicate($0.0,$0.1) {
-				actionsTrue.composeAll().apply(value: $0.0, storage: $0.1)
+				actionsTrue.concatenated.apply(value: $0.0, storage: $0.1)
 			} else {
-				actionsFalse.composeAll().apply(value: $0.0, storage: $0.1)
+				actionsFalse.concatenated.apply(value: $0.0, storage: $0.1)
 			}
 		}
 	}
@@ -91,10 +93,10 @@ extension FieldCondition {
 	}
 
 	public func ifTrue(_ actions: FieldAction<Value>...) -> FieldAction<Value> {
-		return run(ifTrue: actions.composeAll(), ifFalse: .zero)
+		return run(ifTrue: actions.concatenated, ifFalse: .empty)
 	}
 
 	public func ifFalse(_ actions: FieldAction<Value>...) -> FieldAction<Value> {
-		return run(ifTrue: .zero, ifFalse: actions.composeAll())
+		return run(ifTrue: .empty, ifFalse: actions.concatenated)
 	}
 }

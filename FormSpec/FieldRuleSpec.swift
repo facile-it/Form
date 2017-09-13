@@ -1,6 +1,8 @@
 import XCTest
 import SwiftCheck
 import Functional
+import Abstract
+import Monads
 import JSONObject
 @testable import Form
 
@@ -10,12 +12,12 @@ class FieldRuleSpec: XCTestCase {
     func testMonoidLaws() {
         property("1•a = a") <- forAll { (av: OptionalOf<Int>, object: RuleTested) in
             let rule = object.get
-            return FieldRule.zero.compose(rule).isEqual(to: rule) § av.getOptional
+            return FieldRule.empty.compose(rule).isEqual(to: rule) § av.getOptional
         }
         
         property("a•1 = a") <- forAll { (av: OptionalOf<Int>, object: RuleTested) in
             let rule = object.get
-            return rule.compose(FieldRule.zero).isEqual(to: rule) § av.getOptional
+            return rule.compose(FieldRule.empty).isEqual(to: rule) § av.getOptional
         }
         
         property("(a•b)•c = a•(b•c)") <- forAll { (av: OptionalOf<Int>, object1: RuleTested, object2: RuleTested, object3: RuleTested) in

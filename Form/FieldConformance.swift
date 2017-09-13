@@ -1,4 +1,6 @@
 import Functional
+import Abstract
+import Monads
 
 public struct FieldConformance {
 	public let isValid: Bool
@@ -17,17 +19,17 @@ extension FieldConformance: Equatable {}
 
 public func == (lhs: FieldConformance, rhs: FieldConformance) -> Bool {
 	return lhs.isValid == rhs.isValid
-		&& lhs.invalidMessages.isEqual(to: rhs.invalidMessages)
+		&& lhs.invalidMessages == rhs.invalidMessages
 }
 
 extension FieldConformance: Monoid {
-	public static var zero: FieldConformance {
+	public static var empty: FieldConformance {
 		return FieldConformance(isValid: true, invalidMessages: [])
 	}
 
-	public func compose(_ other: FieldConformance) -> FieldConformance {
+	public static func <> (left: FieldConformance, right: FieldConformance) -> FieldConformance {
 		return FieldConformance(
-			isValid: isValid && other.isValid,
-			invalidMessages: invalidMessages.compose(other.invalidMessages))
+			isValid: left.isValid && right.isValid,
+			invalidMessages: left.invalidMessages + right.invalidMessages)
 	}
 }

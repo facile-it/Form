@@ -1,4 +1,6 @@
 import Functional
+import Abstract
+import Monads
 import Signals
 
 public final class FormStorage {
@@ -79,10 +81,21 @@ public final class FormStorage {
 	}
 
 	public func hasSameFieldValuesAndHiddenFieldKeys(of other: FormStorage) -> Bool {
-		return fieldValues.isEqual(
-			to: other.fieldValues,
-			considering: { $0.isEqual(to: $1) })
-			&&
-			hiddenFieldKeys.isEqual(to: other.hiddenFieldKeys)
+		guard Array.init(fieldValues.keys) == Array.init(other.fieldValues.keys) else { return false }
+		guard hiddenFieldKeys == other.hiddenFieldKeys else { return false }
+
+		let a = fieldValues
+		let b = other.fieldValues
+
+		guard a.count == b.count else { return false }
+
+		for (key,value) in a {
+			guard let otherValue = b[key] else { return false }
+			guard value.isEqual(to: otherValue) else { return false }
+		}
+
+		return true
 	}
 }
+
+
