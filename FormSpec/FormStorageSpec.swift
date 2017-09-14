@@ -29,7 +29,7 @@ class FormStorageSpec: XCTestCase {
 				.keys
 				|> Set.init
 
-			return storage.allKeys.isEqual(to: expectedKeys)
+			return storage.allKeys == expectedKeys
 		}
 	}
 

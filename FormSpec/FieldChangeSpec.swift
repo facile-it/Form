@@ -11,19 +11,19 @@ class FieldChangeSpec: XCTestCase {
     func testMonoidLaws() {
         property("1•a = a") <- forAll { (ai: Int, at: TestObject, ac: ArbitraryTestChange) in
             let object = ac.value
-            return AnyFieldChange.empty.compose(object).isEqual(to: object) § (ai, at)
+            return (.empty <> object).isEqual(to: object) § (ai, at)
         }
         
         property("a•1 = a") <- forAll { (ai: Int, at: TestObject, ac: ArbitraryTestChange) in
             let object = ac.value
-            return object.compose(AnyFieldChange.empty).isEqual(to: object) § (ai, at)
+            return (object <> .empty).isEqual(to: object) § (ai, at)
         }
         
         property("(a•b)•c = a•(b•c)") <- forAll { (ai: Int, at: TestObject, ac1: ArbitraryTestChange, ac2: ArbitraryTestChange, ac3: ArbitraryTestChange) in
             let object1 = ac1.value
             let object2 = ac2.value
             let object3 = ac3.value
-            return (object1.compose(object2)).compose(object3).isEqual(to:object1.compose(object2.compose(object3))) § (ai, at)
+            return (object1 <> object2 <> object3).isEqual(to: object1 <> (object2 <> object3)) § (ai, at)
         }
     }
     

@@ -13,19 +13,19 @@ class FieldConditionSpec: XCTestCase {
     func testMonoidLaws() {
         property("1•a = a") <- forAll { (av: OptionalOf<Int>, ac: ArbitraryTestedCondition) in
             let object = ac.get
-            return TestedCondition.empty.compose(object).isEqual(to: object) § av.getOptional
+            return (.empty <> object).isEqual(to: object) § av.getOptional
         }
         
         property("a•1 = a") <- forAll { (av: OptionalOf<Int>, ac: ArbitraryTestedCondition) in
             let object = ac.get
-            return object.compose(TestedCondition.empty).isEqual(to: object) § av.getOptional
+            return (object <> .empty).isEqual(to: object) § av.getOptional
         }
         
         property("(a•b)•c = a•(b•c)") <- forAll { (av: OptionalOf<Int>, ac1: ArbitraryTestedCondition, ac2: ArbitraryTestedCondition, ac3: ArbitraryTestedCondition) in
             let object1 = ac1.get
             let object2 = ac2.get
             let object3 = ac3.get
-            return (object1.compose(object2)).compose(object3).isEqual(to:object1.compose(object2.compose(object3))) § av.getOptional
+            return (object1 <> object2 <> object3).isEqual(to: object1 <> (object2 <> object3)) § av.getOptional
         }
     }
     

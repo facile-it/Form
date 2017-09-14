@@ -12,19 +12,19 @@ class FieldRuleSpec: XCTestCase {
     func testMonoidLaws() {
         property("1•a = a") <- forAll { (av: OptionalOf<Int>, object: RuleTested) in
             let rule = object.get
-            return FieldRule.empty.compose(rule).isEqual(to: rule) § av.getOptional
+            return (.empty <> rule).isEqual(to: rule) § av.getOptional
         }
         
         property("a•1 = a") <- forAll { (av: OptionalOf<Int>, object: RuleTested) in
             let rule = object.get
-            return rule.compose(FieldRule.empty).isEqual(to: rule) § av.getOptional
+            return (rule <> .empty).isEqual(to: rule) § av.getOptional
         }
         
         property("(a•b)•c = a•(b•c)") <- forAll { (av: OptionalOf<Int>, object1: RuleTested, object2: RuleTested, object3: RuleTested) in
             let rule1 = object1.get
             let rule2 = object2.get
             let rule3 = object3.get
-            return (rule1.compose(rule2)).compose(rule3).isEqual(to:rule1.compose(rule2.compose(rule3))) § av.getOptional
+            return (rule1 <> rule2 <> rule3).isEqual(to: rule1 <> (rule2 <> rule3)) § av.getOptional
         }
     }
     
