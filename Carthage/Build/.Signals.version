@@ -2,8 +2,8 @@
   "commitish" : "9b12ba86ae13349c7a187bf586e638bdeb9583a9",
   "iOS" : [
     {
-      "hash" : "d4049bd537ea60c5ffa7542068cfd030f4a6cbe71a9c8c298a8ff0608ad155f4",
-      "name" : "Signals"
+      "name" : "Signals",
+      "hash" : "c95a10a4edfa2fcc8e1016894f1a7936ba124fe5236d051d06d2712a3ccc8924"
     }
   ]
 }

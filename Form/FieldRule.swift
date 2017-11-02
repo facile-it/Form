@@ -16,8 +16,8 @@ public struct FieldRule<Value> {
 
 extension FieldRule {
 	public static func nonNil(message: String) -> FieldRule {
-		return FieldRule {
-			guard $0.0 != nil else {
+		return FieldRule { value, _ in
+			guard value != nil else {
 				return FieldConformance.invalid(message: message)
 			}
 			return FieldConformance.valid
@@ -27,7 +27,7 @@ extension FieldRule {
 
 extension FieldRule: Monoid {
 	public static var empty: FieldRule<Value> {
-		return FieldRule { _ in .empty }
+		return FieldRule { _,_  in .empty }
 	}
 
 	public static func <> (left: FieldRule<Value>, right: FieldRule<Value>) -> FieldRule<Value> {

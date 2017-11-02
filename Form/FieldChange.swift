@@ -41,7 +41,7 @@ public struct AnyFieldChange<Value> {
 	}
 
 	public static var identity: AnyFieldChange<Value> {
-		return AnyFieldChange<Value> { $0.1 }
+		return AnyFieldChange<Value> { _, object in object }
 	}
 }
 

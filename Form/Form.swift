@@ -105,7 +105,7 @@ public final class Form {
 
 	fileprivate static func getFieldViewModelIndexPathPair(model: FormModel, storage: FormStorage) -> (FieldKey) -> FieldViewModelPair? {
 		return { key in
-			Optional(Writer<FormModel,FieldIndexPath>(model))
+			Optional(Writer<FormModel,FieldIndexPath>.pure(model))
 				.flatMapT { $0.getSubelement(at: key) }
 				.flatMapT { $0.getSubelement(at: key) }
 				.flatMapT { $0.getSubelement(at: key) }

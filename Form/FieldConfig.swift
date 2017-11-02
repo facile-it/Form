@@ -14,7 +14,7 @@ public struct FieldConfig<Options: FieldOptions> {
 	}
 
 	public init(title: String, options: Options) {
-		self.init(title: title, deferredOptions: Deferred<Options>(options))
+		self.init(title: title, deferredOptions: Deferred<Options>.pure(options))
 	}
 
 	public func getViewModel(for key: FieldKey, in storage: FormStorage, rules: [FieldRule<FieldValueType>]) -> FieldViewModel {

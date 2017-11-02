@@ -34,6 +34,6 @@ extension FormContainerType where Self.Subtype : FormContainerType {
 extension FormContainerType {
 	public func getSubelement(at key: FieldKey) -> Writer<Subtype,FieldIndexPath>? {
 		guard let index = getSubelementIndex(at: key) else { return nil }
-		return Writer(subelements[Int(index)]).tell(getFieldIndexPath(for: index))
+		return Writer.pure(subelements[Int(index)]).tell(getFieldIndexPath(for: index))
 	}
 }

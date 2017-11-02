@@ -16,13 +16,13 @@ public struct FieldAction<Value: FieldValue> {
 
 extension FieldAction: Monoid {
 	public static var empty: FieldAction {
-		return FieldAction { _ in }
+		return FieldAction { _,_  in }
 	}
 
 	public static func <> (left: FieldAction, right: FieldAction) -> FieldAction {
-		return FieldAction {
-			left.apply(value: $0.0, storage: $0.1)
-			right.apply(value: $0.0, storage: $0.1)
+		return FieldAction { value, storage in
+			left.apply(value: value, storage: storage)
+			right.apply(value: value, storage: storage)
 		}
 	}
 }

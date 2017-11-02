@@ -18,26 +18,29 @@ public struct FieldCondition<Value: FieldValue> {
 
 extension FieldCondition: Monoid {
 	public static var empty: FieldCondition {
-		return FieldCondition { _ in true }
+		return FieldCondition { _,_  in true }
 	}
 
 	public static func <> (left: FieldCondition, right: FieldCondition) -> FieldCondition {
-		return FieldCondition {
-			left.check(value: $0.0, storage: $0.1) && right.check(value: $0.0, storage: $0.1)
+		return FieldCondition { value, storage in
+			left.check(value: value, storage: storage)
+				&& right.check(value: value, storage: storage)
 		}
 	}
 }
 
 extension FieldCondition {
 	public func and(_ other: FieldCondition) -> FieldCondition {
-		return FieldCondition {
-			self.check(value: $0.0, storage: $0.1) && other.check(value: $0.0, storage: $0.1)
+		return FieldCondition { value, storage in
+			self.check(value: value, storage: storage)
+				&& other.check(value: value, storage: storage)
 		}
 	}
 
 	public func or(_ other: FieldCondition) -> FieldCondition {
-		return FieldCondition {
-			self.check(value: $0.0, storage: $0.1) || other.check(value: $0.0, storage: $0.1)
+		return FieldCondition { value, storage in
+			self.check(value: value, storage: storage)
+				|| other.check(value: value, storage: storage)
 		}
 	}
 }
@@ -79,11 +82,11 @@ public typealias If<Value: FieldValue> = FieldCondition<Value>
 
 extension FieldCondition {
 	public func run(ifTrue actionsTrue: [FieldAction<Value>], ifFalse actionsFalse: [FieldAction<Value>]) -> FieldAction<Value> {
-		return FieldAction<Value> {
-			if self.predicate($0.0,$0.1) {
-				actionsTrue.concatenated.apply(value: $0.0, storage: $0.1)
+		return FieldAction<Value> { value, storage in
+			if self.predicate(value,storage) {
+				actionsTrue.concatenated.apply(value: value, storage: storage)
 			} else {
-				actionsFalse.concatenated.apply(value: $0.0, storage: $0.1)
+				actionsFalse.concatenated.apply(value: value, storage: storage)
 			}
 		}
 	}
