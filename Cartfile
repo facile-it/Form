@@ -1,4 +1,4 @@
-github "broomburgo/Functional" "master"
-github "broomburgo/Monads" "master"
 github "broomburgo/Signals" "master"
-github "broomburgo/JSONObject" "master"
+
+github "facile-it/FunctionalKit"
+github "facile-it/NetworkingKit"

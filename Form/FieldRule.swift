@@ -1,6 +1,6 @@
-import Functional
+import FunctionalKit
 import Abstract
-import Monads
+
 
 public struct FieldRule<Value> {
 	private let validation: (Value?,FormStorage) -> FieldConformance

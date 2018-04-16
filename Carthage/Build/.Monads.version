@@ -1,9 +1,0 @@
-{
-  "commitish" : "b1b96f8367ed370adca8bb5185ebf1b02bfc4d57",
-  "iOS" : [
-    {
-      "name" : "Monads",
-      "hash" : "0ffdcaf5b3acdff3f5ec996cb53f01675b7a43656269fe0085ac89f40f649880"
-    }
-  ]
-}

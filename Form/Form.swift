@@ -1,8 +1,8 @@
-import Functional
+import FunctionalKit
 import Abstract
-import Monads
+
 import Signals
-import JSONObject
+import NetworkingKit
 
 public typealias FieldViewModelPair = (viewModel: FieldViewModel, indexPath: FieldIndexPath)
 public typealias FieldValueCompletePair = (fieldValue: FieldValue?, indexPath: FieldIndexPathComplete)
@@ -60,7 +60,7 @@ public final class Form {
 			.joined
 		return elements
 			.map { $0.key }
-			.flatMap(Form.getFieldViewModelIndexPathPair(model: model, storage: storage))
+			.compactMap(Form.getFieldViewModelIndexPathPair(model: model, storage: storage))
 	}
 
 	public func update(pair: FieldValueCompletePair) {
@@ -105,12 +105,12 @@ public final class Form {
 
 	fileprivate static func getFieldViewModelIndexPathPair(model: FormModel, storage: FormStorage) -> (FieldKey) -> FieldViewModelPair? {
 		return { key in
-			Optional(Writer<FormModel,FieldIndexPath>.pure(model))
+			Optional(Writer<FieldIndexPath,FormModel>.pure(model))
 				.flatMapT { $0.getSubelement(at: key) }
 				.flatMapT { $0.getSubelement(at: key) }
 				.flatMapT { $0.getSubelement(at: key) }
-				.mapT { $0.getViewModel(in: storage) }?
-				.run
+				.mapT { $0.getViewModel(in: storage) }
+				.map { ($0.run.1, $0.run.0) }
 		}
 	}
 }

@@ -1,8 +1,8 @@
 import XCTest
 import SwiftCheck
-import Functional
+import FunctionalKit
 import Abstract
-import Monads
+
 import Form
 
 typealias ArbitraryTestChange = ArbitraryAnyFieldChange<Int, TestObject>

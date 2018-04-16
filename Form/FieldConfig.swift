@@ -1,28 +1,32 @@
-import Functional
+import FunctionalKit
 import Abstract
-import Monads
+
 
 public struct FieldConfig<Options: FieldOptions> {
 	public typealias FieldValueType = Options.ValueType
 
 	public let title: String
-	public let deferredOptions: Deferred<Options>
+	public let futureOptions: Future<Options>
 
-	public init(title: String, deferredOptions: Deferred<Options>) {
+	public init(title: String, futureOptions: Future<Options>) {
 		self.title = title
-		self.deferredOptions = deferredOptions
+		self.futureOptions = futureOptions
 	}
 
 	public init(title: String, options: Options) {
-		self.init(title: title, deferredOptions: Deferred<Options>.pure(options))
+		self.init(title: title, futureOptions: Future<Options>.pure(options))
 	}
 
 	public func getViewModel(for key: FieldKey, in storage: FormStorage, rules: [FieldRule<FieldValueType>]) -> FieldViewModel {
+		var available: Options? = nil
+		futureOptions.run {
+			available = $0
+		}
 		guard let availableOptions = [storage.getOptions(at: key) as? Options,
-		                              deferredOptions.peek]
+		                              available]
 			.first(where: { $0 != nil }).joined else {
 
-				deferredOptions.run { storage.set(options: $0, at: key) }
+				futureOptions.run { storage.set(options: $0, at: key) }
 
 				return FieldViewModel.empty(
 					isHidden: storage.getHidden(at: key),

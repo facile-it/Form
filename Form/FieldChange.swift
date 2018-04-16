@@ -1,7 +1,7 @@
 import Foundation
-import Functional
+import FunctionalKit
 import Abstract
-import Monads
+
 
 public struct FieldChange<Value,Object> {
 	let transform: (Value,Object) -> Object

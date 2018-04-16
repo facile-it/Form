@@ -1,6 +1,6 @@
-import Functional
+import FunctionalKit
 import Abstract
-import Monads
+
 import Signals
 
 public final class FormStorage {

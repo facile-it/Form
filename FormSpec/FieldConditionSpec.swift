@@ -1,8 +1,8 @@
 import XCTest
 import SwiftCheck
-import Functional
+import FunctionalKit
 import Abstract
-import Monads
+
 @testable import Form
 
 typealias TestedCondition = FieldCondition<Int>
@@ -11,21 +11,21 @@ typealias ArbitraryTestedCondition = ArbitraryFieldCondition<Int>
 class FieldConditionSpec: XCTestCase {
 
     func testMonoidLaws() {
-        property("1•a = a") <- forAll { (av: OptionalOf<Int>, ac: ArbitraryTestedCondition) in
+        property("1•a = a") <- forAll { (av: Optional<Int>, ac: ArbitraryTestedCondition) in
             let object = ac.get
-            return (.empty <> object).isEqual(to: object) § av.getOptional
+            return (.empty <> object).isEqual(to: object) § av
         }
         
-        property("a•1 = a") <- forAll { (av: OptionalOf<Int>, ac: ArbitraryTestedCondition) in
+        property("a•1 = a") <- forAll { (av: Optional<Int>, ac: ArbitraryTestedCondition) in
             let object = ac.get
-            return (object <> .empty).isEqual(to: object) § av.getOptional
+            return (object <> .empty).isEqual(to: object) § av
         }
         
-        property("(a•b)•c = a•(b•c)") <- forAll { (av: OptionalOf<Int>, ac1: ArbitraryTestedCondition, ac2: ArbitraryTestedCondition, ac3: ArbitraryTestedCondition) in
+        property("(a•b)•c = a•(b•c)") <- forAll { (av: Optional<Int>, ac1: ArbitraryTestedCondition, ac2: ArbitraryTestedCondition, ac3: ArbitraryTestedCondition) in
             let object1 = ac1.get
             let object2 = ac2.get
             let object3 = ac3.get
-            return (object1 <> object2 <> object3).isEqual(to: object1 <> (object2 <> object3)) § av.getOptional
+            return (object1 <> object2 <> object3).isEqual(to: object1 <> (object2 <> object3)) § av
         }
     }
     
@@ -53,48 +53,48 @@ class FieldConditionSpec: XCTestCase {
     }
     
     func testConvenienceConditions() {
-        property("'and(_ other:)' works as intended") <- forAll { (av1: OptionalOf<Int>, ac1: ArbitraryTestedCondition, ac2: ArbitraryTestedCondition) in
+        property("'and(_ other:)' works as intended") <- forAll { (av1: Optional<Int>, ac1: ArbitraryTestedCondition, ac2: ArbitraryTestedCondition) in
             let storage = FormStorage()
             
             let condition1 = ac1.get
             let condition2 = ac1.get
             
-            let check1 = condition1.check(value: av1.getOptional, storage: storage)
-            let check2 = condition2.check(value: av1.getOptional, storage: storage)
+            let check1 = condition1.check(value: av1, storage: storage)
+            let check2 = condition2.check(value: av1, storage: storage)
             
             let andCondition = condition1.and(condition2)
-            let andCheck = andCondition.check(value: av1.getOptional, storage: storage)
+            let andCheck = andCondition.check(value: av1, storage: storage)
             
             return (andCheck && (check1 && check2)) || (!andCheck && !(check1 && check2))
         }
         
-        property("'or(_ other:)' works as intended") <- forAll { (av: OptionalOf<Int>, ac1: ArbitraryTestedCondition, ac2: ArbitraryTestedCondition) in
+        property("'or(_ other:)' works as intended") <- forAll { (av: Optional<Int>, ac1: ArbitraryTestedCondition, ac2: ArbitraryTestedCondition) in
             let storage = FormStorage()
             
             let condition1 = ac1.get
             let condition2 = ac1.get
             
-            let check1 = condition1.check(value: av.getOptional, storage: storage)
-            let check2 = condition2.check(value: av.getOptional, storage: storage)
+            let check1 = condition1.check(value: av, storage: storage)
+            let check2 = condition2.check(value: av, storage: storage)
             
             let orCondition = condition1.or(condition2)
-            let orCheck = orCondition.check(value: av.getOptional, storage: storage)
+            let orCheck = orCondition.check(value: av, storage: storage)
             
             return (orCheck && (check1 && check2)) || (!orCheck && !(check1 && check2))
         }
         
-        property("'valueIs(equalTo otherValue:)' return true condition for equal values") <- forAll { (av: OptionalOf<Int>) in
+        property("'valueIs(equalTo otherValue:)' return true condition for equal values") <- forAll { (av: Optional<Int>) in
             let storage = FormStorage()
-            let optValue = av.getOptional
+            let optValue = av
             
             return FieldCondition<Int>
                 .valueIs(equalTo: optValue)
                 .check(value: optValue, storage: storage)
         }
         
-        property("'valueIs(differentFrom otherValue:)' return true condition for different values") <- forAll { (av: OptionalOf<Int>) in
+        property("'valueIs(differentFrom otherValue:)' return true condition for different values") <- forAll { (av: Optional<Int>) in
             let storage = FormStorage()
-            let optValue = av.getOptional
+            let optValue = av
             
             guard let value = optValue else { return true }
             let diffOptValue: Int? = value + 1
@@ -104,9 +104,9 @@ class FieldConditionSpec: XCTestCase {
                 .check(value: optValue, storage: storage)
         }
         
-        property("'otherValue(at key:isEqual toValue:)' return true condition for equal values") <- forAll { (ak: FieldKey, av: OptionalOf<Int>) in
+        property("'otherValue(at key:isEqual toValue:)' return true condition for equal values") <- forAll { (ak: FieldKey, av: Optional<Int>) in
             let storage = FormStorage()
-            let optValue = av.getOptional
+            let optValue = av
             storage.set(value: optValue, at: ak)
             
             return FieldCondition<Int>
@@ -114,28 +114,28 @@ class FieldConditionSpec: XCTestCase {
                 .check(value: optValue, storage: storage)
         }
         
-        property("'ifTrue(_ action:)' return actionTrue for true condition") <- forAll { (av: OptionalOf<Int>, ak: FieldKey, actionTrue:FieldAction<Int>) in
+        property("'ifTrue(_ action:)' return actionTrue for true condition") <- forAll { (av: Optional<Int>, ak: FieldKey, actionTrue:FieldAction<Int>) in
             let storage = FormStorage()
-            storage.set(value: av.getOptional, at: ak)
+            storage.set(value: av, at: ak)
             let condition = FieldCondition<Int>.init(predicate: { (_, storage) -> Bool in
                 true
             })
             
             return condition
                 .ifTrue(actionTrue)
-                .isEqual(to: actionTrue)(av.getOptional)
+                .isEqual(to: actionTrue)(av)
         }
         
-        property("'ifFalse(_ action:)' return actionFalse for false condition") <- forAll { (av: OptionalOf<Int>, ak: FieldKey, actionFalse:FieldAction<Int>) in
+        property("'ifFalse(_ action:)' return actionFalse for false condition") <- forAll { (av: Optional<Int>, ak: FieldKey, actionFalse:FieldAction<Int>) in
             let storage = FormStorage()
-            storage.set(value: av.getOptional, at: ak)
+            storage.set(value: av, at: ak)
             let condition = FieldCondition<Int>.init(predicate: { (_, storage) -> Bool in
                 false
             })
             
             return condition
                 .ifFalse(actionFalse)
-                .isEqual(to: actionFalse)(av.getOptional)
+                .isEqual(to: actionFalse)(av)
         }
     }
 }

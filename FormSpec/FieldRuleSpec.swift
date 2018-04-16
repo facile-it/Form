@@ -1,30 +1,30 @@
 import XCTest
 import SwiftCheck
-import Functional
+import FunctionalKit
 import Abstract
-import Monads
-import JSONObject
+
+import NetworkingKit
 @testable import Form
 
 typealias RuleTested = ArbitraryFieldRule<Int>
 
 class FieldRuleSpec: XCTestCase {
     func testMonoidLaws() {
-        property("1•a = a") <- forAll { (av: OptionalOf<Int>, object: RuleTested) in
+        property("1•a = a") <- forAll { (av: Optional<Int>, object: RuleTested) in
             let rule = object.get
-            return (.empty <> rule).isEqual(to: rule) § av.getOptional
+            return (.empty <> rule).isEqual(to: rule) § av
         }
         
-        property("a•1 = a") <- forAll { (av: OptionalOf<Int>, object: RuleTested) in
+        property("a•1 = a") <- forAll { (av: Optional<Int>, object: RuleTested) in
             let rule = object.get
-            return (rule <> .empty).isEqual(to: rule) § av.getOptional
+            return (rule <> .empty).isEqual(to: rule) § av
         }
         
-        property("(a•b)•c = a•(b•c)") <- forAll { (av: OptionalOf<Int>, object1: RuleTested, object2: RuleTested, object3: RuleTested) in
+        property("(a•b)•c = a•(b•c)") <- forAll { (av: Optional<Int>, object1: RuleTested, object2: RuleTested, object3: RuleTested) in
             let rule1 = object1.get
             let rule2 = object2.get
             let rule3 = object3.get
-            return (rule1 <> rule2 <> rule3).isEqual(to: rule1 <> (rule2 <> rule3)) § av.getOptional
+            return (rule1 <> rule2 <> rule3).isEqual(to: rule1 <> (rule2 <> rule3)) § av
         }
     }
     

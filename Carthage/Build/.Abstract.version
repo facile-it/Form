@@ -1,9 +1,9 @@
 {
-  "commitish" : "a6bf1ba0483e2b7fbd222d332b3a8861753f87ae",
+  "commitish" : "0.0.2",
   "iOS" : [
     {
       "name" : "Abstract",
-      "hash" : "f3bf74f194b9113a8038bbaf4f12477d03aa01186c44836ac68bc91116b6b1a2"
+      "hash" : "f037ba92d419fd74d800ed399aba23f7b853aa16b5d3137c96a9da8818e44c0e"
     }
   ]
 }

@@ -1,0 +1,4 @@
+framework module NetworkingKit {
+    header "NetworkingKit-Swift.h"
+    requires objc
+}

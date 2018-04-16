@@ -1,6 +1,6 @@
-import Functional
+import FunctionalKit
 import Abstract
-import Monads
+
 
 public struct FieldCondition<Value: FieldValue> {
 	let predicate: (Value?,FormStorage) -> Bool

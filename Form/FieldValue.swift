@@ -1,4 +1,4 @@
-import JSONObject
+import NetworkingKit
 
 public protocol JSONObjectConvertible {
 	var jsonObject: JSONObject { get }

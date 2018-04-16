@@ -1,0 +1,9 @@
+{
+  "commitish" : "0.10.0",
+  "iOS" : [
+    {
+      "name" : "FunctionalKit",
+      "hash" : "3f082b67fb0bf59f8d16b6ba5696752bddf51931c827ac53765ae4e7ec29062d"
+    }
+  ]
+}

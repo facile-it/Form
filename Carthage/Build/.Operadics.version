@@ -1,9 +1,0 @@
-{
-  "commitish" : "f6aa739369baded0b509157cc8c9beaf16bfe636",
-  "iOS" : [
-    {
-      "name" : "Operadics",
-      "hash" : "d299b39b929bee07ae682abcc3b23dc2f9d277581d46531f0ea702b7458db1b4"
-    }
-  ]
-}

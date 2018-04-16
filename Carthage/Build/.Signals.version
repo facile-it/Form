@@ -1,9 +1,9 @@
 {
-  "commitish" : "9b12ba86ae13349c7a187bf586e638bdeb9583a9",
+  "commitish" : "e07972a26a76fa23d6913f63914b351a9bd1a320",
   "iOS" : [
     {
       "name" : "Signals",
-      "hash" : "c95a10a4edfa2fcc8e1016894f1a7936ba124fe5236d051d06d2712a3ccc8924"
+      "hash" : "67b3800ad5d0e7939f5bba1d9cf258678229de35856d1feb48c5efbb7c65fcb1"
     }
   ]
 }

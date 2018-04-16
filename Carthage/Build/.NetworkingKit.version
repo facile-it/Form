@@ -1,0 +1,9 @@
+{
+  "commitish" : "1.4.0",
+  "iOS" : [
+    {
+      "name" : "NetworkingKit",
+      "hash" : "987b2112f0b717ceac73ec330b02355fa83f8110c7b922af195b54dc56b9ab47"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
-import Functional
+import FunctionalKit
 import Abstract
-import Monads
-import JSONObject
+
+import NetworkingKit
 
 public struct FieldModel<Options: FieldOptions>: FieldKeyOwnerType {
 	public typealias ValueType = Options.ValueType
