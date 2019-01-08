@@ -53,11 +53,11 @@ public final class Form {
 	}
 
 	public var allPairs: [FieldViewModelPair] {
-		let elements: [Field] = model.subelements
+		let elements = model.subelements
 			.map { $0.subelements }
-			.joined
+			.joined()
 			.map { $0.subelements }
-			.joined
+			.joined()
 		return elements
 			.map { $0.key }
 			.compactMap(Form.getFieldViewModelIndexPathPair(model: model, storage: storage))
@@ -82,11 +82,11 @@ public final class Form {
 	}
 
 	public func applyActions() {
-		let elements: [Field] = self.model.subelements
+		let elements = model.subelements
 			.map { $0.subelements }
-			.joined
+			.joined()
 			.map { $0.subelements }
-			.joined
+			.joined()
 		elements.forEach { $0.updateValueAndApplyActions(
 				with: self.storage.getValue(at: $0.key),
 				in: self.storage) }
@@ -94,11 +94,11 @@ public final class Form {
 
 	public var getObjectChange: ObjectChange {
 		return ObjectChange {
-			let elements: [Field] = self.model.subelements
+			let elements = self.model.subelements
 				.map { $0.subelements }
-				.joined
+				.joined()
 				.map { $0.subelements }
-				.joined
+				.joined()
 			return elements.reduce($0) { $1.transform(object: $0, considering: self.storage) }
 		}
 	}
@@ -110,7 +110,7 @@ public final class Form {
 				.flatMapT { $0.getSubelement(at: key) }
 				.flatMapT { $0.getSubelement(at: key) }
 				.mapT { $0.getViewModel(in: storage) }
-				.map { ($0.run.1, $0.run.0) }
+				.map { ($0.unwrap.1, $0.unwrap.0) }
 		}
 	}
 }

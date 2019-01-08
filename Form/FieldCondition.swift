@@ -84,9 +84,9 @@ extension FieldCondition {
 	public func run(ifTrue actionsTrue: [FieldAction<Value>], ifFalse actionsFalse: [FieldAction<Value>]) -> FieldAction<Value> {
 		return FieldAction<Value> { value, storage in
 			if self.predicate(value,storage) {
-				actionsTrue.concatenated.apply(value: value, storage: storage)
+				actionsTrue.concatenated().apply(value: value, storage: storage)
 			} else {
-				actionsFalse.concatenated.apply(value: value, storage: storage)
+				actionsFalse.concatenated().apply(value: value, storage: storage)
 			}
 		}
 	}
@@ -96,10 +96,10 @@ extension FieldCondition {
 	}
 
 	public func ifTrue(_ actions: FieldAction<Value>...) -> FieldAction<Value> {
-		return run(ifTrue: actions.concatenated, ifFalse: .empty)
+		return run(ifTrue: actions.concatenated(), ifFalse: .empty)
 	}
 
 	public func ifFalse(_ actions: FieldAction<Value>...) -> FieldAction<Value> {
-		return run(ifTrue: .empty, ifFalse: actions.concatenated)
+		return run(ifTrue: .empty, ifFalse: actions.concatenated())
 	}
 }

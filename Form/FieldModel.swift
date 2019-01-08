@@ -31,7 +31,7 @@ public struct FieldModel<Options: FieldOptions>: FieldKeyOwnerType {
 				}
 			}
 			.map { $0.getChange }
-			.concatenated
+			.concatenated()
 			.apply(with: value, to: object)
 	}
 
@@ -41,6 +41,6 @@ public struct FieldModel<Options: FieldOptions>: FieldKeyOwnerType {
 
 	public func updateValueAndApplyActions(with value: FieldValue?, in storage: FormStorage) {
 		storage.set(value: value, at: key)
-		actions.concatenated.apply(value: value.flatMap(Options.sanitizeValue), storage: storage)
+		actions.concatenated().apply(value: value.flatMap(Options.sanitizeValue), storage: storage)
 	}
 }

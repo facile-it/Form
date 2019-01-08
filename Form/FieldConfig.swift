@@ -24,7 +24,7 @@ public struct FieldConfig<Options: FieldOptions> {
 		}
 		guard let availableOptions = [storage.getOptions(at: key) as? Options,
 		                              available]
-			.first(where: { $0 != nil }).joined else {
+			.first(where: { $0 != nil }).joined() else {
 
 				futureOptions.run { storage.set(options: $0, at: key) }
 
@@ -34,11 +34,11 @@ public struct FieldConfig<Options: FieldOptions> {
 		}
 
 		let value = storage.getValue(at: key)
-		let errorMessage = rules.concatenated
+		let errorMessage = rules.concatenated()
 			.isValid(value: value.flatMap(Options.sanitizeValue), storage: storage)
 			.invalidMessages
 			.map { "\(self.title): \($0)\n" }
-			.concatenated
+			.concatenated()
 
 		return FieldViewModel(
 			title: title,

@@ -63,7 +63,7 @@ extension FieldAction {
 	}
 
 	public static func removeValueAndHideField(at key: FieldKey) -> FieldAction {
-		return [removeValueForField(at: key),hideField(at: key)].concatenated
+		return [removeValueForField(at: key),hideField(at: key)].concatenated()
 	}
 
 	public static func notify(at key: FieldKey) -> FieldAction {
