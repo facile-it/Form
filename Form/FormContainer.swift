@@ -18,7 +18,7 @@ public protocol FormContainerType {
 extension FormContainerType where Self.Subtype : FieldKeyOwnerType {
 	public func getSubelementIndex(at key: FieldKey) -> UInt? {
 		return subelements
-			.index { $0.key == key }
+			.firstIndex { $0.key == key }
 			.map { UInt($0) }
 	}
 }
@@ -26,7 +26,7 @@ extension FormContainerType where Self.Subtype : FieldKeyOwnerType {
 extension FormContainerType where Self.Subtype : FormContainerType {
 	public func getSubelementIndex(at key: FieldKey) -> UInt? {
 		return subelements
-			.index { $0.getSubelementIndex(at: key) != nil }
+			.firstIndex { $0.getSubelementIndex(at: key) != nil }
 			.map { UInt($0) }
 	}
 }
