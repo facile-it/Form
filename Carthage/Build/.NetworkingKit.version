@@ -1,9 +1,9 @@
 {
-  "commitish" : "1.7.1",
+  "commitish" : "1.9.0",
   "iOS" : [
     {
       "name" : "NetworkingKit",
-      "hash" : "ad274443948fc8417d23b6092f33bea1f2c55bf07942a3e9a94c4a799d32fc4e"
+      "hash" : "1c0d9d61656aed793a6003dc920ee587b4b10e2fe87712b11fa8d8d20530ca68"
     }
   ]
 }

@@ -81,7 +81,7 @@ public final class FormStorage {
 	}
 
 	public func hasSameFieldValuesAndHiddenFieldKeys(of other: FormStorage) -> Bool {
-		guard Array.init(fieldValues.keys) == Array.init(other.fieldValues.keys) else { return false }
+		guard Set.init(fieldValues.keys) == Set.init(other.fieldValues.keys) else { return false }
 		guard hiddenFieldKeys == other.hiddenFieldKeys else { return false }
 
 		let a = fieldValues

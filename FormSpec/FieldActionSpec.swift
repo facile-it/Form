@@ -19,7 +19,25 @@ class FieldActionSpec: XCTestCase {
 		}
 
 		property("(a•b)•c = a•(b•c)") <- forAll { (av: Optional<Int>, object1: Tested, object2: Tested, object3: Tested) in
-			(object1 <> object2 <> object3).isEqual(to: object1 <> (object2 <> object3)) § av
+            let x1 = object1 <> object2
+            let x2 = object3
+            let resultX = x1 <> x2
+            
+            let y1 = object1
+            let y2 = object2 <> object3
+            let resultY = y1 <> y2
+            
+            let storageX = FormStorage()
+            let storageY = FormStorage()
+            
+            resultX.apply(value: av, storage: storageX)
+            resultY.apply(value: av, storage: storageY)
+            
+            let isEqual = storageX.hasSameFieldValuesAndHiddenFieldKeys(of: storageY)
+            
+            return isEqual
+            
+//            return (object1 <> object2 <> object3).isEqual(to: object1 <> (object2 <> object3)) § av
 		}
 	}
 
