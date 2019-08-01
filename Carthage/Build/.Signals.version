@@ -3,7 +3,8 @@
   "iOS" : [
     {
       "name" : "Signals",
-      "hash" : "d190bf5811adfd3102cda6c7ad66b71e8cba04555ef86437de4b38b8a0107be5"
+      "hash" : "3a14afd5acb5056995f4d0b056bd833d1a5358bd21fa97078e33f6472521caf4",
+      "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
     }
   ]
 }

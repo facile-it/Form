@@ -3,7 +3,8 @@
   "iOS" : [
     {
       "name" : "Abstract",
-      "hash" : "835663e42a4d4e912f84127356f9820635407808c6fd5e1fad99713d7d440aa7"
+      "hash" : "e14e6adc95c4da606ef16c597adb3b0b3d9f471ea787f3dcd4f21fb3bd109ea1",
+      "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
     }
   ]
 }

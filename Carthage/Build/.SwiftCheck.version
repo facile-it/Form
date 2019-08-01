@@ -3,7 +3,8 @@
   "iOS" : [
     {
       "name" : "SwiftCheck",
-      "hash" : "ce4c3d7eb5b7a6c14397b11228159714ceec73c3a2d31d4b0b8440a441d7aaa2"
+      "hash" : "dc61fa396e7d6c71b70d7dbed06f6a546072736ca9409133845191a0be2f0ec7",
+      "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
     }
   ]
 }

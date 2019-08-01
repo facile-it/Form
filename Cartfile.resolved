@@ -1,5 +1,5 @@
 github "broomburgo/Signals" "e07972a26a76fa23d6913f63914b351a9bd1a320"
-github "facile-it/FunctionalKit" "0.18.0"
-github "facile-it/NetworkingKit" "1.9.0"
+github "facile-it/FunctionalKit" "0.21.0"
+github "facile-it/NetworkingKit" "1.9.2"
 github "typelift/Abstract" "0.1.0"
 github "typelift/SwiftCheck" "0.12.0"
