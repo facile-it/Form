@@ -18,13 +18,6 @@ public struct FieldIndexPath: Hashable {
 	public static func with(fieldIndex index: UInt) -> FieldIndexPath {
 		return FieldIndexPath(stepIndex: nil, sectionIndex: nil, fieldIndex: index)
 	}
-
-	public var hashValue: Int {
-		let step = stepIndex.map { Int($0) } ?? -1
-		let section = sectionIndex.map { Int($0) } ?? -1
-		let field = fieldIndex.map { Int($0) } ?? -1
-		return "\(step)_\(section)_\(field)".hashValue
-	}
 }
 
 public func == (lhs: FieldIndexPath, rhs: FieldIndexPath) -> Bool {
@@ -64,10 +57,6 @@ public struct FieldIndexPathComplete: Hashable {
 			let fieldIndex = path.fieldIndex
 			else { return nil }
 		self.init(stepIndex: stepIndex, sectionIndex: sectionIndex, fieldIndex: fieldIndex)
-	}
-
-	public var hashValue: Int {
-		return "\(stepIndex)_\(sectionIndex)_\(fieldIndex)".hashValue
 	}
 }
 

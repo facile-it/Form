@@ -1,10 +1,10 @@
 {
-  "commitish" : "1.9.2",
+  "commitish" : "1.9.3",
   "iOS" : [
     {
       "name" : "NetworkingKit",
-      "hash" : "56b5ce56791691482c55299ed7061d01ef6500b5b0eeeb3778c925af0451035c",
-      "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
+      "hash" : "1ac8330cd3507f86ed7b91b6ed62aeb69d8bc064e76e8bf203d062285a788411",
+      "swiftToolchainVersion" : "5.1 (swiftlang-1100.0.270.13 clang-1100.0.33.7)"
     }
   ]
 }

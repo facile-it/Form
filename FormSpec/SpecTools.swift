@@ -88,10 +88,6 @@ struct CoArbitraryOptional<Value: Arbitrary & Hashable & CoArbitrary>: Hashable,
         self.get = get
     }
     
-    var hashValue: Int {
-        return get?.hashValue ?? 0
-    }
-    
     static func == (left: CoArbitraryOptional, right: CoArbitraryOptional) -> Bool {
         return left.get == right.get
     }
@@ -238,10 +234,7 @@ extension TestObject: Arbitrary {
 }
 
 extension TestObject: Hashable {
-    var hashValue: Int {
-        return value.hashValue
-    }
-    
+
     static func ==(lhs: TestObject, rhs: TestObject) -> Bool {
         return lhs.value == rhs.value
     }
@@ -269,10 +262,6 @@ struct CoArbitraryPair<Left: Hashable & CoArbitrary, Right: Hashable & CoArbitra
     init(left: Left, right: Right) {
         self.left = left
         self.right = right
-    }
-    
-    var hashValue: Int {
-        return left.hashValue ^ right.hashValue
     }
     
     static func ==(lhs: CoArbitraryPair, rhs: CoArbitraryPair) -> Bool {
